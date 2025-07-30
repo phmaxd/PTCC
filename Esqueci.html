@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<input id="n1" placeholder="nova senha">
+<input id="n2" placeholder="confirmar senha">
+<button id="btn">Alterar</button>
+
+<script>
+   function recebe(){
+            var n1 = document.getElementById("nome").value;
+            var n2 = document.getElementById("senha").value;
+            if(n1 == n2){
+           const data = new URLSearchParams();
+data.append('n1', n1);
+data.append('n2', n2);
+
+fetch('http://localhost:80/banco/esqueci.php', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded',
+  },
+  body: data.toString()
+})
+.then(response => {
+  if (!response.ok) throw new Error('Erro na requisição: ' + response.statusText);
+  return response.text();
+})
+.then(html => {
+  alert(html);
+})
+.catch(error => {
+  console.log('Request failed: ' + error.message);
+})
+.finally(() => {
+  console.log('Foi');
+});
+        }
+        else{
+          alert("as senhas não coincidem");
+        }
+        function outrapagina(){
+          const { ipcRenderer } = require('electron')
+        ipcRenderer.send('trocar-pagina', 'Cadastro')
+        }
+        
+      }
+    </script>
+</body>
+</html>

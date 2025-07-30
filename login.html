@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function recebe(){
+            var n1 = document.getElementById("nome").value;
+            var n2 = document.getElementById("senha").value
+           const data = new URLSearchParams();
+data.append('n1', n1);
+data.append('n2', n2);
+
+fetch('http://localhost/banco/login.php', {
+  method: 'POST',
+   credentials: 'include',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded',
+  },
+  body: data.toString()
+})
+.then(response => {
+  if (!response.ok) throw new Error('Erro na requisição: ' + response.statusText);
+  return response.text();
+})
+.then(html => {
+  if (html == 'usuario ou senha incorreto') {
+    document.getElementById('rep').innerHTML = html;
+  }
+  else{ 
+    alert('deu certo');
+    const { ipcRenderer } = require('electron')
+        ipcRenderer.send('trocar-pagina', 'pagina');
+  }
+})
+.catch(error => {
+  console.log('Request failed: ' + error.message);
+})
+.finally(() => {
+  console.log('Foi');
+});
+
+
+
+        }
+        function outrapagina(){
+          const { ipcRenderer } = require('electron')
+        ipcRenderer.send('trocar-pagina', 'Cadastro')
+        }
+    </script>
+</head>
+<body>
+    <input id="nome" placeholder="nome">
+    <input id="senha" placeholder="senha">
+    <button onclick="recebe()">Login</button>
+    <div id="rep"></div>
+    <button onclick="outrapagina()">Cadastrar</button>
+    <button>Esqueci minha senha</button>
+</body>
+</html>

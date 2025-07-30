@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TESTE</title>
+    
+</head>
+<body>
+<input id="nome" placeholder="nome">
+<input id="senha" placeholder="senha">
+<input id="função" placeholder="função">
+<button onclick="recebe()" id="btn">botão</button>
+<div id="rep"></div>
+
+<script>
+  function recebe(){
+            var n1 = document.getElementById("nome").value;
+            var n2 = document.getElementById("senha").value;
+            var n3 = document.getElementById("função").value;
+           const data = new URLSearchParams();
+data.append('n1', n1);
+data.append('n2', n2);
+data.append('n3', n3);
+
+fetch('http://localhost/banco/manda.php', {
+  method: 'POST',
+   credentials: 'include',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded',
+  },
+  body: data.toString()
+})
+.then(response => {
+  if (!response.ok) throw new Error('Erro na requisição: ' + response.statusText);
+  return response.text();
+})
+.then(html => {
+  document.getElementById('rep').innerHTML = html;
+  if (html == "esse usuario já está cadastrado") {
+    return;
+  }
+  alert("foi");
+           const { ipcRenderer } = require('electron')
+        ipcRenderer.send('trocar-pagina', 'login')
+})
+.catch(error => {
+  console.log('Request failed: ' + error.message);
+  alert("fudeu");
+})
+.finally(() => {
+  console.log('Foi');
+});
+        }
+    </script>
+</body>
+</html>
