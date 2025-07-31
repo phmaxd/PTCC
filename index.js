@@ -1,7 +1,6 @@
-const { app, BrowserWindow, ipcMain, session } = require('electron');
-const path = require('path');
-const Store = require('electron-store').default;
-const store = new Store();
+const { app, BrowserWindow, ipcMain } = import('electron');
+const path = import('path');
+const store = import('./store.js');
 
 const createWindow = () => {
     const win = new BrowserWindow({
@@ -14,8 +13,15 @@ const createWindow = () => {
     },
     })
 
-    win.loadFile('login.html')
+    win.loadFile('login.html');
+  
+ipcMain.handle('set-user', (event, user) => {
+  store.set('user', user);
+});
 
+ipcMain.handle('get-user', () => {
+  return store.get('user');
+});
     ipcMain.on('trocar-pagina', (event, arg) => {
     if  (arg === 'Cadastro') {
       win.loadFile('Cadastro.html')
@@ -27,13 +33,20 @@ const createWindow = () => {
       win.loadFile('pagina.html')
     }
     else{
-      alert ("como assim caralho?")
+      console.log('como assim caralho?', arg);
     }
 })
 }
     app.whenReady().then(() => {
         createWindow()
-    })
+    });
+    app.on('ready', () => {
+  console.log('App pronto');
+});
+
+process.on('uncaughtException', (err) => {
+  console.error('ERRO NÃO TRATADO: ', err);
+});
     app.on('window-all-closed', () => {
-        if (process.plataform !== 'darwin') app.quit()
-    })
+        if (process.platform !== 'darwin') app.quit()
+    });

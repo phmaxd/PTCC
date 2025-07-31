@@ -4,6 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script>
+        const store = require('./store');
+        const user = store.get('user');
+
+        if (user) {
+            alert(user.id)
+            const {ipcRenderer} = require('electron')
+        ipcRenderer.send('troca-pagina', 'login')
+        }
+        else{
+            const { ipcRenderer } = require('electron')
+        ipcRenderer.send('trocar-pagina', 'pagina');
+        }
+    </script>
 </head>
 <body>
     
