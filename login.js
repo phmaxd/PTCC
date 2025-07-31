@@ -1,4 +1,11 @@
-const { ipcRenderer } = import('electron');
+const { ipcRenderer } = require('electron');
+
+document.addEventListener('DOMContentLoaded', () => {
+  const loginBtn = document.getElementById('login');
+  const cadastroBtn = document.getElementById('cadastro');
+
+  loginBtn.addEventListener('click', recebe);
+});
 
 async function recebe() {
   const n1 = document.getElementById("nome").value;
@@ -18,23 +25,22 @@ async function recebe() {
       body: data.toString()
     });
 
-    if (!response.ok) throw new Error('Erro na requisição: ' + response.statusText);
+    if (!response.ok) {
+      throw new Error('Erro na requisição: ' + response.statusText);
+    }
 
     const html = await response.text();
 
     if (html === 'usuario ou senha incorreto') {
-      document.getElementById('rep').innerHTML = html;
+      document.getElementById('rep').innerText = html;
     } else {
-      // Salva no store via ipcRenderer
-      await ipcRenderer.invoke('set-user', { id: html });
-
-      // Troca para a página principal
+      await ipcRenderer.send('usuario', html);
       ipcRenderer.send('trocar-pagina', 'pagina');
     }
   } catch (error) {
     console.error('Request failed: ' + error.message);
   } finally {
-    console.log('Requisição finalizada');
+    console.log("Requisição finalizada");
   }
 }
 

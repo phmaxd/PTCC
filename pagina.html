@@ -7,7 +7,6 @@
     <script>
         const store = require('./store');
         const user = store.get('user');
-
         if (user) {
             alert(user.id)
             const {ipcRenderer} = require('electron')

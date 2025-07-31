@@ -1,4 +1,9 @@
-const Store = import('electron-store');
-const store = new Store();
+(async () =>{
 
-module.exports = store;
+    const storePromise = require('electron-store').then(({ default: Store}) => {
+    return new Store();
+});
+
+module.exports = storePromise;
+
+})
