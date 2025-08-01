@@ -3,22 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script>
-        const store = require('./store');
-        const user = store.get('user');
-        if (user) {
-            alert(user.id)
-            const {ipcRenderer} = require('electron')
-        ipcRenderer.send('troca-pagina', 'login')
-        }
-        else{
-            const { ipcRenderer } = require('electron')
-        ipcRenderer.send('trocar-pagina', 'pagina');
-        }
-    </script>
+    <title>Página Principal</title>
+    <script src="pagina.js"></script>
 </head>
 <body>
-    
+    <h1>Bem-vindo!</h1>
+    <div id="content">
+        <p>Por favor, faça login para continuar.</p>
+    </div>
 </body>
 </html>

@@ -6,48 +6,57 @@
     <title>Document</title>
 </head>
 <body>
-<input id="n1" placeholder="nova senha">
-<input id="n2" placeholder="confirmar senha">
-<button id="btn">Alterar</button>
+<input id="novaSenha" placeholder="nova senha"> <!-- Alterado para um ID mais descritivo -->
+<input id="confirmarSenha" placeholder="confirmar senha"> <!-- Alterado para um ID mais descritivo -->
+<button id="btnAlterar">Alterar</button> <!-- Alterado para um ID mais descritivo -->
 
 <script>
-   function recebe(){
-            var n1 = document.getElementById("nome").value;
-            var n2 = document.getElementById("senha").value;
-            if(n1 == n2){
+   document.addEventListener("DOMContentLoaded", () => {
+    const btnAlterar = document.getElementById("btnAlterar");
+    if (btnAlterar) {
+      btnAlterar.addEventListener("click", recebe);
+    }
+  });
+
+  async function recebe(){ // Tornar a função assíncrona
+            var n1 = document.getElementById("novaSenha").value; // Usar o ID correto
+            var n2 = document.getElementById("confirmarSenha").value; // Usar o ID correto
+            if(n1 === n2){ // Usar === para comparação estrita
            const data = new URLSearchParams();
 data.append('n1', n1);
-data.append('n2', n2);
+// data.append('n2', n2); // Não é necessário enviar n2 para o PHP se ele só usa n1
 
-fetch('http://localhost:80/banco/esqueci.php', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/x-www-form-urlencoded',
-  },
-  body: data.toString()
-})
-.then(response => {
+try {
+  const response = await fetch('http://localhost:80/banco/esqueci.php', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: data.toString()
+  });
+
   if (!response.ok) throw new Error('Erro na requisição: ' + response.statusText);
-  return response.text();
-})
-.then(html => {
+  
+  const html = await response.text();
   alert(html);
-})
-.catch(error => {
+
+  // Se a alteração for bem-sucedida, você pode querer voltar para a página de login
+  // Usando a API segura do preload
+  const result = await window.electronAPI.trocarPagina('login');
+  if (!result.success) {
+    console.error("Erro ao trocar página:", result.error);
+  }
+
+} catch (error) {
   console.log('Request failed: ' + error.message);
-})
-.finally(() => {
+  alert("Erro ao alterar senha: " + error.message); // Melhorar a mensagem de erro
+} finally {
   console.log('Foi');
-});
+}
         }
         else{
-          alert("as senhas não coincidem");
+          alert("As senhas não coincidem");
         }
-        function outrapagina(){
-          const { ipcRenderer } = require('electron')
-        ipcRenderer.send('trocar-pagina', 'Cadastro')
-        }
-        
       }
     </script>
 </body>
