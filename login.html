@@ -3,15 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title id="title">Login</title>
 </head>
 <body>
     <h1>Login</h1>
     <input type="text" id="nome" placeholder="Usuário">
     <input type="password" id="senha" placeholder="Senha">
     <button id="login">Entrar</button>
-
-    <script src="login.js">
+    <button id="cadastro" onclick="outrapagina()">cadastro</button>
+    <button id="Esqueci">Esqueci minha senha</button>
+    <div id="rep"></div>
+    <script src="login.js"></script>
+    <script>
+        document.getElementById('Esqueci').addEventListener('click', function() {
+            if (window.electronAPI && window.electronAPI.trocarPagina) {
+                window.electronAPI.trocarPagina('Esqueci');
+            }
+        });
     </script>
 </body>
 </html>

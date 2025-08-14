@@ -2,13 +2,11 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página Principal</title>
-    <script src="pagina.js" defer></script>
+    <title>Entrada de aluno</title>
+    <script src="entrada.js"></script>
 </head>
 <body>
-    <div id="nada"></div>
+        <button id="cadastroBtn" style="position:fixed; top:20px; left:20px; z-index:1000;">Cadastro de Aluno</button>
     <div id="cadastroMenu" style="display:none; top:60px; left:20px; background:#fff; border:1px solid #ccc; box-shadow:0 2px 8px rgba(0,0,0,0.2); padding:20px; z-index:1001; border-radius:8px; position:fixed;">
         <button id="fecharMenuBtn" type="button" style="float:right; margin-bottom:10px;">X</button>
         <form>
@@ -16,13 +14,10 @@
             <input type="text" id="nome" name="nome"><br><br>
             <label for="imagem">Imagem:</label>
             <input type="file" id="imagem" name="imagem" accept="image/*"><br><br>
-            <button type="submit" id="enviar">Enviar</button>
+            <button type="submit" id="Enviar" onclick="enviar(event)">Enviar</button>
         </form>
     </div>
-    <h1>Bem-vindo!</h1>
-    <!-- Botão agora está abaixo do título -->
-    <button id="cadastroBtn" style="margin-top:20px;">Cadastro de Aluno</button>
-    <div id="content"></div>
+<div id="content"></div>
     <script>
         // Menu de cadastro
         document.getElementById('cadastroBtn').onclick = function(e) {

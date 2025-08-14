@@ -6,6 +6,7 @@
     <title>Document</title>
 </head>
 <body>
+<input id="usuario" placeholder="usuario"> <!-- Alterado para um ID mais descritivo -->
 <input id="novaSenha" placeholder="nova senha"> <!-- Alterado para um ID mais descritivo -->
 <input id="confirmarSenha" placeholder="confirmar senha"> <!-- Alterado para um ID mais descritivo -->
 <button id="btnAlterar">Alterar</button> <!-- Alterado para um ID mais descritivo -->
@@ -21,13 +22,14 @@
   async function recebe(){ // Tornar a função assíncrona
             var n1 = document.getElementById("novaSenha").value; // Usar o ID correto
             var n2 = document.getElementById("confirmarSenha").value; // Usar o ID correto
+            var n3 = document.getElementById("usuario").value; // Usar o ID correto
             if(n1 === n2){ // Usar === para comparação estrita
            const data = new URLSearchParams();
 data.append('n1', n1);
 // data.append('n2', n2); // Não é necessário enviar n2 para o PHP se ele só usa n1
-
+data.append('n3', n3); // Enviar o usuário
 try {
-  const response = await fetch('http://localhost:80/banco/esqueci.php', {
+  const response = await fetch('http://localhost/banco/esqueci.php', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',

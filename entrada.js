@@ -1,21 +1,48 @@
-    window.onload = async function () {
-      try {
-        const conecta = await fetch("http://localhost/banco/acesso.php", {
-          method: "POST",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-          body: ""
+async function enviar(event) {
+  event.preventDefault(); // Previne o comportamento padrão do formulário
+  try{
+    var nome = document.getElementById("nome").value;
+    var file = document.getElementById("imagem").files[0];
+    var formData = new FormData();
+    formData.append("nome", nome);
+    formData.append("imagem", file);
+    const response = await fetch("http://localhost/banco/upload.php", {
+      method: "POST",
+      credentials: "include",
+      body: formData
+    });
+    if (response.ok) {
+      const info = await response.json();
+      if (info.success) {
+        alert("Upload realizado com sucesso!");
+        window.location.reload(); // Recarrega a página para atualizar a lista
+      } else {
+        console.log("Erro no upload: " + info.message);
+      }
+    } else {
+      alert("Erro na requisição: " + response.statusText);
+    }
+  }catch(error){
+    console.error("Erro ao carregar a página:", error);
+}
+}
+window.onload = async function () {
+    try {
+        const response = await fetch("http://localhost/banco/acesso.php", {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: ""
         });
-
-        if (conecta.ok) {
-          const info = await conecta.json();
+             if (response.ok) {
+          const info = await response.json();
           var texto = document.getElementById('content');
           if (texto && Array.isArray(info.data)) {
             // Cria o style global apenas uma vez
-            if (!document.getElementById('cards-style')) {
-              const style = document.createElement('style');
+            if (!document.getElementById('')) {
+                const style = document.createElement('style');
               style.id = 'cards-style';
               style.innerHTML = `
                 #content {
@@ -58,7 +85,8 @@
             // Limpa o conteúdo anterior
             texto.innerHTML = '';
 
-            info.data.forEach(function(dados) {
+
+                info.data.forEach(function(dados) {
               var linha = document.createElement('tr');
               linha.classList.add('linha-tabela');
               linha.innerHTML = `
@@ -73,6 +101,7 @@
                     min-width: 180px;
                     max-width: 100%;
                   ">
+                  <img src="http://localhost/banco/imagens/${dados.imagem}" alt="Imagem do Card" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; margin-bottom: 8px;">
                     <div><strong>Nome:</strong> ${dados.nome}</div>
                     <div><strong>RM:</strong> ${dados.rm}</div>
                   </div>
@@ -80,39 +109,8 @@
               `;
               texto.appendChild(linha);
             });
-          } else {
-            console.log("Elemento com id 'content' não encontrado ou info.data não é um array.");
-          }
-        } else {
-          console.log("Erro ao conectar ao servidor.");
-        }
-      } catch (error) {
-        console.log(error);
-      }
+        }}}
+         catch (error) {
+        console.error("Erro ao carregar a página:", error);
+         }
     }
-    document.getElementById('enviar').onclick = async function (e) {
-      e.preventDefault();
-      const form = document.getElementById('imagem').files[0];
-      if (!form) return;
-      const formData = new FormData();
-      formData.append('imagem', form);
-      var nome = document.getElementById('nome').value;
-      formData.append('nome', nome);
-        try {
-        const response = await fetch("http://localhost/banco/enviar.php", {
-          method: "POST",
-          credentials: "include",
-          body: formData
-        });
-        if (response.ok) {
-          // Faça algo após o envio, como atualizar a lista ou mostrar mensagem
-          alert('Dados enviados com sucesso!');
-          const resposta = await response.text();
-          nada.innerHTML = "<meta http-equiv='refresh' content='0'>";    } else {
-          alert('Erro ao enviar dados.');
-        }
-      } catch (error) {
-        alert('Erro: ' + error.message);
-      }
-    };
-  

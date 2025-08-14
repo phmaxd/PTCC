@@ -1,18 +1,34 @@
-import { app, BrowserWindow, ipcMain } from "electron"; // Usando import para ESM
-import path from "path"; // Usando import para ESM
-import store from "./store.js"; // Importando o store como um módulo ES
+import { app, BrowserWindow, ipcMain } from "electron";
+import path from "path";
+import { fileURLToPath } from "url";
 
-// __dirname não está disponível em módulos ES por padrão.
-// Precisamos recriá-lo ou usar import.meta.url
-import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const createWindow = () => {
-  const win = new BrowserWindow({
+let splash;
+let mainWindow;
+
+function createWindows() {
+  // Splash screen
+  splash = new BrowserWindow({
+    width: 800,
+    height: 700,
+    frame: false,
+    alwaysOnTop: true,
+    transparent: true,
+    resizable: false,
+    center: true,
+  });
+
+  splash.loadFile(path.join(__dirname, "splash.html"));
+
+  // Janela principal (escondida até estar pronta)
+  mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
+    show: false,
     title: "BIOID",
+    icon: path.join(__dirname, "favicon.ico"),
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
@@ -20,10 +36,7 @@ const createWindow = () => {
     },
   });
 
-  win.webContents.openDevTools();
-
-  win
-    .loadFile("login.html")
+  mainWindow.loadFile(path.join(__dirname, "login.html"))
     .then(() => {
       console.log("login.html carregado");
     })
@@ -31,41 +44,44 @@ const createWindow = () => {
       console.error("erro", err);
     });
 
- ipcMain.handle("set-user", async (event, userData) => {
-    try {
-        store.set("user", userData); // Salva o usuário
-        return { success: true };
-    } catch (error) {
-        console.error("Erro ao salvar usuário:", error);
-        return { success: false, error: error.message };
-    }
-});
+  mainWindow.once("ready-to-show", () => {
+    setTimeout(() => {
+      splash.close();
+      mainWindow.show();
+    }, 2000); // Delay opcional
+  });
 
-ipcMain.handle("get-user", async () => {
-    try {
-        return store.get("user"); // Retorna o usuário salvo
-    } catch (error) {
-        console.error("Erro ao buscar usuário:", error);
-        return null; // Retorna null se houver erro
-    }
-});
+  mainWindow.on("closed", () => {
+    console.log("Janela foi fechada");
+    mainWindow = null;
+  });
 
+  mainWindow.webContents.on("did-finish-load", () => {
+    console.log("A página foi carregada/recarregada");
+  });
 
+  // Trocar páginas via IPC
   ipcMain.handle("trocar-pagina", async (event, pagina) => {
-    console.log(`tentando carregar a pagina: ${pagina}`);
+    console.log(`Tentando carregar a página: ${pagina}`);
     try {
       switch (pagina) {
         case "Cadastro":
-          await win.loadFile("Cadastro.html");
+          await mainWindow.loadFile("Cadastro.html");
           break;
         case "login":
-          await win.loadFile("login.html");
+          await mainWindow.loadFile("login.html");
           break;
         case "pagina":
-          await win.loadFile("pagina.html");
+          await mainWindow.loadFile("pagina.html");
+          break;
+        case "entrada":
+          await mainWindow.loadFile("entrada.html");
+          break;
+        case "Esqueci":
+          await mainWindow.loadFile("Esqueci.html");
           break;
         default:
-          console.log("pagina desconhecida", pagina);
+          console.log("Página desconhecida", pagina);
           return { success: false, error: "Página desconhecida" };
       }
       return { success: true };
@@ -74,22 +90,16 @@ ipcMain.handle("get-user", async () => {
       return { success: false, error: error.message };
     }
   });
-
-  win.on("closed", () => {
-    console.log("janela foi fechada");
-  });
-
-  win.webContents.on("did-finish-load", () => {
-    console.log("a pagina foi carregada/recarregada");
-  });
-};
+}
 
 app.whenReady().then(() => {
-  createWindow();
+  createWindows();
 });
 
 app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") app.quit();
+  if (process.platform !== "darwin") {
+    app.quit();
+  }
   console.log("App encerrado");
 });
 

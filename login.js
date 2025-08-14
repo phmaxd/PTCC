@@ -1,17 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
   const loginBtn = document.getElementById("login");
-  // const cadastroBtn = document.getElementById("cadastro"); // 'cadastro' não existe no login.html
-
   if (loginBtn) {
     loginBtn.addEventListener("click", recebe);
   }
 
-  // Adicionar listener para o botão "Esqueci minha senha"
-  const forgotPasswordBtn = document.querySelector('button:last-of-type'); // Seleciona o último botão
+  const forgotPasswordBtn = document.getElementById('Esqueci');
   if (forgotPasswordBtn) {
-    forgotPasswordBtn.addEventListener('click', () => {
-      // Trocar para a página de "Esqueci minha senha"
-      window.electronAPI.trocarPagina('Esqueci'); // Assumindo que você terá um Esqueci.html
+    forgotPasswordBtn.addEventListener('click', async () => {
+      await window.electronAPI.trocarPagina('Esqueci');
     });
   }
 });
@@ -38,19 +34,14 @@ async function recebe() {
     },
     body: data.toString(),
 });
-
 if (response.ok) {
     const pata = await response.json();
-    if (pata.data !== "usuario ou senha incorreto") {
-        const userData = {
-            id: pata.data,
-            // outras informações que você deseja salvar
-        };
-        const result = await window.electronAPI.setUser (userData);
-        // Verifique se o usuário foi salvo com sucesso
-        console.log("Usuário salvo:", result);
-        alert(userData['id']);
+    if (pata.data != "usuario ou senha incorreto") {
+      if (pata.data.funcao == "adm") {
         await window.electronAPI.trocarPagina('pagina');
+      }else{
+        await window.electronAPI.trocarPagina('entrada');
+      }        
     } else {
         document.getElementById("rep").innerText = pata.data;
     }

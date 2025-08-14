@@ -10,7 +10,7 @@ if ($select && $select->rowCount() != 0) {
     $batata = $select->fetch(PDO::FETCH_ASSOC);
     if ($batata['nome'] == $n1 && password_verify($n2, $batata['senha'])) {
         echo json_encode([ 
-            'data'=> [$batata['id']]
+            'data'=> [$batata]
         ]); //estilizar no futuro
         
     } else {
