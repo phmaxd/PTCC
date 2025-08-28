@@ -6,7 +6,7 @@ async function enviar(event) {
     var formData = new FormData();
     formData.append("nome", nome);
     formData.append("imagem", file);
-    const response = await fetch("http://localhost/banco/Php/upload.php", {
+    const response = await fetch("http://localhost/ETEC/3MIN/TCC/bioid/Php/upload.php", {
       method: "POST",
       credentials: "include",
       body: formData
@@ -28,7 +28,7 @@ async function enviar(event) {
 }
 window.onload = async function () {
     try {
-        const response = await fetch("http://localhost/banco/Php/acesso.php", {
+        const response = await fetch("http://localhost/ETEC/3MIN/TCC/bioid/Php/acesso.php", {
             method: "POST",
             credentials: "include",
             headers: {

@@ -36,7 +36,7 @@ function createWindows() {
   setTimeout(() => {
   mainWindow.maximize();
   mainWindow.show();
-}, 2200);
+}, 2500);
 
   mainWindow.loadFile(path.join(__dirname, "../Html/login.html"))
     .then(() => {
