@@ -26,7 +26,7 @@ async function recebe() {
   data.append("n2", n2);
 
   try {
-    const response = await fetch("http://localhost/banco/login.php", {
+    const response = await fetch("http://localhost/banco/Php/login.php", {
     method: "POST",
     credentials: "include",
     headers: {
@@ -37,9 +37,11 @@ async function recebe() {
 if (response.ok) {
     const pata = await response.json();
     if (pata.data != "usuario ou senha incorreto") {
-      if (pata.data.funcao == "adm") {
+      if (pata.data[0].funcao == "adm") {
+        alert("Administrador logado com sucesso")
         await window.electronAPI.trocarPagina('pagina');
       }else{
+        alert("Funcionario logado com sucesso")
         await window.electronAPI.trocarPagina('entrada');
       }        
     } else {

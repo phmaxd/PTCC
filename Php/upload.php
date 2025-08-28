@@ -14,10 +14,10 @@ if (isset($_FILES['imagem']) && isset($_POST['nome'])) {
             $nome = $_POST['nome'];
             $sql = "INSERT INTO alunos (nome, imagem) VALUES(:nome, :imagem)";
             $stmt = $conn->prepare($sql);
-            $stmt->execute(array[
+            $stmt->execute(array(
                 ':nome' => $nome,
                 ':imagem' => $novoNome
-            ]);
+        ));
             echo json_encode([
                 "success" => true,
                 "message" => "Arquivo enviado com sucesso",

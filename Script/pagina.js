@@ -1,48 +1,21 @@
-async function enviar(event) {
-  event.preventDefault(); // Previne o comportamento padrão do formulário
-  try{
-    var nome = document.getElementById("nome").value;
-    var file = document.getElementById("imagem").files[0];
-    var formData = new FormData();
-    formData.append("nome", nome);
-    formData.append("imagem", file);
-    const response = await fetch("http://localhost/banco/upload.php", {
-      method: "POST",
-      credentials: "include",
-      body: formData
-    });
-    if (response.ok) {
-      const info = await response.json();
-      if (info.success) {
-        alert("Upload realizado com sucesso!");
-        window.location.reload(); // Recarrega a página para atualizar a lista
-      } else {
-        console.log("Erro no upload: " + info.message);
-      }
-    } else {
-      alert("Erro na requisição: " + response.statusText);
-    }
-  }catch(error){
-    console.error("Erro ao carregar a página:", error);
-}
-}
-window.onload = async function () {
-    try {
-        const response = await fetch("http://localhost/banco/acesso.php", {
-            method: "POST",
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            body: ""
+    window.onload = async function () {
+      try {
+        const conecta = await fetch("http://localhost/banco/Php/acesso.php", {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: ""
         });
-             if (response.ok) {
-          const info = await response.json();
+
+        if (conecta.ok) {
+          const info = await conecta.json();
           var texto = document.getElementById('content');
           if (texto && Array.isArray(info.data)) {
             // Cria o style global apenas uma vez
-            if (!document.getElementById('')) {
-                const style = document.createElement('style');
+            if (!document.getElementById('cards-style')) {
+              const style = document.createElement('style');
               style.id = 'cards-style';
               style.innerHTML = `
                 #content {
@@ -85,8 +58,7 @@ window.onload = async function () {
             // Limpa o conteúdo anterior
             texto.innerHTML = '';
 
-
-                info.data.forEach(function(dados) {
+            info.data.forEach(function(dados) {
               var linha = document.createElement('tr');
               linha.classList.add('linha-tabela');
               linha.innerHTML = `
@@ -101,7 +73,6 @@ window.onload = async function () {
                     min-width: 180px;
                     max-width: 100%;
                   ">
-                  <img src="http://localhost/banco/imagens/${dados.imagem}" alt="Imagem do Card" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; margin-bottom: 8px;">
                     <div><strong>Nome:</strong> ${dados.nome}</div>
                     <div><strong>RM:</strong> ${dados.rm}</div>
                   </div>
@@ -109,8 +80,41 @@ window.onload = async function () {
               `;
               texto.appendChild(linha);
             });
-        }}}
-         catch (error) {
-        console.error("Erro ao carregar a página:", error);
-         }
+          } else {
+            console.log("Elemento com id 'content' não encontrado ou info.data não é um array.");
+          }
+        } else {
+          console.log("Erro ao conectar ao servidor.");
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
+    document.getElementById('enviar').onclick = async function (e) {
+      e.preventDefault();
+      var Rm = document.getElementById('Rm').value;
+        try {
+        const response = await fetch("http://localhost/banco/Php/enviar.php", {
+          method: "POST",
+          credentials: "include",
+          body: Rm
+        });
+        if (response.ok) {
+          
+          if (confirm("")) {
+          const response = await fetch("http://localhost/banco/Php/enviar.php", {
+          method: "POST",
+          credentials: "include",
+          body: Rm
+        });
+} else {
+  document.getElementById("Rm").value = ""
+}
+        } else {
+          alert('Erro');
+        }
+      } catch (error) {
+        alert('Erro: ' + error.message);
+      }
+    };
+  

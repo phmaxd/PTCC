@@ -19,4 +19,3 @@ if ($select && $select->rowCount() != 0) {
 } else {
     echo json_encode(['data' => "usuario ou senha incorreto"]);
 }
-?>

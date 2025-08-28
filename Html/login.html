@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="title">Login</title>
+    <title id="title">Login</title> 
+       <script src="../Script/login.js"></script>
 </head>
 <body>
     <h1>Login</h1>
@@ -13,7 +14,7 @@
     <button id="cadastro" onclick="outrapagina()">cadastro</button>
     <button id="Esqueci">Esqueci minha senha</button>
     <div id="rep"></div>
-    <script src="login.js"></script>
+
     <script>
         document.getElementById('Esqueci').addEventListener('click', function() {
             if (window.electronAPI && window.electronAPI.trocarPagina) {

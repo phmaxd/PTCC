@@ -20,23 +20,25 @@ function createWindows() {
     center: true,
   });
 
-  splash.loadFile(path.join(__dirname, "splash.html"));
+  splash.loadFile(path.join(__dirname, "../Html/splash.html"));
 
   // Janela principal (escondida até estar pronta)
-  mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+   mainWindow = new BrowserWindow({
     show: false,
     title: "BIOID",
-    icon: path.join(__dirname, "favicon.ico"),
+    icon: path.join(__dirname, "../Imagens/favicon.ico"),
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
-      preload: path.join(__dirname, "preload.js"),
+      preload: path.join(__dirname, "../Script/preload.js"),
     },
   });
+  setTimeout(() => {
+  mainWindow.maximize();
+  mainWindow.show();
+}, 2200);
 
-  mainWindow.loadFile(path.join(__dirname, "login.html"))
+  mainWindow.loadFile(path.join(__dirname, "../Html/login.html"))
     .then(() => {
       console.log("login.html carregado");
     })
@@ -66,19 +68,19 @@ function createWindows() {
     try {
       switch (pagina) {
         case "Cadastro":
-          await mainWindow.loadFile("Cadastro.html");
+          await mainWindow.loadFile("Html/Cadastro.html");
           break;
         case "login":
-          await mainWindow.loadFile("login.html");
+          await mainWindow.loadFile("Html/login.html");
           break;
         case "pagina":
-          await mainWindow.loadFile("pagina.html");
+          await mainWindow.loadFile("Html/pagina.html");
           break;
         case "entrada":
-          await mainWindow.loadFile("entrada.html");
+          await mainWindow.loadFile("Html/entrada.html");
           break;
         case "Esqueci":
-          await mainWindow.loadFile("Esqueci.html");
+          await mainWindow.loadFile("Html/Esqueci.html");
           break;
         default:
           console.log("Página desconhecida", pagina);
