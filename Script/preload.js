@@ -1,6 +1,18 @@
-const { contextBridge, ipcRenderer } = require("electron")
+const { contextBridge, ipcRenderer } = require("electron");
+console.log("penis penis");
 
 // Expor APIs seguras para o renderer process
 contextBridge.exposeInMainWorld("electronAPI", {
   trocarPagina: (pagina) => ipcRenderer.invoke("trocar-pagina", pagina),
-});
+sendToMain: (msg) => {
+    console.log("Preload: enviando para o Main ->", msg);
+    ipcRenderer.send("fromRenderer", msg);
+  },
+  onEsp32Msg: (callback) => {
+    ipcRenderer.on("esp32-msg", (event, msg) => {
+      console.log("Preload: recebeu do Main ->", msg);
+      callback(msg);
+    });
+  }});
+
+
