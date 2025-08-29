@@ -5,8 +5,7 @@
           credentials: "include",
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
-          },
-          body: ""
+          }
         });
 
         if (conecta.ok) {

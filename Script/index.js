@@ -23,7 +23,8 @@ function createWindows() {
   splash.loadFile(path.join(__dirname, "../Html/splash.html"));
 
   // Janela principal (escondida até estar pronta)
-   mainWindow = new BrowserWindow({
+
+  mainWindow = new BrowserWindow({
     show: false,
     title: "BIOID",
     icon: path.join(__dirname, "../Imagens/favicon.ico"),
@@ -33,11 +34,6 @@ function createWindows() {
       preload: path.join(__dirname, "../Script/preload.js"),
     },
   });
-  setTimeout(() => {
-  mainWindow.maximize();
-  mainWindow.show();
-}, 2200);
-
   mainWindow.loadFile(path.join(__dirname, "../Html/login.html"))
     .then(() => {
       console.log("login.html carregado");
@@ -81,6 +77,9 @@ function createWindows() {
           break;
         case "Esqueci":
           await mainWindow.loadFile("Html/Esqueci.html");
+          break;
+          case "CadastroDigital":
+          await mainWindow.loadFile("Html/CadastroDigital.html");
           break;
         default:
           console.log("Página desconhecida", pagina);
