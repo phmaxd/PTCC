@@ -45,16 +45,14 @@
 
   <div id="content"></div>
   <!-- Modal de confirmação -->
-  <div id="confirmModal">
-    <div class="modal-box">
-      <h3>Confirmar informações</h3>
-      <p id="modalContent"></p>
-      <div>
-        <button id="confirmBtn">Confirmar</button>
-        <button id="cancelBtn">Não é</button>
-      </div>
-    </div>
+<!-- Adicione isso no seu HTML, fora do JS -->
+<div id="confirmModal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); align-items:center; justify-content:center; z-index:9999;">
+  <div id="modalContent" style="background:#fff; padding:20px; border-radius:8px; min-width:220px;">
+    <!-- Conteúdo preenchido pelo JS -->
+    <button id="confirmBtn" style="margin-right:10px;">Confirmar</button>
+    <button id="cancelBtn">Cancelar</button>
   </div>
+</div>
 
   <script>
     // Abrir/fechar menu de cadastro

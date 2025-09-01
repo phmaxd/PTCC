@@ -1,34 +1,20 @@
 <?php
 include 'conecta.php';
+header('Content-Type: application/json; charset=utf-8');
 
-$Rm = "";
-
-if($_POST['acao'] == "inserir" ){
+$rm = $_POST['rm'] ?? '';
 
 try {
-    $resposta = $conn->prepare("SELECT * FROM alunos WHERE rm = :Rm");
-    $resposta->bindParam(":Rm", $Rm, PDO::PARAM_INT);
-    $resposta->execute();
+    $stmt = $conn->prepare("SELECT * FROM alunos WHERE rm = :rm");
+    $stmt->bindParam(':rm', $rm);
+    $stmt->execute();
+    $aluno = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    if ($resposta && $resposta->rowCount() > 0) {
-        $dados = $resposta->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode([
-            'success' => true,
-            'data' => $dados
-        ]);
+    if ($aluno) {
+        echo json_encode($aluno);
     } else {
-        echo json_encode([
-            'success' => false,
-            'message' => "Usuário não encontrado",
-            'rm_recebido' => $Rm
-        ]);
+        echo json_encode(['error' => 'Aluno não encontrado']);
     }
-} catch (Throwable $th) {
-    echo json_encode([
-        'success' => false,
-        'message' => "Erro: " . $th->getMessage()
-    ]);
-}
-} else {
-    $Rm = $_POST['Rm'];
+} catch (\Throwable $th) {
+    throw $th;
 }

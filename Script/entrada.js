@@ -24,31 +24,18 @@ async function enviar(event) {
       let modalContent = document.getElementById("modalContent");
 
       modalContent.innerHTML = `
-        <strong>Nome:</strong> ${aluno.nome} <br>
-        <strong>RM:</strong> ${aluno.rm} <br>
-      `;
+  <strong>Nome:</strong> ${aluno.nome} <br>
+  <strong>RM:</strong> ${aluno.rm} <br>
+  <button id="confirmBtn" style="margin-right:10px;">Confirmar</button>
+  <button id="cancelBtn">Cancelar</button>
+`;
       modal.style.display = "flex";
 
       // Ações do modal
       document.getElementById("confirmBtn").onclick = async function() {
+        window.name = document.getElementById("Rm").value.trim();
+        await window.electronAPI.trocarPagina("CadastroDigital");
         modal.style.display = "none";
-        await window.electronAPI.trocarPagina("CadastroDigital", aluno.rm);
-        try {
-          const dato = new URLSearchParams();
-          dato.append('Rm', aluno.rm);
-          dato.append('acao', 'inserir');
-          const dedo = await fetch("http://localhost/banco/Php/dados.php", {
-            method: "POST",
-            credentials: "include",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: data.toString()
-          });
-          outrapagina();
-          
-        } catch (error) {
-          console.error("Erro ao enviar dados:", error);
-        }
-        
       };
       document.getElementById("cancelBtn").onclick = function() {
         modal.style.display = "none";
