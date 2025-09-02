@@ -29,32 +29,31 @@ data.append('n1', n1);
 // data.append('n2', n2); // Não é necessário enviar n2 para o PHP se ele só usa n1
 data.append('n3', n3); // Enviar o usuário
 try {
-  const response = await fetch('http://localhost/banco/Php/esqueci.php', {
+  const response = await fetch('http://localhost/ETEC/3MIN/TCC/bioid/Php/esqueci.php', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: data.toString()
   });
 
   if (!response.ok) throw new Error('Erro na requisição: ' + response.statusText);
-  
-  const html = await response.text();
-  alert(html);
 
-  // Se a alteração for bem-sucedida, você pode querer voltar para a página de login
-  // Usando a API segura do preload
-  const result = await window.electronAPI.trocarPagina('login');
-  if (!result.success) {
-    console.error("Erro ao trocar página:", result.error);
+  const result = await response.json(); // ✅ lê só uma vez
+  console.log("Resposta:", result);
+
+  if (result.success) {
+    alert(result.message);
+    // await window.electronAPI.trocarPagina('login');
+  } else {
+    alert("Erro: " + result.message);
   }
 
 } catch (error) {
   console.log('Request failed: ' + error.message);
-  alert("Erro ao alterar senha: " + error.message); // Melhorar a mensagem de erro
+  alert("Erro ao alterar senha: " + error.message);
 } finally {
   console.log('Foi');
 }
+
         }
         else{
           alert("As senhas não coincidem");

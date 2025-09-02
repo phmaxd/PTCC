@@ -13,12 +13,18 @@
     <button id="login">Entrar</button>
     <button id="cadastro" onclick="outrapagina()">cadastro</button>
     <button id="Esqueci">Esqueci minha senha</button>
+    <button id="Ws_teste">Ws_teste</button>
     <div id="rep"></div>
 
     <script>
         document.getElementById('Esqueci').addEventListener('click', function() {
             if (window.electronAPI && window.electronAPI.trocarPagina) {
                 window.electronAPI.trocarPagina('Esqueci');
+            }
+        });
+        document.getElementById('Ws_teste').addEventListener('click', function() {
+            if (window.electronAPI && window.electronAPI.trocarPagina) {
+                window.electronAPI.trocarPagina('Ws_teste');
             }
         });
     </script>

@@ -1,14 +1,14 @@
 document.getElementById("Enviar").addEventListener("click", enviar);
 
 async function enviar(event) {
-  event.preventDefault(); // impede refresh do form
-  try {
-    var Rm = document.getElementById("Rm").value.trim();
-
-    const data = new URLSearchParams();
-    data.append('Rm', Rm);
-
-    const response = await fetch("http://localhost/banco/Php/digital.php", {
+  event.preventDefault(); // Previne o comportamento padrão do formulário
+  try{
+    var nome = document.getElementById("nome").value;
+    var file = document.getElementById("imagem").files[0];
+    var formData = new FormData();
+    formData.append("nome", nome);
+    formData.append("imagem", file);
+    const response = await fetch("http://localhost/ETEC/3MIN/TCC/bioid/Php/upload.php", {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },

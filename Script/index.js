@@ -7,6 +7,30 @@ const __dirname = path.dirname(__filename);
 
 let splash;
 let mainWindow;
+// WebSocket--------------------------------------------------------------------------
+import WebSocket, { WebSocketServer } from 'ws';
+let win;
+
+  const wss = new WebSocketServer({ port: 8080 });
+  console.log('Servidor WS rodando na porta 8080');
+
+  wss.on('connection', (ws) => {
+    console.log('Novo cliente conectado!');
+
+    ws.on('message', (msg) => {
+      console.log('Mensagem recebida do ESP32:', msg.toString());
+
+      // Mandar pro renderer
+      mainWindow.webContents.send('esp32-msg', msg.toString());
+
+      // Responder pro ESP32
+      ws.send('Mensagem recebida ');
+    });
+
+    ws.send('Bem-vindo ESP32!');
+  });
+
+// ------------------------------------------------------------------------------------------
 
 function createWindows() {
   // Splash screen
@@ -80,6 +104,8 @@ function createWindows() {
           break;
           case "CadastroDigital":
           await mainWindow.loadFile("Html/CadastroDigital.html");
+        case "Ws_teste":
+          await mainWindow.loadFile("Html/Ws_teste.html");
           break;
         default:
           console.log("Página desconhecida", pagina);
