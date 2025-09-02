@@ -119,3 +119,12 @@ window.onload = async function () {
     console.error("Erro ao trocar página:", result.error);
   }
 }
+
+function Deslogar(){
+if(confirm("Deseja realmente deslogar?")){
+    window.electronAPI.trocarPagina("login");
+}else{
+    return;
+}
+
+}

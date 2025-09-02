@@ -10,6 +10,7 @@
 <input id="senha" placeholder="senha">
 <select id="funcao"><option value="funcionario">funcionario</option><option value="adm">adiministrador</option></select>
 <button id="btn">botão</button>
+<button onclick="Voltar()">Voltar</button>
 <div id="rep"></div>
 
 <script>
@@ -66,6 +67,9 @@
     }
   }
 
+function Voltar() {
+  window.electronAPI.trocarPagina("login");
+}
 </script>
 </body>
 </html>

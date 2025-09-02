@@ -30,3 +30,7 @@ catch(error) {
     console.error("Erro ao carregar a página:", error);
   }
 }
+
+function trocar() {
+  window.electronAPI.trocarPagina("entrada");
+}
