@@ -104,6 +104,7 @@ function createWindows() {
           break;
           case "CadastroDigital":
           await mainWindow.loadFile("Html/CadastroDigital.html");
+          break
         case "Ws_teste":
           await mainWindow.loadFile("Html/Ws_teste.html");
           break;
