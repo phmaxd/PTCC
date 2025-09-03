@@ -10,24 +10,25 @@ let mainWindow;
 // WebSocket--------------------------------------------------------------------------
 import WebSocket, { WebSocketServer } from 'ws';
 let win;
+let esp32Client = null;
 
   const wss = new WebSocketServer({ port: 8080 });
   console.log('Servidor WS rodando na porta 8080');
 
   wss.on('connection', (ws) => {
     console.log('Novo cliente conectado!');
+    esp32Client = ws;
+  });
 
-    ws.on('message', (msg) => {
-      console.log('Mensagem recebida do ESP32:', msg.toString());
+//Usa o IPCMain para receber mensagens do Renderer e enviar para o ESP32
+  ipcMain.on("fromRenderer", (event, msg) => {
+    console.log("Main recebeu do Renderer:", msg);
 
-      // Mandar pro renderer
-      mainWindow.webContents.send('esp32-msg', msg.toString());
-
-      // Responder pro ESP32
-      ws.send('Mensagem recebida ');
-    });
-
-    ws.send('Bem-vindo ESP32!');
+    if (esp32Client && esp32Client.readyState === WebSocket.OPEN) {
+      esp32Client.send(JSON.stringify(msg));
+    } else {
+      console.log("ESP32 não está conectado!");
+    }
   });
 
 // ------------------------------------------------------------------------------------------
