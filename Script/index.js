@@ -1,35 +1,18 @@
 import { app, BrowserWindow, ipcMain } from "electron";
 import path from "path";
 import { fileURLToPath } from "url";
+import { setupWebSocket } from "./WebSocketHandlers/WebSocketHandler.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 let splash;
 let mainWindow;
+
+
 // WebSocket--------------------------------------------------------------------------
-import WebSocket, { WebSocketServer } from 'ws';
-let win;
-let esp32Client = null;
 
-  const wss = new WebSocketServer({ port: 8080 });
-  console.log('Servidor WS rodando na porta 8080');
-
-  wss.on('connection', (ws) => {
-    console.log('Novo cliente conectado!');
-    esp32Client = ws;
-  });
-
-//Usa o IPCMain para receber mensagens do Renderer e enviar para o ESP32
-  ipcMain.on("fromRenderer", (event, msg) => {
-    console.log("Main recebeu do Renderer:", msg);
-
-    if (esp32Client && esp32Client.readyState === WebSocket.OPEN) {
-      esp32Client.send(JSON.stringify(msg));
-    } else {
-      console.log("ESP32 não está conectado!");
-    }
-  });
+setupWebSocket(mainWindow, ipcMain);
 
 // ------------------------------------------------------------------------------------------
 
