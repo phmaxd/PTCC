@@ -1,4 +1,5 @@
 import WebSocket, { WebSocketServer } from 'ws';
+import { cadastrar_digital } from '../WebSocketHandlers/cadastrar_digital.js';
 let esp32Client = null;
 
 export function setupWebSocket(mainWindow, ipcMain) {
@@ -11,7 +12,12 @@ export function setupWebSocket(mainWindow, ipcMain) {
     esp32Client = ws;
     esp32Client.on('message', (data) => {
     const jsonData = JSON.parse(data);
+    if (jsonData.acao === 'digital_cadastrada') {
+        cadastrar_digital(jsonData);
+    }
     console.log('Mensagem recebida do ESP32:', jsonData);
+
+
     if(mainWindow){
       mainWindow.webContents.send('esp32-msg', jsonData);
     }
