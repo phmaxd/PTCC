@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TESTE</title>
+<link rel="stylesheet" href="../css/cadastro.css">
+</head>
+
+<body>
+  <input id="nome" placeholder="nome">
+  <br>
+  <input id="senha" placeholder="senha">
+  <select id="funcao">
+      <option value="" disabled selected hidden>Selecione uma função</option>
+    <option value="funcionario">funcionario</option>
+    <option value="adm">adiministrador</option>
+  </select>
+  <button id="btn">Cadastrar</button>
+  <button onclick="Voltar()">Voltar</button>
+  <div id="rep"></div>
+  <div class="imgsvg">
+    <img src="../css/assets/cadFuncionario/escolaAluno.svg" alt="Aluno em frente a escola">
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const btn = document.getElementById("btn");
+      if (btn) {
+        btn.addEventListener("click", recebe);
+      }
+    });
+
+    async function recebe() { // Tornar a função assíncrona para usar await
+      var n1 = document.getElementById("nome").value;
+      var n2 = document.getElementById("senha").value;
+      var n3 = document.getElementById("funcao").value;
+
+      const data = new URLSearchParams();
+      data.append('n1', n1);
+      data.append('n2', n2);
+      data.append('n3', n3);
+
+      try {
+        const response = await fetch('http://localhost/banco/Php/manda.php', {
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: data.toString()
+        });
+
+        if (!response.ok) {
+          throw new Error('Erro na requisição: ' + response.statusText);
+        }
+
+        const html = response.text();
+        document.getElementById('rep').innerHTML = html;
+
+        if (html === "esse usuario já está cadastrado") {
+          return;
+        }
+        alert("foi");
+
+        // Usando a API segura do preload
+        const result = window.electronAPI.trocarPagina('login');
+        if (!result.success) {
+          console.error("Erro ao trocar página:", result.error);
+        }
+
+      } catch (error) {
+        console.log('Request failed: ' + error.message);
+        alert("fudeu: " + error.message); // Melhorar a mensagem de erro
+      } finally {
+        console.log('Foi');
+      }
+    }
+
+    function Voltar() {
+      window.electronAPI.trocarPagina("login");
+    }
+  </script>
+</body>
+
+</html>

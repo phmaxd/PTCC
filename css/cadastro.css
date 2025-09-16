@@ -1,0 +1,118 @@
+body {
+    background-image: url("../css/assets/cadFuncionario/fundo.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    font-family: "Poppins", sans-serif;
+    margin: 15% 10% 5% 10%;
+    margin-top: 10%;
+    background-attachment: fixed;
+}
+
+
+input {
+    all: unset;
+    margin-bottom: 1%;
+    width: 40%;
+    height: 50px;
+    border-radius: 5px;
+    border-top: 2px solid #C1BBBB;
+    border-right: 2px solid #C1BBBB;
+    border-bottom: 2px solid #C1BBBB;
+    border-left: 5px solid #4D9267;
+    padding-left: 10px;
+    background-color: #ffffffa7;
+}
+
+input::placeholder,
+select {
+    color: #2a2a2a;
+    align-items: center;
+}
+
+/* ======== Botão principal ======== */
+button#btn {
+    width: 41%;
+    height: 54px;
+    font-size: 1.25rem;
+    background-color: #355F46;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+button#btn:hover {
+    background-color: #4d9267;
+    transform: scale(1.05);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 400%;
+    color: #4d9267;
+}
+
+.imgsvg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 90px;
+  margin-left: 24%;
+  margin-top: -37%;
+}
+
+.imgsvg img {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+}
+
+/* ======== Campo de seleção ======== */
+select {
+    all: unset;
+    display: block;
+    margin-bottom: 20px;
+    width: 40%;
+    height: 50px;
+    border-radius: 5px;
+    border: 2px solid #4D9267;
+    border-left-width: 5px solid #4D9267;
+    padding-left: 12px;
+    background-color: #ffffffa7;
+    font-size: 1rem;
+    cursor: pointer;
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%234D9267" height="30" viewBox="0 0 24 24" width="30" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 40px 40px;
+}
+
+/* Opções do select */
+select option {
+    height: 50px;
+    line-height: 50px;
+    padding: 0 15px;
+    font-size: 1.2rem;
+}
+
+
+
+/* ======== Área de resposta ======== */
+#rep {
+    margin-top: 20px;
+    color: #4D9267;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+p{
+    text-align: center
+}

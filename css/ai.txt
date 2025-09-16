@@ -1,0 +1,310 @@
+/* ================== CSS BASE ================== */
+
+body {
+    background-image: url("../css/assets/login/fundo.png"); 
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    font-family: "Poppins", sans-serif;
+    margin-left: 10%;
+    margin-top: 5%;
+}
+
+.poppins-regular {
+    font-family: "Poppins", sans-serif;
+    font-weight: bolder;
+    font-style: normal;
+}
+
+.img-fundo {
+    margin-left: 40%;
+    top: 10%;
+    position: fixed;
+    animation: moverParaBaixo 2s linear infinite;
+}
+
+.img-fundo img {
+    width: 800px;
+    height: auto;
+}
+
+@keyframes moverParaBaixo {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(18px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+h1 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 800;
+    font-size: 500%;
+    color: #4d9267;
+}
+
+p {
+    color: #636363;
+    margin: 0;
+    margin-bottom: 2%;
+}
+
+input {
+    
+    margin-bottom: 1%;
+    width: 25%;
+    height: 50px;
+    border-radius: 5px;
+    border-top: 2px solid #C1BBBB;
+    border-right: 2px solid #C1BBBB;
+    border-bottom: 2px solid #C1BBBB;
+    border-left: 5px solid #4D9267;
+    padding-left: 10px;
+}
+
+#BioID {
+    font-weight: 700;
+    font-size: 140%;
+    color: #4D9267;
+}
+
+input::placeholder {
+    text-align: left;
+}
+
+button {
+    all: unset;
+    text-align: center;
+    width: 20%;
+    max-width: 90%;
+    height: 3.5rem;
+    flex-shrink: 0;
+    font-size: 1.25rem;
+    background-color: #4D9267;
+    color: #ffffff;
+    font-weight: 500;
+    border-radius: 5px;
+    border-left: 5px solid #355F46;
+    border-right: 5px solid #355F46;
+    box-shadow: 0 2px 3px 0 #00000040;
+    cursor: pointer;
+}
+
+.botoes-container {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(150px, 1fr));
+    gap: 10px;
+    max-width: 460px;
+}
+
+.botoes-container button {
+    width: 100%;
+    height: 54px;
+    font-size: 1.25rem;
+    background-color: #355F46;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+@media (max-width: 1068px) {
+    .botoes-container {
+        grid-template-columns: 2fr;
+    }
+
+    #cadastrar {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+}
+
+button {
+    width: 100%;
+}
+
+#cadastrar {
+    margin-left: 1.5%; 
+    border: 2px solid #355F46;
+    color: #355F46; 
+    background-color: #ffffff;
+}
+
+/* ================== MEDIA QUERIES ================== */
+
+/* ----- 1. Celular Pequeno (max-width: 480px) ----- */
+@media (max-width: 480px) {
+    body {
+        background-position: top center;
+        background-size: cover;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+    .botoes-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        max-width: 100%;
+    }
+
+    h1 {
+        font-size: 550%;
+    }
+
+    p {
+        font-size: 1.2rem;
+    }
+
+    #BioID {
+        font-size: 160%;
+    }
+
+    input {
+        width: 100%;
+        height: 60px;
+        font-size: 1.1rem;
+        padding-left: 15px;
+    }
+
+    button {
+        width: 100%;
+        height: 5rem;
+        font-size: 1.6rem;
+        margin-top: 20px;
+        border-left: 7px solid #355F46;
+        border-right: 7px solid #355F46;
+    }
+
+    .img-fundo {
+        width: 70%;
+        max-width: 200px;
+        position: absolute;
+        top: 150px;
+        right: 10px;
+        margin-left: 0;
+    }
+
+    .img-fundo img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+/* ----- 2. Celular e Tablet Médio (max-width: 768px) ----- */
+@media (max-width: 768px) {
+    body {
+        background-position: top center;
+        background-size: cover;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+    
+
+    .botoes-container {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        max-width: 100%;
+    }
+
+    h1 {
+        font-size: 620%;
+    }
+
+    p {
+        font-size: 1.1rem;
+    }
+
+    #BioID {
+        font-size: 150%;
+    }
+
+    input {
+        width: 95%;
+        height: 55px;
+        font-size: 1.05rem;
+        padding-left: 12px;
+    }
+
+    button {
+        width: 100%;
+        height: 4.5rem;
+        font-size: 1.5rem;
+        margin-top: 15px;
+        border-left: 6px solid #355F46;
+        border-right: 6px solid #355F46;
+    }
+
+    .img-fundo {
+        width: 60%;
+        max-width: 250px;
+        position: absolute;
+        top: 130px;
+        right: 0;
+        margin-left: 0;
+    }
+
+    .img-fundo img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+/* ----- 3. Tablet Grande / Desktop Pequeno (max-width: 1024px) ----- */
+@media (max-width: 1024px) {
+    body {
+        margin-left: 5%;
+        margin-right: 5%;
+        background-position: center;
+        background-size: cover;
+    }
+
+    .botoes-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        max-width: 460px;
+    }
+
+    h1 {
+        font-size: 450%;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    #BioID {
+        font-size: 130%;
+    }
+
+    input {
+        width: 60%;
+        height: 50px;
+        font-size: 1rem;
+        padding-left: 10px;
+    }
+
+    button {
+        width: 100%;
+        height: 4rem;
+        font-size: 1.3rem;
+        margin-top: 10px;
+        border-left: 5px solid #355F46;
+        border-right: 5px solid #355F46;
+    }
+
+    .img-fundo {
+        width: 45%;
+        max-width: 350px;
+        margin-left: 40%;
+        position: fixed;
+        top: 10%;
+    }
+
+    .img-fundo img {
+        width: 100%;
+        height: auto;
+    }
+}
