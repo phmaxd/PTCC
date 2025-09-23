@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apagar Usuario</title>
+      <link rel="stylesheet" href="../css/apagarusuario.css">
+</head>
+<body>
+    
+  <header class="textos">
+    <h2>BioID</h2>
+    <h1>Editar <br> Perfil</h1>
+  </header>
+
+  <main class="container">
+
+    <div class="middle-elements">
+      <input id="nome" placeholder="Usuario">
+          <select id="funcao">
+      <option value="" disabled selected hidden>Selecione uma função</option>
+      <option value="funcionario">Funcionário</option>
+      <option value="adm">Administrador</option>
+    </select>
+      <button id="btn">Salvar Alterações</button>
+        <button id="btndeletar">Deletar</button>
+    </div>
+  </main>
+
+    <a onclick="trocar()">
+    <img src="../imagens/iconperfil.svg" alt="Ícone de voltar" class="iconperfil">
+  </a>
+
+      <a onclick="trocar()">
+    <img src="../imagens/iconvoltar.svg" alt="Ícone de voltar" class="iconvoltar">
+  </a>
+
+</body>
+</html>

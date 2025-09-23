@@ -52,6 +52,20 @@ button#btnAlterar:hover {
   padding: 0;
 }
 
+.iconvoltar{
+  position: fixed;
+  left: 60%;
+  top: 20px;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+      transition: all 0.3s ease; 
+}
+
+.iconvoltar:hover {
+  transform: scale(1.1);
+}
+
 
 
 /* =========================================================================================================================================== */
