@@ -55,17 +55,37 @@ function Excluir(botao){
 
 
 }
-function adicionarFuncionario(dados){
-    var funcionariosDiv = document.getElementById("funcionarios");
-    var funcionarioCard = document.createElement("div");
-    funcionarioCard.classList.add("funcionario-card");
-    funcionarioCard.innerHTML = `
-        <h3>${dados.nome}</h3>
-        <p><div>Função:</div> ${dados.funcao}</p>
-        <strong style="display:none;">${dados.id}</strong>
-        <button onclick="Excluir(this)">Excluir</button>
+function adicionarFuncionario(dados) {
+    // Decide em qual tabela adicionar
+    var tbody;
+    if (dados.funcao === "funcionario") {
+        tbody = document.getElementById("tabela-funcionarios");
+    } else if (dados.funcao === "adm") {
+        tbody = document.getElementById("tabela-adms");
+    } else {
+        return; // ignora se for outra função
+    }
+
+    // Cria a linha
+    var tr = document.createElement("tr");
+    tr.innerHTML = `
+        <td>${dados.nome}</td>
+        <td>${dados.funcao}</td>
+        <td>${dados.id}</td>
+        <td><button onclick="Excluir(this)">Excluir</button>    <button onclick="Editar(this)">Editar</button></td>
     `;
-    funcionariosDiv.appendChild(funcionarioCard);
+
+    // Insere na tabela correspondente
+    tbody.appendChild(tr);
+}
+
+// Exemplo de como rodar com array vindo do PHP
+dados.forEach(item => {
+    adicionarFuncionario(item);
+});
+
+function Editar(botao){
+    // Editar depois
 }
 
 function Deslogar(){

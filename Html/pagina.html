@@ -7,12 +7,66 @@
     <title>Edição de funcionario</title>
     <script src="../Script/jquery-3.7.1.min.js"></script>
     <script src="../Script/funcionario.js"></script>
+    <style>
+.excel-table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 20px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+.excel-table th,
+.excel-table td {
+  border: 1px solid #c6c6c6;
+  padding: 8px;
+  text-align: left;
+}
+
+.excel-table th {
+  background-color: #f3f3f3;
+  font-weight: bold;
+}
+
+.excel-table tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+.excel-table tr:hover {
+  background-color: #dbe9ff;
+}
+
+    </style>
     
 </head>
 <body>
-    <div id="funcionarios">
+    <h2>Funcionários</h2>
+<table class="excel-table">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Função</th>
+      <th>ID</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody id="tabela-funcionarios"></tbody>
+</table>
 
-    </div><br>
+<h2>Administradores</h2>
+<table class="excel-table">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Função</th>
+      <th>ID</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody id="tabela-adms"></tbody>
+</table>
     <button onclick="Deslogar()">Deslogar</button>
+
+    
 </body>
 </html>

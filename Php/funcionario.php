@@ -4,7 +4,7 @@ include 'conecta.php';
 
 header('Content-Type: application/json; charset=utf-8');
 
-$query = $conn -> prepare("SELECT * FROM teste WHERE funcao = 'funcionario' ");
+$query = $conn -> prepare("SELECT * FROM teste ");
 
 $query -> execute();
 $resposta = $query -> fetchAll(PDO::FETCH_ASSOC);
