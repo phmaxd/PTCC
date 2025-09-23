@@ -27,7 +27,7 @@ function Excluir(botao){
     if(!confirm("Deseja realmente excluir este funcionário?")) return;
 
     const row = botao.closest(".funcionario-card");
-    const id = row.querySelector("strong").textContent;
+    const id = row.dataset.id;
 
     try {
         $.ajax({
@@ -68,6 +68,8 @@ function adicionarFuncionario(dados) {
 
     // Cria a linha
     var tr = document.createElement("tr");
+tr.classList.add("funcionario-card"); // Adicione isso
+tr.setAttribute("data-id", dados.id);
     tr.innerHTML = `
         <td>${dados.nome}</td>
         <td>${dados.funcao}</td>
@@ -80,9 +82,7 @@ function adicionarFuncionario(dados) {
 }
 
 // Exemplo de como rodar com array vindo do PHP
-dados.forEach(item => {
-    adicionarFuncionario(item);
-});
+
 
 function Editar(botao){
     // Editar depois
@@ -96,3 +96,22 @@ if(confirm("Deseja realmente deslogar?")){
 }
 
 }
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("overlay");
+    const perfilBtn = document.getElementById("perfilBtn");
+    const closeSidebar = document.getElementById("closeSidebar");
+
+    perfilBtn.addEventListener("click", () => {
+      sidebar.classList.add("open");
+      overlay.classList.add("active");
+    });
+
+    closeSidebar.addEventListener("click", () => {
+      sidebar.classList.remove("open");
+      overlay.classList.remove("active");
+    });
+
+    overlay.addEventListener("click", () => {
+      sidebar.classList.remove("open");
+      overlay.classList.remove("active");
+    });
