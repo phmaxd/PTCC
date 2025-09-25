@@ -1,32 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="title">Login</title> 
-       <script src="../Script/login.js"></script>
+    
+    <title id="title">Login</title>
+    <script src="../Script/login.js"></script>
+    <link rel="stylesheet" href="../css/login.css">
 </head>
-<body>
-    <h1>Login</h1>
-    <input type="text" id="nome" placeholder="Usuário">
-    <input type="password" id="senha" placeholder="Senha">
-    <button id="login">Entrar</button>
-    <button id="cadastro" onclick="outrapagina()">cadastro</button>
-    <button id="Esqueci">Esqueci minha senha</button>
-    <button id="Ws_teste">Ws_teste</button>
-    <div id="rep"></div>
 
-    <script>
-        document.getElementById('Esqueci').addEventListener('click', function() {
-            if (window.electronAPI && window.electronAPI.trocarPagina) {
-                window.electronAPI.trocarPagina('Esqueci');
-            }
-        });
-        document.getElementById('Ws_teste').addEventListener('click', function() {
-            if (window.electronAPI && window.electronAPI.trocarPagina) {
-                window.electronAPI.trocarPagina('Ws_teste');
-            }
-        });
-    </script>
+<body>
+
+    <div class="container">
+        <div class="bloco esquerdo">
+            <!-- <p id="BioID">BioID</p> -->
+            <div class="elementos">
+            <h1>Bem-Vindo <br> de volta!</h1>
+            <p>Faça login na sua conta.</p>
+            <input type="text" id="nome" placeholder="Usuário"><br>
+            <input type="password" id="senha" placeholder="Senha">
+            <a href="Esqueci.html"><p class="Esqueci">Esqueceu a senha?</p></a>
+
+            <div class="botoes-container">
+                <button id="login">Entrar</button>
+                <button id="cadastro" onclick="outrapagina()">Cadastro</button>
+            </div>
+            <div id="rep"></div>
+
+            </div>
+        </div>
+
+
+        <div class="bloco direito">
+            <img src="../css/assets/login/Digital.svg" id="ImgDigital" alt="Imagem de uma digital">
+        </div>
+    </div>
+
+
 </body>
+
 </html>

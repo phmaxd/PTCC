@@ -2,35 +2,47 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
+  
   <title>Entrada de aluno</title>
-  <script src="../Script/entrada.js" defer></script>
-  <style>
-    /* Modal */
-    #confirmModal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.5);
-      justify-content: center; align-items: center;
-      z-index: 2000;
-    }
-    #confirmModal .modal-box {
-      background: #fff; padding: 20px; border-radius: 8px;
-      min-width: 300px; text-align: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    }
-    #confirmModal button {
-      margin: 10px; padding: 8px 16px; border: none;
-      border-radius: 4px; cursor: pointer;
-    }
-    #confirmBtn { background: #4CAF50; color: #fff; }
-    #cancelBtn { background: #f44336; color: #fff; }
-  </style>
+
 </head>
 <body>
-  <button id="cadastroBtn" style="position:fixed; top:20px; left:20px; z-index:1000;">
-    Cadastrar Digital
+
+  <!-- ===== SIDEBAR ===== -->
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+      <h2>Menu</h2>
+      <span class="close-btn" id="closeSidebar">&times;</span>
+    </div>
+    <ul class="sidebar-menu">
+      <li><a href="#">🏠 Início</a></li>
+      <li><a href="#" onclick="Deslogar()">🚪 Sair</a></li>
+    </ul>
+  </div>
+
+  <div id="overlay" class="overlay"></div>
+
+  
+  <!-- ===== HEADER ===== -->
+  <header>
+          <h1>Controle de Entrada</h1>
+
+<div class="search-box">
+  <input type="text" id="searchInput" placeholder="Pesquisar aluno...">
+  <button id="searchBtn">
+    <img src="../imagens/Lupa.svg" alt="Pesquisar">
   </button>
+</div>
+<div class="icons">
+  <img src="../imagens/iconperfil.svg" alt="Perfil" class="icon perfil" id="perfilBtn">
+</div>
+
+  </header>
+
+  <h2>Histórico de Alunos</h2>
+
+  <!-- ===== BOTÃO DE CADASTRO ===== -->
+
 
   <div id="cadastroMenu" style="display:none; top:60px; left:20px; background:#fff;
       border:1px solid #ccc; box-shadow:0 2px 8px rgba(0,0,0,0.2);
@@ -43,19 +55,48 @@
     </form>
   </div>
 
-  <div id="content"></div>
-  <!-- Modal de confirmação -->
-<!-- Adicione isso no seu HTML, fora do JS -->
-<div id="confirmModal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); align-items:center; justify-content:center; z-index:9999;">
-  <div id="modalContent" style="background:#fff; padding:20px; border-radius:8px; min-width:220px;">
-    <!-- Conteúdo preenchido pelo JS -->
-    <button id="confirmBtn" style="margin-right:10px;">Confirmar</button>
-    <button id="cancelBtn">Cancelar</button>
-  </div>
-</div>
-<button onclick="Deslogar()">Deslogar</button>
+  <!-- ===== MODAL DE CONFIRMAÇÃO ===== -->
+<div id="confirmModal" style="display: none;">
+      <!-- <div class="modal-box">
+      Conteúdo preenchido pelo JS
+      <button id="confirmBtn">Confirmar</button>
+      <button id="cancelBtn">Cancelar</button>
+    </div> -->
+  </div> 
+
+  <div id="content"></div><br>
+
+   <button id="cadastroBtn">Cadastrar Digital</button>
+
+  <!-- Script do sidebar e menus -->
   <script>
-    // Abrir/fechar menu de cadastro
+    // ====== SIDEBAR ======
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("overlay");
+    const perfilBtn = document.getElementById("perfilBtn");
+    const closeSidebar = document.getElementById("closeSidebar");
+
+    perfilBtn.addEventListener("click", () => {
+      sidebar.classList.add("open");
+      overlay.classList.add("active");
+    });
+
+    closeSidebar.addEventListener("click", () => {
+      sidebar.classList.remove("open");
+      overlay.classList.remove("active");
+    });
+
+    overlay.addEventListener("click", () => {
+      sidebar.classList.remove("open");
+      overlay.classList.remove("active");
+    });
+
+    function Deslogar() {
+      alert("Você foi deslogado!");
+      // window.location.href = "login.html"; // redireciona se quiser
+    }
+
+    // ====== MENU DE CADASTRO ======
     document.getElementById('cadastroBtn').onclick = function(e) {
       e.stopPropagation();
       var menu = document.getElementById('cadastroMenu');
@@ -73,6 +114,43 @@
       }
     });
 
+    // ===== PESQUISA DE ALUNOS =====
+const searchInput = document.getElementById("searchInput");
+const searchBtn = document.getElementById("searchBtn");
+
+function filtrarAlunos() {
+  let filtro = searchInput.value.toLowerCase();
+  const cards = document.querySelectorAll("#content .card");
+
+  cards.forEach(card => {
+    const nomeEl = card.querySelector("div:nth-child(2)");
+    const rmEl = card.querySelector("div:nth-child(3)");
+
+    const nome = nomeEl ? nomeEl.innerText.toLowerCase() : "";
+    const rm = rmEl ? rmEl.innerText.toLowerCase() : "";
+
+    if (nome.includes(filtro) || rm.includes(filtro)) {
+      card.parentElement.style.display = "flex"; // mostra <tr> wrapper
+    } else {
+      card.parentElement.style.display = "none";
+    }
+  });
+}
+
+// Botão de pesquisa
+if (searchBtn) {
+  searchBtn.addEventListener("click", filtrarAlunos);
+}
+
+// Pesquisa em tempo real
+if (searchInput) {
+  searchInput.addEventListener("keyup", filtrarAlunos);
+}
+
   </script>
+  
+    <script src="../Script/entrada.js" defer></script>
+  <link rel="stylesheet" href="../css/historicoalunos.css">
+
 </body>
 </html>

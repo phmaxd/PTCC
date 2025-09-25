@@ -2,13 +2,15 @@
 <html>
 <head>
 <meta charset="UTF-8" />
+
 <style>
     .container {
         border-radius: 22px;
-        background-color: rgb(65, 255, 129);
-        padding: 0px;
+        padding: 40px;
         align-items: center;
         width: 100%;
+        transform: translateY(100%); /* começa fora da tela embaixo */
+    animation: slideUp 1s ease-out forwards;
     }
   body {
     overflow: hidden;
@@ -31,6 +33,7 @@
     height: 200px;
     margin-bottom: 15px;
     border-radius: 22px;
+    animation: fadeIn 1s ease-in, pulse 2s infinite ease-in-out;
   }
 
   h1 {
@@ -51,6 +54,26 @@
   @keyframes spin {
     to { transform: rotate(360deg); }
   } */
+  @keyframes slideUp {
+    from {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+   @keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
 
 </style>
 </head>

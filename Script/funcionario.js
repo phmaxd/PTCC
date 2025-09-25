@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+const ID = window.name;
+      console.log(ID);
+>>>>>>> origin/bap
 window.onload = function () {
     try {
        $.ajax({
@@ -24,11 +29,21 @@ window.onload = function () {
 
 }
 function Excluir(botao){
+<<<<<<< HEAD
     if(!confirm("Deseja realmente excluir este funcionário?")) return;
 
     const row = botao.closest(".funcionario-card");
     const id = row.querySelector("strong").textContent;
 
+=======
+    if(!confirm("Deseja realmente excluir este funcionário?")) {return;}
+    const row = botao.closest(".funcionario-card");
+    const id = row.dataset.id;
+    if(ID == id){
+        alert("❌ Você não pode excluir a si mesmo.");
+        return;
+    }
+>>>>>>> origin/bap
     try {
         $.ajax({
             url: "http://localhost/banco/Php/Excluir.php",
@@ -55,6 +70,7 @@ function Excluir(botao){
 
 
 }
+<<<<<<< HEAD
 function adicionarFuncionario(dados){
     var funcionariosDiv = document.getElementById("funcionarios");
     var funcionarioCard = document.createElement("div");
@@ -66,6 +82,39 @@ function adicionarFuncionario(dados){
         <button onclick="Excluir(this)">Excluir</button>
     `;
     funcionariosDiv.appendChild(funcionarioCard);
+=======
+function adicionarFuncionario(dados) {
+    // Decide em qual tabela adicionar
+    var tbody;
+    if (dados.funcao === "funcionario") {
+        tbody = document.getElementById("tabela-funcionarios");
+    } else if (dados.funcao === "adm") {
+        tbody = document.getElementById("tabela-adms");
+    } else {
+        return; // ignora se for outra função
+    }
+
+    // Cria a linha
+    var tr = document.createElement("tr");
+tr.classList.add("funcionario-card"); // Adicione isso
+tr.setAttribute("data-id", dados.id);
+    tr.innerHTML = `
+        <td>${dados.nome}</td>
+        <td>${dados.funcao}</td>
+        <td>${dados.id}</td>
+        <td><button onclick="Excluir(this)" class="btn-excluir">Excluir</button>    <button onclick="Editar(this)" class="btn">Editar</button></td>
+    `;
+
+    // Insere na tabela correspondente
+    tbody.appendChild(tr);
+}
+
+// Exemplo de como rodar com array vindo do PHP
+
+
+function Editar(botao){
+    // Editar depois
+>>>>>>> origin/bap
 }
 
 function Deslogar(){
@@ -76,3 +125,22 @@ if(confirm("Deseja realmente deslogar?")){
 }
 
 }
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("overlay");
+    const perfilBtn = document.getElementById("perfilBtn");
+    const closeSidebar = document.getElementById("closeSidebar");
+
+    perfilBtn.addEventListener("click", () => {
+      sidebar.classList.add("open");
+      overlay.classList.add("active");
+    });
+
+    closeSidebar.addEventListener("click", () => {
+      sidebar.classList.remove("open");
+      overlay.classList.remove("active");
+    });
+
+    overlay.addEventListener("click", () => {
+      sidebar.classList.remove("open");
+      overlay.classList.remove("active");
+    });

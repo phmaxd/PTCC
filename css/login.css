@@ -1,0 +1,368 @@
+/*     <nav class="navbar">
+        <div class="logo">BioID</div>
+        <ul>
+          <li>Home</li>
+          <li>Sobre</li>
+          <li>Contato</li>
+        </ul>
+      </nav> */
+
+a{
+    text-decoration: none;
+    color: #225b42;
+
+}
+
+body {
+  background-image: url("../css/assets/login/fundo.png"); 
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  font-family: "Poppins", sans-serif;
+  background-attachment: fixed;
+  background-color: #f5faf6;
+  margin: 0%;
+}
+
+.poppins-regular {
+  font-family: "Poppins", sans-serif;
+  font-weight: bolder;
+  font-style: normal;
+}
+
+.container {
+  display: flex;
+  flex-direction: row; /* Divide verticalmente (lado a lado) */
+  height: 100vh;
+}
+
+/* BLOCO ESQUERDO */
+.bloco.esquerdo {
+  flex: 1; /* Ocupa mais espaço */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.bloco.esquerdo h1 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 400%;
+  color: #225b42;
+}
+
+.bloco.esquerdo p {
+  font-size: 1.2rem;
+  margin-bottom: 4%;
+
+}
+
+input {
+  all: unset;
+  margin-bottom: 2.5%;
+  width: 60%;
+  height: 50px;
+  border-radius: 5px;
+  font-size: 1.7rem;
+  border-top: 2px solid #C1BBBB;
+  border-right: 2px solid #C1BBBB;
+  border-bottom: 2px solid #C1BBBB;
+  border-left: 5px solid #225b42;
+  padding-left: 10px;
+  background-color: #ffffffa7;
+ 
+}
+
+/* input::placeholder {
+  font-size: 1.5rem;
+  color: #636363;
+  margin-bottom: 1%;
+
+} */
+
+#BioID {
+  font-weight: 700;
+  font-size: 140%;
+  color:#225b42;
+}
+
+.botoes-container {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(100px, 1fr));
+  gap: 15px;
+  max-width: 230px; /* só para controlar o tamanho máximo da área */
+}
+
+
+button {
+  padding: 10px 20px;
+  margin-right: 10px;
+  font-size: 16px;
+  width: 90%; /* botão ocupa toda a largura da célula */
+  height: 54px;
+  font-size: 1.5rem;
+  background-color: #355F46;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease; /* suaviza as mudanças */
+}
+
+  button:hover {
+  background-color: #225b42;     /* muda o tom do verde */
+  transform: scale(1.05);       /* aumenta levemente */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* sombra de destaque */
+  }
+
+  #cadastro{
+    border: 2px solid #355F46;
+    padding: 4px;
+    color: #355F46; 
+    background-color: #ffffff;
+    
+    }
+  
+  .esqueceu-senha {
+    color: #355F46;          /* cor estilo link */
+    cursor: pointer;         /* muda o mouse para "mãozinha" */
+    transition: all 0.2s ease;
+    display: inline-block;   /* permite aplicar underline animado */
+    }
+
+    /* hover */
+  .esqueceu-senha:hover {
+  text-decoration: underline; /* aparece linha embaixo */
+  color: #225b42;             /* muda um pouco a cor */
+  }
+
+  .elementos{
+    padding-left: 20%;
+  }
+  
+
+  /* BLOCO DIREITO  =========  */
+  .bloco.direito {
+  flex: 1;
+  display: flex;
+  justify-content: center; /* Centraliza na horizontal */
+  align-items: center;     /* Centraliza na vertical */
+  padding: 0;              /* Remove padding que pode deslocar */
+  height: 100vh;           /* Garante altura cheia da tela */
+}
+
+
+
+/* RESPONSIVO P OUTROS LAYOUTS =============================================================================================================  */
+
+
+@media (min-width: 2560px) {
+ /* BLOCO ESQUERDO */
+.bloco.esquerdo {
+  flex: 1; /* Ocupa mais espaço */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.bloco.esquerdo h1 {
+  font-size: 800%;
+}
+
+.bloco.esquerdo p {
+  margin-bottom: 4%;
+  font-size: 50px;
+}
+
+input {
+  margin-bottom: 1%;
+  width: 60%;
+  height: 80px;
+  font-size: 3rem;
+}
+
+/* input::placeholder {
+  font-size: 45px;
+  color: #636363;
+  margin-bottom: -5%;
+  
+
+} */
+
+/* .botoes-container {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(150px, 1fr));
+  gap: 100px;
+  max-width: 100px; 
+} */
+
+
+button {
+  font-weight: 700;
+  padding: 10px 20px;
+  margin-right: 10px;
+  width: 150%; /* botão ocupa toda a largura da célula */
+  height: 100px;
+  font-size: 2.5rem;
+
+}
+
+  .elementos{
+    padding-left: 20%;
+  }
+  
+  .bloco.direito img{
+    flex: 1;
+    display: flex;
+    justify-content: center; /* Centraliza na horizontal */
+    align-items: center;     /* Centraliza na vertical */
+    padding: 0;              /* Remove padding que pode deslocar */
+    height: 50vh;           /* Garante altura cheia da tela */
+  }
+  
+}
+
+@media (max-width: 1440px) {
+
+
+    
+  .bloco.direito img{
+        width: 65%;
+
+  }
+
+  .bloco.esquerdo h1{
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 250%;
+    color: #225b42;
+    margin-bottom: 5%;
+            width: 50%;
+
+  }
+
+  .bloco.esquerdo input{
+    all: unset;
+    margin-bottom: 2.5%;
+    width: 50%;
+    height: 35px;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    border-top: 1.5px solid #C1BBBB;
+    border-right: 1.5px solid #C1BBBB;
+    border-bottom: 1.5px solid #C1BBBB;
+    border-left: 3.5px solid #225b42;
+    padding-left: 10px;
+    background-color: #ffffffa7;
+  }
+  .bloco.esquerdo button {
+    margin-top: 2.5%;
+    width: 100%;
+    height: 35px;
+    font-size: 1.2rem;
+    background-color: #355F46;
+    color: white;
+    border-radius: 4px;
+    border: none;
+    padding: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;  }
+}
+
+/* ============================================================================================================= */
+@media (min-width: 900px) and (max-width: 1200px) {
+  #ImgDigital {
+    width: 70%;
+  }
+
+  /* input::placeholder {
+    font-size: 1.5rem;
+    color: #636363;
+    margin-bottom: 10px;
+  align-items: center;
+  } */
+
+
+}
+
+/* ============================================================================================================= */
+
+/* Tornar layout responsivo */
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column; /* Blocos empilhados verticalmente */
+    height: auto; /* Ajusta altura automática */
+  }
+  
+  .bloco.esquerdo,
+  .bloco.direito {
+    flex: none; /* Remove proporções fixas */
+    width: 100%; /* Ocupa toda largura */
+    height: auto;
+  }
+
+  #ImgDigital{
+    width: 30%;
+  }
+
+  .elementos{
+    padding-left: 0%;
+    display: flex;
+    justify-content: center; /* centraliza horizontalmente */
+    align-items: center;     /* centraliza verticalmente */
+    /* Se quiser que a div tenha altura para alinhar verticalmente */
+    height: 100%; /* ou qualquer valor fixo ou relativo */
+    /* Opcional: para alinhar os itens em coluna (um embaixo do outro) */
+    flex-direction: column;
+  }
+
+  h1{
+    text-align: center;
+    margin: 2%;
+  }
+
+  .bloco.esquerdo p {
+    margin-bottom: 5%;
+  }
+  
+  .bloco.direito {
+    order: -1; /* Opcional: coloca imagem acima do conteúdo */
+    padding: 20px 0;
+  }
+  input{
+    margin-bottom: 0.5%;
+  }
+
+  /* input::placeholder {
+    font-size: 1.5rem;
+    color: #636363;
+    margin-bottom:;
+    padding-bottom: 2;
+  
+  } */
+}
+
+ /* ================================================================================================================================ */
+ 
+/* Esconde a imagem em telas muito pequenas */
+@media (max-width: 500px) {
+  .bloco.esquerdo,
+  .bloco.direito {
+    flex: none; /* Remove proporções fixas */
+    width: 100%; /* Ocupa toda largura */
+    height: auto;
+  }
+  .elementos{
+    padding-left: 0%;
+    display: flex;
+    justify-content: center; /* centraliza horizontalmente */
+    align-items: center;     /* centraliza verticalmente */
+    /* Se quiser que a div tenha altura para alinhar verticalmente */
+    height: 100%; /* ou qualquer valor fixo ou relativo */
+    /* Opcional: para alinhar os itens em coluna (um embaixo do outro) */
+    flex-direction: column;
+  }
+
+
+
+}

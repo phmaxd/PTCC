@@ -1,0 +1,239 @@
+body {
+  background-image: url("../css/assets/login/fundo.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  font-family: "Poppins", sans-serif;
+  margin-left: 10%;
+  margin-top: 5%;
+  font-family: "Poppins", sans-serif;
+
+}
+
+.poppins-regular {
+  font-family: "Poppins", sans-serif;
+  font-weight: bolder;
+  font-style: normal;
+
+}
+
+.img-fundo {
+  margin-left: 40%;
+  top: 10%;
+  position: fixed;
+  animation: moverParaBaixo 2s linear infinite;
+}
+
+.img-fundo img {
+  width: 800px;
+  height: auto;
+}
+
+@keyframes moverParaBaixo {
+  0% {
+    transform: translateY(0);
+    /* Posição inicial */
+  }
+
+  50% {
+    transform: translateY(18px);
+    /* Posição intermediária */
+  }
+
+  100% {
+    transform: translateY(0);
+    /* Volta para a posição inicial */
+  }
+}
+
+h1 {
+
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-size: 500%;
+  color: #4d9267;
+}
+
+p {
+  color: #636363;
+  margin: 0%;
+  margin-bottom: 2%;
+
+}
+
+
+
+#BioID {
+  font-weight: 700;
+  font-size: 140%;
+  color: #4D9267;
+}
+
+input::placeholder {
+  text-align: left;
+  padding-left: 10px;
+}
+
+button {
+  all: unset;
+  text-align: center;
+  width: 200px;
+  /* valor base fixo */
+  max-width: 100%;
+  /* não ultrapassa 90% do container em telas pequenas */
+  height: 3.5rem;
+  /* altura proporcional ao tamanho da fonte */
+  flex-shrink: 0;
+  font-size: 1.25rem;
+  /* usa rem para escalar melhor */
+  background-color: #4D9267;
+  color: #ffffff;
+  font-weight: 500;
+  border-radius: 5px;
+  border-left: 5px solid #355F46;
+  border-right: 5px solid #355F46;
+  box-shadow: 0 2px 3px 0 #00000040;
+  cursor: pointer;
+}
+
+.botoes-container {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(150px, 1fr));
+  gap: 10px;
+  max-width: 100%;
+  /* só para controlar o tamanho máximo da área */
+}
+
+.botoes-container button {
+  width: 100%;
+  /* botão ocupa toda a largura da célula */
+  height: 54px;
+  font-size: 1.25rem;
+  background-color: #355F46;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+
+
+
+/* CELULAR E TABLET */
+@media (max-width: 768px) {
+  body {
+
+    background-position: top center;
+    background-size: cover;
+  }
+
+  .botoes-container {
+    grid-template-columns: 1fr;
+    /* 1 coluna só */
+  }
+
+  h1 {
+    font-size: 620%;
+    /* título maior */
+  }
+
+  p {
+    font-size: 1.1rem;
+    /* aumenta o texto dos parágrafos */
+  }
+
+  #BioID {
+    font-size: 150%;
+    /* título do BioID maior */
+  }
+
+  button {
+    width: 100%;
+    /* botão ocupa quase toda a largura */
+    height: 4.5rem;
+    /* botão maior */
+    font-size: 1.5rem;
+    /* texto maior no botão */
+    margin-top: 15px;
+    border-left: 6px solid #355F46;
+    /* aumenta borda para manter proporção */
+    border-right: 6px solid #355F46;
+  }
+
+  .botoes-container {
+    grid-template-columns: 1fr;
+    /* botão em coluna única */
+    gap: 15px;
+    max-width: 100%;
+  }
+
+
+}
+
+/* .img-fundo {
+  position: absolute;
+  top: 130px;
+  right: 0;
+  margin-left: 0;
+  width: 60%;
+  max-width: 250px;
+}
+
+.img-fundo img {
+  width: 100%;
+  height: auto;
+} */
+
+
+/* LAPTOP */
+@media (max-width: 1200px) {
+  body {
+    margin-top: 50%;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+
+ input {
+  fill: none;
+  margin-bottom: 1%;
+  height: 10%;
+  border-radius: 5px;
+  border-top: 2px solid #C1BBBB;
+  border-right: 2px solid #C1BBBB;
+  border-bottom: 2px solid #C1BBBB;
+  border-left: 5px solid #4D9267;
+
+}
+
+  button {
+    width:50%;
+  }
+
+  .botoes-container button {
+    width: 70%;
+    height: 54px;
+    font-size: 1.25rem;
+    background-color: #355F46;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+  }
+
+  /* .img-fundo {
+    margin-left: 55%;
+    width: 30%;
+  } */
+
+  h1 {
+    font-size: 350%;
+  }
+}
+
+#cadastrar {
+  margin-left: 1.5%;
+  border: 2px solid #355F46;
+  color: #355F46;
+  background-color: #ffffff;
+
+}

@@ -1,5 +1,4 @@
 document.getElementById("Enviar").addEventListener("click", enviar);
-
 async function enviar(event) {
   event.preventDefault(); // impede refresh do form
   try {
@@ -14,33 +13,44 @@ async function enviar(event) {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: data.toString()
     });
-
     const text = await response.text();
     const info = JSON.parse(text);
 
     if (info.success && info.data.length > 0) {
-      let aluno = info.data[0]; // pega o primeiro registro
-      let modal = document.getElementById("confirmModal");
-      let modalContent = document.getElementById("modalContent");
+  let aluno = info.data[0];
+  let modal = document.getElementById("confirmModal");
 
-      modalContent.innerHTML = `
-  <strong>Nome:</strong> ${aluno.nome} <br>
-  <strong>RM:</strong> ${aluno.rm} <br>
-  <button id="confirmBtn" style="margin-right:10px;">Confirmar</button>
-  <button id="cancelBtn">Cancelar</button>
-`;
-      modal.style.display = "flex";
+  modal.innerHTML = `
+    <div class="modal-box" style="
+      background: #fff;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      max-width: 300px;
+      margin: 20px auto;
+      text-align: center;
+    ">
+      <strong>Nome:</strong> ${aluno.nome} <br>
+      <strong>RM:</strong> ${aluno.rm} <br><br>
+      <button id="confirmBtn" style="margin-right:10px;">Confirmar</button>
+      <button id="cancelBtn">Cancelar</button>
+    </div>
+  `;
 
-      // Ações do modal
-      document.getElementById("confirmBtn").onclick = async function() {
-        window.name = document.getElementById("Rm").value.trim();
-        await window.electronAPI.trocarPagina("CadastroDigital");
-        modal.style.display = "none";
-      };
-      document.getElementById("cancelBtn").onclick = function() {
-        modal.style.display = "none";
-        alert("❌ Cancelado, não é o aluno correto.");
-      };
+  // deixa o modal visível
+  modal.style.display = "block";
+
+  // ações dos botões
+  document.getElementById("confirmBtn").onclick = async function() {
+    window.name = document.getElementById("Rm").value.trim();
+    await window.electronAPI.trocarPagina("CadastroDigital");
+  };
+
+  document.getElementById("cancelBtn").onclick = function() {
+    alert("❌ Cancelado, não é o aluno correto.");
+    modal.style.display = "none";
+  };
+
     } else {
       alert(info.message || "Usuário não encontrado");
     }

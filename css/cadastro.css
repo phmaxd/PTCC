@@ -1,0 +1,223 @@
+/* ======== BODY E FONTES ======== */
+body {
+  background-color: #f5faf6;
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.poppins-regular {
+  font-family: "Poppins", sans-serif;
+  font-weight: lighter;
+  font-style: normal;
+}
+
+/* ======== CONTAINER PRINCIPAL ======== */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 20px 40px;
+  border-radius: 40px;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+}
+
+/* ======== TÍTULOS ======== */
+h1 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 2.5rem;
+  color: #225b42;
+  margin-bottom: 15px;
+}
+
+p {
+  font-size: 1.2rem;
+  color: #225b42;
+  margin-bottom: 20px;
+}
+
+/* ======== INPUTS E SELECT ======== */
+input {
+  all: unset;
+  width: 85%;
+  height: 40px;
+  margin-bottom: 15px;
+  padding-left: 10px;
+  border-radius: 5px;
+  font-size: 1rem;
+  border-top: 2px solid #c1bbbb;
+  border-right: 2px solid #c1bbbb;
+  border-bottom: 2px solid #c1bbbb;
+  border-left: 5px solid #225b42;
+  background-color: #ffffffa7;
+  transition: all 0.3s ease;
+  text-align: left;
+}
+
+select {
+  width: 89%;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  font-size: 1rem;
+  border-top: 2px solid #c1bbbb;
+  border-right: 2px solid #c1bbbb;
+  border-bottom: 2px solid #c1bbbb;
+  border-left: 5px solid #225b42;
+  background-color: #ffffffa7;
+  transition: all 0.3s ease;
+  text-align: left;
+  height: 45px;
+  padding-left: 10px;   
+}
+
+
+input:focus,
+select:focus {
+  outline: none;
+  border-left: 5px solid #4d9267;
+  box-shadow: 0 0 8px rgba(34, 91, 66, 0.3);
+}
+
+/* ======== BOTÃO ======== */
+button {
+  width: 50%;
+  padding: 10px;  /* font-weight: 600; */
+  background-color: #355f46;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+    height: 40px;
+  font-size: 1rem;
+
+
+}
+
+button:hover {
+  background-color: #4d9267;
+  transform: scale(1.05);
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* ======== RESPONSIVO ======== */
+@media (max-width: 1024px) {
+  .container {
+    padding: 35px 25px;
+    max-width: 450px;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+  }
+
+  input,
+  select {
+    height: 50px;
+    font-size: 1.1rem;
+  }
+
+  
+}
+
+@media (max-width: 500px) {
+  .container {
+    padding: 30px 20px;
+    max-width: 350px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+  input,
+  select,
+  button {
+    font-size: 1rem;
+    height: 40px;
+  }
+
+  button {
+    height: 45px;
+  }
+}
+
+/* ======== ANIMAÇÕES ======== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.container {
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* ======== VALIDAÇÃO VISUAL ======== */
+.input-error {
+  border-left: 5px solid #e74c3c !important;
+  background-color: rgba(231, 76, 60, 0.1) !important;
+}
+
+.input-success {
+  border-left: 5px solid #27ae60 !important;
+  background-color: rgba(39, 174, 96, 0.1) !important;
+}
+
+#rep {
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: 500;
+}
+
+.success-message {
+  background-color: rgba(39, 174, 96, 0.1);
+  color: #27ae60;
+  border: 1px solid #27ae60;
+}
+
+.error-message {
+  background-color: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+  border: 1px solid #e74c3c;
+}
+
+.iconvoltar{
+  position: fixed;
+  left: 90%;
+  top: 20px;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  transition: all 0.3s ease; 
+}
+
+.iconvoltar:hover {
+  transform: scale(1.1);
+}
+

@@ -5,14 +5,52 @@
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edição de funcionario</title>
-    <script src="../Script/jquery-3.7.1.min.js"></script>
-    <script src="../Script/funcionario.js"></script>
-    
+
 </head>
 <body>
-    <div id="funcionarios">
+    <div id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+      <h2>Menu</h2>
+      <span class="close-btn" id="closeSidebar">&times;</span>
+    </div>
+    <ul class="sidebar-menu">
+      <li><a href="#" onclick="Deslogar()"> Sair</a></li>
+    </ul>
+  </div>
+<header>
+  <div id="overlay" class="overlay"></div>
+<div class="icons">
+  <img src="../imagens/iconperfil.svg" alt="Perfil" class="icon perfil" id="perfilBtn">
+</div>
+</header>
+    <h2>Funcionários</h2>
+<table class="excel-table">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Função</th>
+      <th>ID</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody id="tabela-funcionarios"></tbody>
+</table>
 
-    </div><br>
-    <button onclick="Deslogar()">Deslogar</button>
+<h2>Administradores</h2>
+<table class="excel-table">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Função</th>
+      <th>ID</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody id="tabela-adms"></tbody>
+</table>
+
+        <script src="../Script/jquery-3.7.1.min.js"></script>
+    <script src="../Script/funcionario.js"></script>
+    <link rel="stylesheet" href="../Css/pagina.css">
 </body>
 </html>
