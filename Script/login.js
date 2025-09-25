@@ -16,7 +16,7 @@ async function recebe() {
   const n1 = document.getElementById("nome").value;
   const n2 = document.getElementById("senha").value;
   if (!n1 || !n2) {
-    document.getElementById("rep").innerText = "Por favor, preencha todos os campos";
+    alert("Por favor, preencha todos os campos.");
     return;
   }
 
@@ -54,7 +54,7 @@ if (response.ok) {
 
   } catch (error) {
     console.error("Request failed: " + error.message);
-    document.getElementById("rep").innerText = "Erro de conexão. Tente novamente.";
+    Erro();
   } finally {
     console.log("Requisição finalizada");
   }

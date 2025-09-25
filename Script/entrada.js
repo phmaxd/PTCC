@@ -124,18 +124,14 @@ window.onload = async function () {
     console.error("Erro ao carregar a página:", error);
   }
 }
-        async function outrapagina() {
+  async function outrapagina() {
   const result = await window.electronAPI.trocarPagina("CadastroDigital");
   if (!result.success) {
     console.error("Erro ao trocar página:", result.error);
   }
 }
 
-function Deslogar(){
-if(confirm("Deseja realmente deslogar?")){
-    window.electronAPI.trocarPagina("login");
-}else{
-    return;
-}
-
+async function Deslogar(){
+       modalizar();
+       window.pagina = "pagina";
 }

@@ -1,12 +1,10 @@
-<!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  
   <title>Entrada de aluno</title>
-
 </head>
 <body>
+  <div class="modal" id="modal"></div>
 <!-- SIDEBARz -->
  <div id="sidebar" class="sidebar">
   <div class="sidebar-header">
@@ -63,7 +61,7 @@
   <!-- ===== BOTÃO DE CADASTRO ===== -->
 
 
-  <div id="cadastroMenu" style="display:none; top:60px; left:20px; background:#fff;
+  <div id="cadastroMenu"  style="display:none; top:60px; left:20px; background:#fff;
       border:1px solid #ccc; box-shadow:0 2px 8px rgba(0,0,0,0.2);
       padding:20px; z-index:1001; border-radius:8px; position:fixed;">
     <button id="fecharMenuBtn" type="button" style="float:right; margin-bottom:10px;">X</button>
@@ -110,10 +108,6 @@
       overlay.classList.remove("active");
     });
 
-    function Deslogar() {
-      alert("Você foi deslogado!");
-      // window.location.href = "login.html"; // redireciona se quiser
-    }
 
     // ====== MENU DE CADASTRO ======
     document.getElementById('cadastroBtn').onclick = function(e) {
@@ -170,6 +164,8 @@ if (searchInput) {
   
     <script src="../Script/entrada.js" defer></script>
   <link rel="stylesheet" href="../css/historicoalunos.css">
-
+  <script src="../Script/modal.js"></script>
+  <script src="../Script/modalErro.js"></script>
+  <link rel="stylesheet" href="../css/modal.css">
 </body>
 </html>

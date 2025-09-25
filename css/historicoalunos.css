@@ -150,9 +150,12 @@ margin-top: 2%;
 #confirmModal button {
   margin: 10px; padding: 8px 16px; border: none;
   border-radius: 4px; cursor: pointer;
+  
 }
 #confirmBtn { background: #4CAF50; color: #fff; }
 #cancelBtn { background: #f44336; color: #fff; }
+
+
 
 /* ======== SIDEBAR ======== */
 .sidebar {
