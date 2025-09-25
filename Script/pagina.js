@@ -1,4 +1,5 @@
     window.onload = async function () {
+
       try {
         const conecta = await fetch("http://localhost/banco/Php/acesso.php", {
           method: "POST",

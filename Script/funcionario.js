@@ -1,3 +1,5 @@
+const ID = window.name;
+      console.log(ID);
 window.onload = function () {
     try {
        $.ajax({
@@ -24,11 +26,13 @@ window.onload = function () {
 
 }
 function Excluir(botao){
-    if(!confirm("Deseja realmente excluir este funcionário?")) return;
-
+    if(!confirm("Deseja realmente excluir este funcionário?")) {return;}
     const row = botao.closest(".funcionario-card");
     const id = row.dataset.id;
-
+    if(ID == id){
+        alert("❌ Você não pode excluir a si mesmo.");
+        return;
+    }
     try {
         $.ajax({
             url: "http://localhost/banco/Php/Excluir.php",
@@ -74,7 +78,7 @@ tr.setAttribute("data-id", dados.id);
         <td>${dados.nome}</td>
         <td>${dados.funcao}</td>
         <td>${dados.id}</td>
-        <td><button onclick="Excluir(this)">Excluir</button>    <button onclick="Editar(this)">Editar</button></td>
+        <td><button onclick="Excluir(this)" class="btn-excluir">Excluir</button>    <button onclick="Editar(this)" class="btn">Editar</button></td>
     `;
 
     // Insere na tabela correspondente

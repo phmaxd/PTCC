@@ -123,3 +123,20 @@ body {
 .excel-table tr:hover {
   background-color: #dbe9ff;
 }
+
+.btn{
+  background-color: #355F46;
+  color: white;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease; /* suaviza as mudanças */
+}
+.btn-excluir{
+  background-color: #fa5252;
+  color: white;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease; /* suaviza as mudanças */
+}

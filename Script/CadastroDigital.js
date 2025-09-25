@@ -34,3 +34,32 @@ catch(error) {
 function trocar() {
   window.electronAPI.trocarPagina("entrada");
 }
+
+const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("overlay");
+    const perfilBtn = document.getElementById("perfilBtn");
+    const closeSidebar = document.getElementById("closeSidebar");
+
+    perfilBtn.addEventListener("click", () => {
+      sidebar.classList.add("open");
+      overlay.classList.add("active");
+    });
+
+    closeSidebar.addEventListener("click", () => {
+      sidebar.classList.remove("open");
+      overlay.classList.remove("active");
+    });
+
+    overlay.addEventListener("click", () => {
+      sidebar.classList.remove("open");
+      overlay.classList.remove("active");
+    });
+
+    function Deslogar(){
+if(confirm("Deseja realmente deslogar?")){
+    window.electronAPI.trocarPagina("login");
+}else{
+    return;
+}
+
+}

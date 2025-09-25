@@ -3,13 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Document</title>
-    <script src="../Script/CadastroDigital.js"></script>
 </head>
 <body>
+      <div id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+      <h2>Menu</h2>
+      <span class="close-btn" id="closeSidebar">&times;</span>
+    </div>
+    <ul class="sidebar-menu">
+      <li><a href="#" onclick="trocar()">🏠 Início</a></li>
+      <li><a href="#" onclick="Deslogar()">🚪 Sair</a></li>
+    </ul>
+  </div>
+
+  <div id="overlay" class="overlay"></div>
+
+  <div class="icons">
+  <img src="../imagens/iconperfil.svg" alt="Perfil" class="icon perfil" id="perfilBtn">
+</div>
+
+
+  
 <div id="Cleide">
 
 </div>
-<button onclick="trocar()">Voltar</button>
+<link rel="stylesheet" href="../css/cadastrodigital.css">
+<script src="../Script/CadastroDigital.js"></script>
 </body>
 </html>
