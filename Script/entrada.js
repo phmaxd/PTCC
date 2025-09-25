@@ -46,7 +46,6 @@ async function enviar(event) {
   };
 
   document.getElementById("cancelBtn").onclick = function() {
-    alert("❌ Cancelado, não é o aluno correto.");
     modal.style.display = "none";
   };
 

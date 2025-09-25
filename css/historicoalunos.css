@@ -216,6 +216,10 @@ margin-top: 2%;
   background: #e3f3ea;
 }
 
+.sidebar-menu a:active {
+  background: #bae1cb;
+}
+
 /* ======== OVERLAY ======== */
 .overlay {
   position: fixed;
@@ -246,6 +250,8 @@ margin-top: 2%;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   margin-right: 21%;
   width: 30%;
+  height: 38px;
+
 }
 
 .search-box input {
@@ -284,20 +290,17 @@ margin-top: 2%;
 }
 
 
-@media (max-width: 600px) {
-  header h1 {
-    font-size: 1.5rem;
-  }
-  h2 {
-    font-size: 1.2rem;
-  }
-  .card img {
-    width: 50px;
-  }
-  .sidebar {
-    width: 200px;
-  }
-  .sidebar-header h2 {
-    font-size: 1rem;
-  }
+
+/* ======== SIDEBAR ======== */
+.icon-sidebar {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  margin-right: 8px;
+  stroke: #225b42; /* cor combinando com o tema */
+  transition: stroke 0.2s ease;
+}
+
+.sidebar-menu a:hover .icon-sidebar {
+  stroke: #355F46; /* muda cor no hover para combinar com hover do link */
 }

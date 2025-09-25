@@ -37,12 +37,13 @@ if (response.ok) {
     const pata = await response.json();
     if (pata.data != "usuario ou senha incorreto") {
       if (pata.data[0].funcao == "adm") {
-        alert("Administrador logado com sucesso")
+       modalizar();
+       window.pagina = "pagina";
         window.name = JSON.parse(pata.data[0].id); //variavel global window, não le JSON
-        await window.electronAPI.trocarPagina('pagina');
+
       }else{
-        alert("Funcionario logado com sucesso")
-        await window.electronAPI.trocarPagina('entrada');
+        modalizar();
+        window.pagina = "entrada";
         window.name = pata.data[0].nome;
       }        
     } else {
@@ -65,3 +66,4 @@ async function outrapagina() {
     console.error("Erro ao trocar página:", result.error);
   }
 }
+

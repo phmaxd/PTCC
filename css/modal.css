@@ -1,0 +1,32 @@
+.modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 220px; /* Modal mais estreito */
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  text-align: center;
+  z-index: 1000;
+  padding: 15px;
+  font-size: 14px; /* Texto menor */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Botões menores e mais espaçados */
+.modal button {
+  margin: 8px 10px; /* Espaço entre botões */
+  padding: 6px 12px; /* Menor altura e largura */
+  font-size: 13px; /* Texto menor */
+  border: none;
+  border-radius: 4px;
+  background-color: #225b42;
+  color: white;
+  cursor: pointer;
+}
+
+.modal button:hover {
+  background-color: #225b42;
+}
