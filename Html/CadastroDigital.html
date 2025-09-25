@@ -29,7 +29,18 @@
 <div id="Cleide">
 
 </div>
+<div id="mensagens" ></div>
 <link rel="stylesheet" href="../css/cadastrodigital.css">
+<script type="module">
+  const div = document.getElementById('mensagens'); 
+
+// Recebe mensagens vindas do Main
+window.electronAPI.onEsp32Msg((msg) => {
+  console.log("Renderer: recebeu do Main ->", msg);
+ const pretty = JSON.stringify(msg, null, 2); // null = sem replacer, 2 = número de espaços
+  div.innerHTML += `<pre>${pretty}</pre>`;});
+
+</script>
 <script src="../Script/CadastroDigital.js"></script>
 </body>
 </html>

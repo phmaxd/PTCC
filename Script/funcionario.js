@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-=======
 const ID = window.name;
       console.log(ID);
->>>>>>> origin/bap
 window.onload = function () {
     try {
        $.ajax({
@@ -29,13 +26,6 @@ window.onload = function () {
 
 }
 function Excluir(botao){
-<<<<<<< HEAD
-    if(!confirm("Deseja realmente excluir este funcionário?")) return;
-
-    const row = botao.closest(".funcionario-card");
-    const id = row.querySelector("strong").textContent;
-
-=======
     if(!confirm("Deseja realmente excluir este funcionário?")) {return;}
     const row = botao.closest(".funcionario-card");
     const id = row.dataset.id;
@@ -43,7 +33,6 @@ function Excluir(botao){
         alert("❌ Você não pode excluir a si mesmo.");
         return;
     }
->>>>>>> origin/bap
     try {
         $.ajax({
             url: "http://localhost/banco/Php/Excluir.php",
@@ -70,19 +59,6 @@ function Excluir(botao){
 
 
 }
-<<<<<<< HEAD
-function adicionarFuncionario(dados){
-    var funcionariosDiv = document.getElementById("funcionarios");
-    var funcionarioCard = document.createElement("div");
-    funcionarioCard.classList.add("funcionario-card");
-    funcionarioCard.innerHTML = `
-        <h3>${dados.nome}</h3>
-        <p><div>Função:</div> ${dados.funcao}</p>
-        <strong style="display:none;">${dados.id}</strong>
-        <button onclick="Excluir(this)">Excluir</button>
-    `;
-    funcionariosDiv.appendChild(funcionarioCard);
-=======
 function adicionarFuncionario(dados) {
     // Decide em qual tabela adicionar
     var tbody;
@@ -114,7 +90,6 @@ tr.setAttribute("data-id", dados.id);
 
 function Editar(botao){
     // Editar depois
->>>>>>> origin/bap
 }
 
 function Deslogar(){

@@ -16,3 +16,4 @@ export async function cadastrar_digital(data) {
     return { success: false, error: error.message };
  }
 }
+

@@ -26,6 +26,19 @@ modalContent.innerHTML = `
   <strong>RM:</strong> ${aluno.rm ?? ''} <br>
   <button id="Digital" style="margin-right:10px;">Cadastrar Digital</button>
 `;
+const btnDigital = document.getElementById("Digital");
+ if (btnDigital) {
+      btnDigital.addEventListener("click", () => {
+        const cadastrar_digital = {
+          action: "cadastrar_digital",
+          rm: aluno.rm
+        };
+
+        // Envia para o main via preload
+        window.electronAPI.sendToMain(cadastrar_digital);
+        console.log("JSON enviado para o ESP32:", cadastrar_digital);
+      });
+    }
 }
 catch(error) {
     console.error("Erro ao carregar a página:", error);

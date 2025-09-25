@@ -9,6 +9,8 @@ const __dirname = path.dirname(__filename);
 let splash;
 let mainWindow;
 
+
+
 function createWindows() {
   // Splash screen
   splash = new BrowserWindow({
@@ -39,7 +41,9 @@ function createWindows() {
           enableRemoteModule: false,
           preload: path.join(__dirname, "../Script/preload.js"),
         },
+        
       });
+setupWebSocket(mainWindow, ipcMain);
 
       mainWindow.loadFile(path.join(__dirname, "../Html/login.html"))
         .then(() => console.log("login.html carregado"))

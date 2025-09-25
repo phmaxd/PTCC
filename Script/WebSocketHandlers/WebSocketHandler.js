@@ -40,10 +40,8 @@ export function setupWebSocket(mainWindow, ipcMain) {
      }
        }
     console.log('Mensagem recebida do ESP32:', jsonData);
-
-    if(mainWindow){
       mainWindow.webContents.send('esp32-msg', jsonData);
-    }
+  
   })
 
   
