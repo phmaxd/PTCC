@@ -4,7 +4,7 @@
   "description": "PTCC-OFC",
   "license": "ISC",
   "author": "pedro",
-  "type": "module",  
+  "type": "module",
   "main": "Script/index.js",
   "scripts": {
     "start": "electron ."
@@ -72,6 +72,6 @@
     "yauzl": "^2.10.0"
   },
   "devDependencies": {
-    "electron": "^36.3.2"
+    "electron": "^36.9.1"
   }
 }
