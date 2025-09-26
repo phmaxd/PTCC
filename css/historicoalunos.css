@@ -19,16 +19,16 @@ body {
 header {
   width: 100%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 20px 40px;
-  margin-top: 1%;
+  position: relative; /* necessário para centralizar a search-box */
 }
 
 h1 {
   color: #225b42;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 600;
+  flex: 1; /* ocupa o espaço à esquerda */
 }
 
 .icons {
@@ -46,6 +46,38 @@ h1 {
 .icon:hover {
   transform: scale(1.1);
 }
+
+/* Search Box centralizada */
+.search-box {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: #fff;
+  padding: 5px 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  padding: 5px;
+}
+
+.search-box button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.bloco1{
+  margin-top: 4.5%;
+}
+
 
 /* ======== SUBTÍTULO ======== */
 h2 {
@@ -134,25 +166,94 @@ margin-top: 2%;
 }
 
 /* ======== MODAL ======== */
+/* ======== MODAL ======== */
+/* ======== MODAL ======== */
 #confirmModal {
   display: none;
   position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0,0,0,0.5);
-  justify-content: center; align-items: center;
-  z-index: 2000;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 280px;
+  background: #fff;
+  border-radius: 8px;
+  text-align: left;
+  z-index: 1000;
+  overflow: hidden; /* respeita o border-radius */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-family: "Poppins", sans-serif;
+  color: #333; /* garante que o texto seja visível */
 }
-#confirmModal .modal-box {
-  background: #fff; padding: 20px; border-radius: 8px;
-  min-width: 300px; text-align: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+
+/* Texto */
+#confirmModal .modal-content {
+  padding: 20px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #333; /* texto escuro */
 }
-#confirmModal button {
-  margin: 10px; padding: 8px 16px; border: none;
-  border-radius: 4px; cursor: pointer;
+
+/* Container dos botões */
+#confirmModal .modal-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* dois botões, cada um ocupa 50% */
+  border-top: 1px solid #e5e5e5; /* Divisão horizontal entre conteúdo e botões */
 }
-#confirmBtn { background: #4CAF50; color: #fff; }
-#cancelBtn { background: #f44336; color: #fff; }
+
+#confirmModal .modal-actions button {
+  width: 100%;
+  padding: 12px 0;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin: 0; /* remove espaçamento extra */
+  border-radius: 0; /* remove cantos arredondados */
+}
+
+#confirmModal .modal-actions button:first-child {
+  border-right: 1px solid #e5e5e5; /* divisor exato no meio */
+}
+
+/* Hover para dar feedback nos botões */
+#confirmModal .modal-actions button:hover {
+  background: #f5f5f5;
+  box-shadow: none;
+}
+
+/* Divisor central (vertical) */
+#confirmModal .modal-actions::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: #ccc; /* divisor central */
+  left: 50%; /* coloca o divisor no meio */
+}
+
+/* Estilo para o botão Confirmar */
+#confirmBtn {
+  color: #333;
+}
+
+/* Estilo para o botão Cancelar */
+#cancelBtn {
+  color: #333;
+}
+
+/* Hover para o botão Confirmar */
+#confirmBtn:hover {
+}
+
+/* Hover para o botão Cancelar */
+#cancelBtn:hover {
+}
+
+
 
 /* ======== SIDEBAR ======== */
 .sidebar {
@@ -216,6 +317,10 @@ margin-top: 2%;
   background: #e3f3ea;
 }
 
+.sidebar-menu a:active {
+  background: #bae1cb;
+}
+
 /* ======== OVERLAY ======== */
 .overlay {
   position: fixed;
@@ -240,12 +345,14 @@ margin-top: 2%;
   display: flex;
   align-items: center;
   background: #fff;
-  border: 2px solid #225b42;
+  border: 1px solid #225b42;
   border-radius: 25px;
   padding: 5px 10px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   margin-right: 21%;
   width: 30%;
+  height: 32px;
+
 }
 
 .search-box input {
@@ -270,12 +377,139 @@ margin-top: 2%;
 }
 
 
+
+
+/* MODAL DE CADASTRAR DIGITAL */
+
+/* Modal centralizado com estilo limpo */
+/* Modal centralizado com estilo limpo */
+#cadastroMenu {
+  display: none;
+  position: fixed;
+  top: 20px; /* Ajuste a distância do topo conforme necessário */
+  left: 20px; /* Ajuste a distância da esquerda conforme necessário */
+  width: 280px;
+  background: #fff;
+  border-radius: 8px;
+  text-align: center;
+  z-index: 1000;
+  overflow: hidden; /* respeita o border-radius */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-family: "Poppins", sans-serif;
+  color: #333; /* garante que o texto seja visível */
+  border: #ccc solid 1px;
+}
+
+
+/* Conteúdo do modal */
+#cadastroMenu form {
+  font-size: 15px;
+  font-weight: 500;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+
+}
+
+#rmaluno{
+       padding: 20px 20px 0 20px; /* top right bottom left */
+       text-align: left;
+}
+
+#Rm::placeholder {
+    color: #ccc; /* Cor mais clara, pode ajustar como preferir */
+    opacity: 1; /* Para garantir que a opacidade do placeholder não fique muito baixa */
+}
+
+
+/* Campo de entrada */
+#cadastroMenu input[type="text"] {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s;
+  margin: 12px 20px 20 20px; /* top right bottom left */
+
+
+}
+
+#cadastroMenu input[type="text"]:focus {
+  border-color: #225b42;
+}
+
+/* Linha horizontal acima do botão */
+.modal-actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+}
+
+/* Linha divisória acima do botão */
+.modal-actions::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: #e5e5e5; /* Cor da linha */
+  margin-top: 12px; /* Espaçamento da linha para o conteúdo acima */
+}
+
+/* Botão único */
+#Enviar {
+  padding: 12px 0;
+  border: none;
+  background: #e4ffe2;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.2s;
+  width: 100%;  /* Faz o botão ocupar toda a largura */
+  text-align: center;
+  border-radius: 0;
+    border-top: #ccc solid 1px;
+
+}
+
+#Enviar:hover {
+  background: #dce6db;
+}
+
+/* Botão de fechar (no topo direito) */
+#fecharMenuBtn {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  color: #aaa;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+#fecharMenuBtn:hover {
+  color: #333;
+}
+
+
+
 /* ======== RESPONSIVIDADE ======== */
 
 
-@media (min-width: 1024px){
+@media (min-width: 1024px) and (max-width: 1440px) {
   #cadastroBtn{
-    width: 17%;
+    width: 14%;
+    font-size: 16px;
   }
 
  /* h1{
@@ -284,20 +518,17 @@ margin-top: 2%;
 }
 
 
-@media (max-width: 600px) {
-  header h1 {
-    font-size: 1.5rem;
-  }
-  h2 {
-    font-size: 1.2rem;
-  }
-  .card img {
-    width: 50px;
-  }
-  .sidebar {
-    width: 200px;
-  }
-  .sidebar-header h2 {
-    font-size: 1rem;
-  }
+
+/* ======== SIDEBAR ======== */
+.icon-sidebar {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  margin-right: 8px;
+  stroke: #225b42; /* cor combinando com o tema */
+  transition: stroke 0.2s ease;
+}
+
+.sidebar-menu a:hover .icon-sidebar {
+  stroke: #355F46; /* muda cor no hover para combinar com hover do link */
 }

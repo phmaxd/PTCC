@@ -49,7 +49,17 @@ function trocar() {
   window.electronAPI.trocarPagina("entrada");
 }
 
-const sidebar = document.getElementById("sidebar");
+   
+    function Deslogar(){
+if(confirm("Deseja realmente deslogar?")){
+    window.electronAPI.trocarPagina("login");
+}else{
+    return;
+}
+
+}
+
+ const sidebar = document.getElementById("sidebar");
     const overlay = document.getElementById("overlay");
     const perfilBtn = document.getElementById("perfilBtn");
     const closeSidebar = document.getElementById("closeSidebar");
@@ -68,12 +78,3 @@ const sidebar = document.getElementById("sidebar");
       sidebar.classList.remove("open");
       overlay.classList.remove("active");
     });
-
-    function Deslogar(){
-if(confirm("Deseja realmente deslogar?")){
-    window.electronAPI.trocarPagina("login");
-}else{
-    return;
-}
-
-}

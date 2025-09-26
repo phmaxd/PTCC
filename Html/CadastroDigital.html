@@ -1,46 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digitais Cadastradas</title>
 </head>
 <body>
-      <div id="sidebar" class="sidebar">
-    <div class="sidebar-header">
-      <h2>Menu</h2>
-      <span class="close-btn" id="closeSidebar">&times;</span>
+<div id="Cleide"></div>
+      <!-- Ícone de voltar -->
+    <a href="entrada.html" class="voltar">
+      <img src="../imagens/iconvoltar.svg" alt="Voltar" class="icon voltar">
+    </a>
+
+
+    <!-- Botão para abrir a sidebar -->
+    <div class="menu-toggle" id="perfilBtn">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
     </div>
-    <ul class="sidebar-menu">
-      <li><a href="#" onclick="trocar()">🏠 Início</a></li>
-      <li><a href="#" onclick="Deslogar()">🚪 Sair</a></li>
-    </ul>
-  </div>
 
-  <div id="overlay" class="overlay"></div>
+    <!-- SIDEBAR -->
+    <div id="sidebar" class="sidebar">
+      <div class="sidebar-header">
+        <h2>Menu</h2>
+        <span class="close-btn" id="closeSidebar">&times;</span>
+      </div>
+      <ul class="sidebar-menu">
+        <li>
+          <a href="entrada.html" class="icon-home">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon-sidebar">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+            </svg>
+            Início
+          </a>
+        </li>
+        <li>
+          <a href="login.html" onclick="Deslogar()">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon-sidebar" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6a2 2 0 012 2v1" />
+            </svg>
+            Sair
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div id="overlay"></div>
 
-  <div class="icons">
-  <img src="../imagens/iconperfil.svg" alt="Perfil" class="icon perfil" id="perfilBtn">
-</div>
-
-
-  
-<div id="Cleide">
-
-</div>
-<div id="mensagens" ></div>
-<link rel="stylesheet" href="../css/cadastrodigital.css">
-<script type="module">
-  const div = document.getElementById('mensagens'); 
-
-// Recebe mensagens vindas do Main
-window.electronAPI.onEsp32Msg((msg) => {
-  console.log("Renderer: recebeu do Main ->", msg);
- const pretty = JSON.stringify(msg, null, 2); // null = sem replacer, 2 = número de espaços
-  div.innerHTML += `<pre>${pretty}</pre>`;});
-
-</script>
 <script src="../Script/CadastroDigital.js"></script>
+  <link rel="stylesheet" href="../css/digitaisCadastradas.css">
 </body>
 </html>

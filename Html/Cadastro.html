@@ -10,6 +10,7 @@
 </head>
 
 <body>
+  <div id="modal" class="modal"></div>
              <a href="login.html"><img src="../imagens/iconvoltar.svg" alt="Ícone de voltar" class="iconvoltar"></a>
 
   <div class="container">
@@ -63,19 +64,17 @@
         if (!response.ok) throw new Error('Erro na requisição: ' + response.statusText);
 
         const html = await response.text();
-        document.getElementById('rep').innerHTML = html;
-
         if (html === "esse usuario já está cadastrado") return;
-        alert("Cadastro realizado com sucesso!");
-
-        const result = window.electronAPI.trocarPagina('login');
-        if (!result.success) console.error("Erro ao trocar página:", result.error);
-
+        modalizar();
+        window.pagina = "login";
       } catch (error) {
         console.log('Request failed: ' + error.message);
-        alert("Erro: " + error.message);
+        Erro();
       }
     }
   </script>
+  <script src="../Script/modal.js"></script>
+  <link rel="stylesheet" href="../css/modal.css">
+  <script src="../Script/modalErro.js"></script>
 </body>
 </html>

@@ -3,9 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Validação de Digital</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+        }
+        #slotDisplay {
+            font-size: 2em;
+            color: green;
+        }
+    </style>
 </head>
 <body>
-    <p>cu</p>
+    <h1>Validação de Digital</h1>
+    <p>Slot detectado:</p>
+    <div id="slotDisplay">---</div>
+
+    <script>
+        const slotDiv = document.getElementById("slotDisplay");
+
+        window.electronAPI.onEsp32Msg((msg) => {
+            if(msg.acao === "verificacao_ok") {
+                slotDiv.textContent = msg.slot; // sobrescreve o slot a cada nova mensagem
+            }
+        });
+    </script>
 </body>
 </html>

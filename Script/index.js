@@ -9,8 +9,6 @@ const __dirname = path.dirname(__filename);
 let splash;
 let mainWindow;
 
-
-
 function createWindows() {
   // Splash screen
   splash = new BrowserWindow({

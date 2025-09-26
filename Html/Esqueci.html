@@ -5,9 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>Redefinir Senha</title>
-  <link rel="stylesheet" href="../css/esqsenha.css">
+  
 </head>
 <body>
+  <div id="modal" class="modal"></div>
   <div class="container">
     
     <!-- BLOCO ESQUERDO -->
@@ -56,13 +57,11 @@
           if (!response.ok) throw new Error('Erro na requisição: ' + response.statusText);
 
           const html = await response.text();
-          alert(html);
-
-          const result = await window.electronAPI.trocarPagina('login');
-          if (!result.success) console.error("Erro ao trocar página:", result.error);
-
+          modalizar(html);
+          window.pagina = 'login';
+          
         } catch (error) {
-          alert("Erro ao alterar senha: " + error.message);
+          Erro();
         }
       } else {
         alert("As senhas não coincidem");
@@ -73,5 +72,9 @@
       window.electronAPI.trocarPagina("login");
     }
   </script>
+  <link rel="stylesheet" href="../css/modal.css">
+  <script src="../Script/modal.js"></script>
+  <script src="../Script/modalErro.js"></script>
+  <link rel="stylesheet" href="../css/esqsenha.css">
 </body>
 </html>

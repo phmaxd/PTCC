@@ -79,7 +79,7 @@ tr.setAttribute("data-id", dados.id);
         <td>${dados.funcao}</td>
         <td>${dados.id}</td>
         <td><button onclick="Excluir(this)" class="btn-excluir">Excluir</button>    <button onclick="Editar(this)" class="btn">Editar</button></td>
-    `;
+      `;
 
     // Insere na tabela correspondente
     tbody.appendChild(tr);

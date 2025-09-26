@@ -43,7 +43,6 @@ async function enviar(event) {
       <button id="cancelBtn">Cancelar</button>
     </div>
   `;
-  
   // deixa o modal visível
   modal.style.display = "block";
 
@@ -53,10 +52,7 @@ async function enviar(event) {
     await window.electronAPI.trocarPagina("CadastroDigital");
   };
 
-
-
   document.getElementById("cancelBtn").onclick = function() {
-    alert("❌ Cancelado, não é o aluno correto.");
     modal.style.display = "none";
   };
 
@@ -132,18 +128,14 @@ window.onload = async function () {
     console.error("Erro ao carregar a página:", error);
   }
 }
-        async function outrapagina() {
+  async function outrapagina() {
   const result = await window.electronAPI.trocarPagina("CadastroDigital");
   if (!result.success) {
     console.error("Erro ao trocar página:", result.error);
   }
 }
 
-function Deslogar(){
-if(confirm("Deseja realmente deslogar?")){
-    window.electronAPI.trocarPagina("login");
-}else{
-    return;
-}
-
+async function Deslogar(){
+       modalizar();
+       window.pagina = "pagina";
 }
