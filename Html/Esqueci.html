@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Redefinir Senha</title>
+  
+</head>
+<body>
+  <div id="modal" class="modal"></div>
+  <div class="container">
+    
+    <!-- BLOCO ESQUERDO -->
+    <div class="bloco esquerdo">
+      <h1>Redefinir <br>senha</h1>
+      <input id="usuario" placeholder="Usuário">
+      <input id="novaSenha" placeholder="Nova senha">
+      <input id="confirmarSenha" placeholder="Confirmar senha">
+        <button id="btnAlterar">Alterar</button>
+        <!-- <button onclick="voltar()">Voltar</button> -->
+    </div>
+
+    <!-- BLOCO DIREITO -->
+    <div class="bloco direito">
+             <a href="login.html"><img src="../imagens/iconvoltar.svg" alt="Ícone de voltar" class="iconvoltar"></a>
+        <img src="../css/assets/esqsenha/boneco.svg"  id="bonecoimg" alt="Aluno em frente a escola">
+    </div>
+
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const btnAlterar = document.getElementById("btnAlterar");
+      if (btnAlterar) {
+        btnAlterar.addEventListener("click", recebe);
+      }
+    });
+
+    async function recebe() {
+      const n1 = document.getElementById("novaSenha").value;
+      const n2 = document.getElementById("confirmarSenha").value;
+      const n3 = document.getElementById("usuario").value;
+
+      if (n1 === n2) {
+        const data = new URLSearchParams();
+        data.append('n1', n1);
+        data.append('n3', n3);
+
+        try {
+          const response = await fetch('http://localhost/banco/Php/esqueci.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: data.toString()
+          });
+
+          if (!response.ok) throw new Error('Erro na requisição: ' + response.statusText);
+
+          const html = await response.text();
+          modalizar(html);
+          window.pagina = 'login';
+          
+        } catch (error) {
+          Erro();
+        }
+      } else {
+        alert("As senhas não coincidem");
+      }
+    }
+
+    function voltar() {
+      window.electronAPI.trocarPagina("login");
+    }
+  </script>
+  <link rel="stylesheet" href="../css/modal.css">
+  <script src="../Script/modal.js"></script>
+  <script src="../Script/modalErro.js"></script>
+  <link rel="stylesheet" href="../css/esqsenha.css">
+</body>
+</html>

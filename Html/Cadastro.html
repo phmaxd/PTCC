@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Cadastro</title>
+  <link rel="stylesheet" href="../css/cadastro.css">
+</head>
+
+<body>
+  <div id="modal" class="modal"></div>
+             <a href="login.html"><img src="../imagens/iconvoltar.svg" alt="Ícone de voltar" class="iconvoltar"></a>
+
+  <div class="container">
+    <h1>Cadastro de Funcionário</h1>
+    <p>Preencha os dados para criar uma conta.</p>
+
+    <input id="nome" placeholder="Nome">
+    <input id="senha" type="password" placeholder="Senha">
+
+    <select id="funcao">
+      <option value="" disabled selected hidden>Selecione uma função</option>
+      <option value="funcionario">Funcionário</option>
+      <option value="adm">Administrador</option>
+    </select>
+
+    <button id="btn">Cadastrar</button>
+    <div id="rep"></div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const btn = document.getElementById("btn");
+      if (btn) btn.addEventListener("click", recebe);
+    });
+
+    async function recebe() {
+      const n1 = document.getElementById("nome").value;
+      const n2 = document.getElementById("senha").value;
+      const n3 = document.getElementById("funcao").value;
+
+      const data = new URLSearchParams({ n1, n2, n3 });
+      if (
+        n1 === null ||
+        n2 === null ||
+        n1 === undefined ||
+        n2 === undefined ||
+        n1.trim() === "" ||
+        n2.trim() === ""
+      ) {
+        alert('preencha todos os campos');
+        return;
+      }
+      try {
+        const response = await fetch('http://localhost/banco/Php/manda.php', {
+          method: 'POST',
+          credentials: 'include',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: data.toString()
+        });
+
+        if (!response.ok) throw new Error('Erro na requisição: ' + response.statusText);
+
+        const html = await response.text();
+        if (html === "esse usuario já está cadastrado") return;
+        modalizar();
+        window.pagina = "login";
+      } catch (error) {
+        console.log('Request failed: ' + error.message);
+        Erro();
+      }
+    }
+  </script>
+  <script src="../Script/modal.js"></script>
+  <link rel="stylesheet" href="../css/modal.css">
+  <script src="../Script/modalErro.js"></script>
+</body>
+</html>
