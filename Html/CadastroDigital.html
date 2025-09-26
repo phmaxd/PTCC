@@ -11,6 +11,7 @@
     <a href="entrada.html" class="voltar">
       <img src="../imagens/iconvoltar.svg" alt="Voltar" class="icon voltar">
     </a>
+<div id="feedbackCadastro" class="feedback"></div>
 
 
     <!-- Botão para abrir a sidebar -->
@@ -48,6 +49,23 @@
     <div id="overlay"></div>
 
 <script src="../Script/CadastroDigital.js"></script>
+<script>
+  const feedbackDiv = document.getElementById('feedbackCadastro');
+
+// Supondo que msg seja a resposta do ESP32 ou do PHP
+window.electronAPI.onEsp32Msg((msg) => {
+    if(msg.acao === "digital_cadastrada") {
+        feedbackDiv.textContent = "Digital cadastrada com sucesso!";
+        feedbackDiv.style.display = "block";
+
+        // Esconde a mensagem depois de 3 segundos
+        setTimeout(() => {
+            feedbackDiv.style.display = "none";
+        }, 3000);
+    }
+});
+
+</script>
   <link rel="stylesheet" href="../css/digitaisCadastradas.css">
 </body>
 </html>

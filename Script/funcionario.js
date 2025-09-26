@@ -3,7 +3,7 @@ const ID = window.name;
 window.onload = function () {
     try {
        $.ajax({
-		url: "http://localhost/banco/Php/funcionario.php",
+		url: "http://localhost/ETEC/3MIN/TCC/bioid/Php/funcionario.php",
 	    type: "POST",
 	    dataType: "json"
 		}).done(function(resposta) {
@@ -35,7 +35,7 @@ function Excluir(botao){
     }
     try {
         $.ajax({
-            url: "http://localhost/banco/Php/Excluir.php",
+            url: "http://localhost/ETEC/3MIN/TCC/bioid/Php/Excluir.php",
             type: "POST",
             data: JSON.stringify({id: id}),
             dataType: "json",

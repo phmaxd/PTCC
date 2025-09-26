@@ -47,7 +47,7 @@ if (response.ok) {
         window.name = pata.data[0].nome;
       }        
     } else {
-        document.getElementById("rep").innerText = pata.data;
+        Erro();
     }
     
 }

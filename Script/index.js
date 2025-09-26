@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain } from "electron";
+import { app, BrowserWindow, ipcMain, Menu } from "electron";
 import path from "path";
 import { fileURLToPath } from "url";
 import { setupWebSocket } from "./WebSocketHandlers/WebSocketHandler.js";
@@ -116,3 +116,5 @@ app.on("window-all-closed", () => {
 process.on("uncaughtException", (err) => {
   console.error("ERRO NÃO TRATADO: ", err);
 });
+
+Menu.setApplicationMenu(null);

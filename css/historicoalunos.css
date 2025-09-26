@@ -102,6 +102,19 @@ h2 {
   font-weight: 400;
 margin-top: 2%;
 }
+#Verificar{
+  width: 15%; /* botão ocupa toda a largura da célula */
+  height: 40px;
+  background-color: #355F46;
+  color: white;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease; /* suaviza as mudanças */
+  font-size: 20px;
+  font-weight: 400;
+margin-top: 2%;
+}
 
 /* ======== GRID DE CARDS ======== */
 .grid {

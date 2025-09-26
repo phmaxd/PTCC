@@ -3,6 +3,7 @@
      window.electronAPI.trocarPagina("verificacao");
      window.electronAPI.sendToMain({ action: "validar_digital" });
    }
+  //  document.getElementById("sair").addEventListener("click", Deslogar);
 
 
 document.getElementById("Enviar").addEventListener("click", enviar);
@@ -135,7 +136,7 @@ window.onload = async function () {
   }
 }
 
-async function Deslogar(){
+async function Deslogar(volta){
        modalizar();
-       window.pagina = "pagina";
+       window.pagina = volta;
 }

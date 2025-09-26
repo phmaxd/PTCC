@@ -1,33 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Validação de Digital</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            padding: 20px;
-        }
-        #slotDisplay {
-            font-size: 2em;
-            color: green;
-        }
-    </style>
-</head>
-<body>
-    <h1>Validação de Digital</h1>
-    <p>Slot detectado:</p>
-    <div id="slotDisplay">---</div>
-
+    <title>Verificação de Aluno</title>
+ </head>
+         <a href="entrada.html" class="icon">
+      <img src="../imagens/iconvoltar.svg" alt="Voltar" class="icon">
+    </a>
+ <body>
+<div class="container">
+     <div id="rmDiv"></div>
+    <div id="nomeDiv"></div>
+</div>
     <script>
-        const slotDiv = document.getElementById("slotDisplay");
+    const nomeDiv = document.getElementById("nomeDiv");
 
-        window.electronAPI.onEsp32Msg((msg) => {
-            if(msg.acao === "verificacao_ok") {
-                slotDiv.textContent = msg.slot; // sobrescreve o slot a cada nova mensagem
+    window.electronAPI.onEsp32Msg(async (msg) => {
+        if(msg.acao === "verificacao_ok") {
+            const slot = msg.slot;
+
+            // Requisita o PHP para pegar nome do aluno
+            try {
+                const formData = new FormData();
+                formData.append('slot', slot);
+
+                const response = await fetch('http://localhost/ETEC/3MIN/TCC/bioid/Php/validar.php', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+                
+                if(data.status === 'sucesso') {
+                    nomeDiv.textContent = `Aluno: ${data.nome_aluno}`;
+                    rmDiv.textContent = `RM: ${data.rm}`;
+                } else {
+                    nomeDiv.textContent = `Aluno não encontrado`;
+                }
+            } catch (err) {
+                console.error("Erro ao buscar nome do aluno:", err);
+                nomeDiv.textContent = "Erro na busca";
             }
-        });
+        }
+    });
     </script>
-</body>
-</html>
+    <link rel="stylesheet" href="../css/varificacao.css">
+ </body>
+ </html>   
+    
+    
+    
+    
+   
