@@ -1,3 +1,10 @@
+  document.getElementById("Verificar").addEventListener("click", Verificar);
+   function Verificar() {
+     window.electronAPI.trocarPagina("verificacao");
+     window.electronAPI.sendToMain({ action: "validar_digital" });
+   }
+
+
 document.getElementById("Enviar").addEventListener("click", enviar);
 async function enviar(event) {
   event.preventDefault(); // impede refresh do form
@@ -36,7 +43,7 @@ async function enviar(event) {
       <button id="cancelBtn">Cancelar</button>
     </div>
   `;
-
+  
   // deixa o modal visível
   modal.style.display = "block";
 
@@ -45,6 +52,8 @@ async function enviar(event) {
     window.name = document.getElementById("Rm").value.trim();
     await window.electronAPI.trocarPagina("CadastroDigital");
   };
+
+
 
   document.getElementById("cancelBtn").onclick = function() {
     alert("❌ Cancelado, não é o aluno correto.");

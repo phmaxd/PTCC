@@ -67,6 +67,7 @@
   <div id="content"></div><br>
 
    <button id="cadastroBtn">Cadastrar Digital</button>
+   <button id="Verificar">Verificar Digital</button>
 
   <!-- Script do sidebar e menus -->
   <script>
@@ -106,7 +107,7 @@
       e.stopPropagation();
       document.getElementById('cadastroMenu').style.display = 'none';
     };
-    document.addEventListener('click', function(e) {
+    document.addEventListener('click', function(e) {   
       var menu = document.getElementById('cadastroMenu');
       var btn = document.getElementById('cadastroBtn');
       if (menu.style.display === 'block' && !menu.contains(e.target) && e.target !== btn) {

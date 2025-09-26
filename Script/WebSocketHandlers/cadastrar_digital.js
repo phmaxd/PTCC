@@ -2,6 +2,7 @@ export async function cadastrar_digital(data) {
  const dados_digital = new URLSearchParams();
  dados_digital.append('rm', data.rm);
  dados_digital.append('digital', data.template);
+ dados_digital.append('slot', data.slot);
  try {
     const response = await fetch('http://localhost/ETEC/3MIN/TCC/bioid/Php/cadastrar_digital.php', {
      method: 'POST',

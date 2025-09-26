@@ -85,6 +85,9 @@ setupWebSocket(mainWindow, ipcMain);
             case "CadastroDigital":
               await mainWindow.loadFile("Html/CadastroDigital.html");
               break;
+            case "verificacao":
+              await mainWindow.loadFile("Html/verificacao.html");
+              break;
             default:
               console.log("Página desconhecida", pagina);
               return { success: false, error: "Página desconhecida" };
