@@ -40,8 +40,12 @@
       const n1 = document.getElementById("nome").value;
       const n2 = document.getElementById("senha").value;
       const n3 = document.getElementById("funcao").value;
+  // Regex
+  const apenasLetras = /^[A-Za-zÀ-ÿ\s]+$/;   // Nome só com letras e espaços
+  const contemNumero = /\d/;                // Verifica se tem número
+  const contemLetra = /[A-Za-z]/;           // Verifica se tem letra
 
-      const data = new URLSearchParams({ n1, n2, n3 });
+
       if (
         n1 === null ||
         n2 === null ||
@@ -50,11 +54,29 @@
         n1.trim() === "" ||
         n2.trim() === ""
       ) {
-        alert('preencha todos os campos');
+        Preencher();
         return;
       }
+
+        // Validação de nome
+  if (!apenasLetras.test(n1)) {
+    letras();
+    return;
+  }
+
+  // Validação de senha
+  if (!contemNumero.test(n2)) {
+    numeros();
+    return;
+  }
+
+  if (!n3) {
+    fnc();
+    return;
+  }
+      const data = new URLSearchParams({ n1, n2, n3 });
       try {
-        const response = await fetch('http://localhost/banco/Php/manda.php', {
+        const response = await fetch('http://localhost/Banco/Php/manda.php', {
           method: 'POST',
           credentials: 'include',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -63,10 +85,16 @@
 
         if (!response.ok) throw new Error('Erro na requisição: ' + response.statusText);
 
-        const html = await response.text();
-        if (html === "esse usuario já está cadastrado") return;
-        modalizar();
-        window.pagina = "login";
+        const result = await response.text();
+
+if (result.status === "exists") {
+  falha(); // usuario já existe
+  return;
+}
+
+Cadastro();
+window.pagina = "login";
+
       } catch (error) {
         console.log('Request failed: ' + error.message);
         Erro();
@@ -75,6 +103,5 @@
   </script>
   <script src="../Script/modal.js"></script>
   <link rel="stylesheet" href="../css/modal.css">
-  <script src="../Script/modalErro.js"></script>
 </body>
 </html>

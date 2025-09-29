@@ -1,12 +1,21 @@
+  document.getElementById("Verificar").addEventListener("click", Verificar);
+   function Verificar() {
+     window.electronAPI.trocarPagina("verificacao");
+     window.electronAPI.sendToMain({ action: "validar_digital" });
+   }
+  //  document.getElementById("sair").addEventListener("click", Deslogar);
+
+
 document.getElementById("Enviar").addEventListener("click", enviar);
 async function enviar(event) {
   event.preventDefault(); // impede refresh do form
   try {
     var Rm = document.getElementById("Rm").value.trim();
+
     const data = new URLSearchParams();
     data.append('Rm', Rm);
 
-    const response = await fetch("http://localhost/banco/Php/digital.php", {
+    const response = await fetch("http://localhost/BANCO/Php/digital.php", {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -35,7 +44,6 @@ async function enviar(event) {
       <button id="cancelBtn">Cancelar</button>
     </div>
   `;
-
   // deixa o modal visível
   modal.style.display = "block";
 
@@ -57,13 +65,10 @@ async function enviar(event) {
   }
 }
 
-
-
-// ------------------------------------------------------------------------------------------------------
 // Carrega cards na tela
 window.onload = async function () {
   try {
-    const response = await fetch("http://localhost/banco/Php/acesso.php", {
+    const response = await fetch("http://localhost/BANCO/Php/acesso.php", {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -124,14 +129,15 @@ window.onload = async function () {
     console.error("Erro ao carregar a página:", error);
   }
 }
-  async function outrapagina() {
-  const result = await window.electronAPI.trocarPagina("CadastroDigital");
-  if (!result.success) {
-    console.error("Erro ao trocar página:", result.error);
-  }
-}
+//   async function outrapagina() {
+//   const result = await window.electronAPI.trocarPagina("CadastroDigital");
+//   if (!result.success) {
+//     console.error("Erro ao trocar página:", result.error);
+//   }
+// }
+// não sei se vai precisar usar o outrapagina()
 
 async function Deslogar(){
-       modalizar();
-       window.pagina = "pagina";
+    Sair();
+  window.pagina = 'Login';
 }

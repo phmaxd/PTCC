@@ -69,6 +69,7 @@
     "undici-types": "^6.21.0",
     "universalify": "^0.1.2",
     "wrappy": "^1.0.2",
+    "ws": "^8.18.3",
     "yauzl": "^2.10.0"
   },
   "devDependencies": {

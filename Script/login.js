@@ -16,7 +16,7 @@ async function recebe() {
   const n1 = document.getElementById("nome").value;
   const n2 = document.getElementById("senha").value;
   if (!n1 || !n2) {
-    alert("Por favor, preencha todos os campos.");
+    Preencher();
     return;
   }
 
@@ -25,7 +25,7 @@ async function recebe() {
   data.append("n2", n2);
 
   try {
-    const response = await fetch("http://localhost/banco/Php/login.php", {
+    const response = await fetch("http://localhost/BANCO/Php/login.php", {
     method: "POST",
     credentials: "include",
     headers: {
@@ -37,17 +37,17 @@ if (response.ok) {
     const pata = await response.json();
     if (pata.data != "usuario ou senha incorreto") {
       if (pata.data[0].funcao == "adm") {
-       modalizar();
+       Login();
        window.pagina = "pagina";
         window.name = JSON.parse(pata.data[0].id); //variavel global window, não le JSON
 
       }else{
-        modalizar();
+        Login();
         window.pagina = "entrada";
         window.name = pata.data[0].nome;
       }        
     } else {
-        document.getElementById("rep").innerText = pata.data;
+        Incorreto();
     }
     
 }

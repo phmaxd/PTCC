@@ -4,7 +4,8 @@ window.onload = async function Dados() {
     console.log("RM recebido:", rm);
     const data = new URLSearchParams();
     data.append("rm", rm);
-    const digital = await fetch("http://localhost/banco/Php/dados.php", {
+    
+    const digital = await fetch("http://localhost/BANCO/Php/dados.php", {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -25,6 +26,19 @@ modalContent.innerHTML = `
   <strong>RM:</strong> ${aluno.rm ?? ''} <br>
   <button id="Digital" style="margin-right:10px;">Cadastrar Digital</button>
 `;
+const btnDigital = document.getElementById("Digital");
+ if (btnDigital) {
+      btnDigital.addEventListener("click", () => {
+        const cadastrar_digital = {
+          action: "cadastrar_digital",
+          rm: aluno.rm
+        };
+
+        // Envia para o main via preload
+        window.electronAPI.sendToMain(cadastrar_digital);
+        console.log("JSON enviado para o ESP32:", cadastrar_digital);
+      });
+    }
 }
 catch(error) {
     console.error("Erro ao carregar a página:", error);
@@ -35,7 +49,17 @@ function trocar() {
   window.electronAPI.trocarPagina("entrada");
 }
 
-const sidebar = document.getElementById("sidebar");
+   
+    function Deslogar(){
+if(confirm("Deseja realmente deslogar?")){
+    window.electronAPI.trocarPagina("login");
+}else{
+    return;
+}
+
+}
+
+ const sidebar = document.getElementById("sidebar");
     const overlay = document.getElementById("overlay");
     const perfilBtn = document.getElementById("perfilBtn");
     const closeSidebar = document.getElementById("closeSidebar");
@@ -54,12 +78,3 @@ const sidebar = document.getElementById("sidebar");
       sidebar.classList.remove("open");
       overlay.classList.remove("active");
     });
-
-    function Deslogar(){
-if(confirm("Deseja realmente deslogar?")){
-    window.electronAPI.trocarPagina("login");
-}else{
-    return;
-}
-
-}

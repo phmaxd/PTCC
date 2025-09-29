@@ -3,7 +3,7 @@ const ID = window.name;
 window.onload = function () {
     try {
        $.ajax({
-		url: "http://localhost/banco/Php/funcionario.php",
+		url: "http://localhost/BANCO/Php/funcionario.php",
 	    type: "POST",
 	    dataType: "json"
 		}).done(function(resposta) {
@@ -30,21 +30,21 @@ function Excluir(botao){
     const row = botao.closest(".funcionario-card");
     const id = row.dataset.id;
     if(ID == id){
-        alert("❌ Você não pode excluir a si mesmo.");
+        mesmo();
         return;
     }
     try {
         $.ajax({
-            url: "http://localhost/banco/Php/Excluir.php",
+            url: "http://localhost/BANCO/Php/Excluir.php",
             type: "POST",
             data: JSON.stringify({id: id}),
             dataType: "json",
             contentType: "application/json; charset=UTF-8"
         }).done(function(resposta) {
             console.log();
-            alert(resposta.mensagem);
             if(resposta.status === "sucesso"){ 
                 row.remove();
+                Apague();
             } else {
                 console.log("Nenhum dado recebido");
             }
@@ -79,7 +79,7 @@ tr.setAttribute("data-id", dados.id);
         <td>${dados.funcao}</td>
         <td>${dados.id}</td>
         <td><button onclick="Excluir(this)" class="btn-excluir">Excluir</button>    <button onclick="Editar(this)" class="btn">Editar</button></td>
-    `;
+      `;
 
     // Insere na tabela correspondente
     tbody.appendChild(tr);
@@ -88,16 +88,74 @@ tr.setAttribute("data-id", dados.id);
 // Exemplo de como rodar com array vindo do PHP
 
 
-function Editar(botao){
-    // Editar depois
+function Editar(botao) {
+    const row = botao.closest(".funcionario-card");
+    const id = row.dataset.id;
+    const nome = row.children[0].textContent;
+    const funcao = row.children[1].textContent;
+
+    const modal = document.getElementById('modal');
+    modal.innerHTML = `
+        <div class="modal-box">
+            <h3>Editar Funcionário</h3>
+            <label>Nome:</label>
+            <input type="text" id="editNome" value="${nome}">
+            </select>
+            <div style="margin-top: 10px;">
+                <button id="btnSalvar" >Salvar</button>
+                <button onclick="fecharModal()">Cancelar</button>
+            </div>
+        </div>
+    `;
+    modal.style.display = 'block';
+
+    // Adiciona o listener depois que o modal existe no DOM
+    document.getElementById('btnSalvar').addEventListener('click', function() {
+        salvarEdicao(id);
+    });
 }
 
-function Deslogar(){
-if(confirm("Deseja realmente deslogar?")){
-    window.electronAPI.trocarPagina("login");
-}else{
-    return;
+
+async function salvarEdicao(id) {
+    const novoNome = document.getElementById('editNome').value.trim();
+
+    if (!novoNome) {
+        alert("O nome não pode ficar vazio!");
+        return;
+    }
+
+    const data = new URLSearchParams();
+    data.append('id', id);
+    data.append('nome', novoNome);
+
+    try {
+        const response = await fetch('http://localhost/BANCO/Php/editarFuncionario.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: data.toString()
+        });
+
+        if (!response.ok) throw new Error('Erro na requisição: ' + response.statusText);
+
+        const resultado = await response.text(); // pode retornar mensagem simples
+
+            Alteração();
+        // Atualiza tabela na tela
+        const row = document.querySelector(`.funcionario-card[data-id='${id}']`);
+        row.children[0].textContent = novoNome;
+    } catch (error) {
+        alert("Erro ao atualizar o nome: " + error.message);
+    }
 }
+
+function fecharModal() {
+    document.getElementById('modal').style.display = 'none';
+}
+
+
+function Deslogar(){
+Sair();
+window.pagina = "login";
 
 }
     const sidebar = document.getElementById("sidebar");
@@ -119,3 +177,14 @@ if(confirm("Deseja realmente deslogar?")){
       sidebar.classList.remove("open");
       overlay.classList.remove("active");
     });
+
+    async function mesmo() {
+const modal = document.getElementById('modal');
+        modal.innerHTML = `
+        <div class="modal-box">
+          <p>Você não pode excluir a si mesmo.</p>
+          <button onclick="puxa()" style="margin-right:10px;">Entendi</button>
+        </div>
+        `;
+modal.style.display = 'block'; // mostra o modal
+}

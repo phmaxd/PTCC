@@ -1,6 +1,7 @@
-import { app, BrowserWindow, ipcMain } from "electron";
+import { app, BrowserWindow, ipcMain, Menu } from "electron";
 import path from "path";
 import { fileURLToPath } from "url";
+import { setupWebSocket } from "./WebSocketHandlers/WebSocketHandler.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -38,7 +39,9 @@ function createWindows() {
           enableRemoteModule: false,
           preload: path.join(__dirname, "../Script/preload.js"),
         },
+        autoHideMenuBar: true,
       });
+setupWebSocket(mainWindow, ipcMain);
 
       mainWindow.loadFile(path.join(__dirname, "../Html/login.html"))
         .then(() => console.log("login.html carregado"))
@@ -80,6 +83,9 @@ function createWindows() {
             case "CadastroDigital":
               await mainWindow.loadFile("Html/CadastroDigital.html");
               break;
+            case "verificacao":
+              await mainWindow.loadFile("Html/verificacao.html");
+              break;
             default:
               console.log("Página desconhecida", pagina);
               return { success: false, error: "Página desconhecida" };
@@ -110,3 +116,4 @@ app.on("window-all-closed", () => {
 process.on("uncaughtException", (err) => {
   console.error("ERRO NÃO TRATADO: ", err);
 });
+
