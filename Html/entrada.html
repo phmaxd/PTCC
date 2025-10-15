@@ -1,0 +1,192 @@
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Entrada de aluno</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+<body>
+  <div class="modal" id="modal"></div>
+<!-- SIDEBARz -->
+ <div id="sidebar" class="sidebar">
+  <div class="sidebar-header">
+    <h2>Menu</h2>
+    <span class="close-btn" id="closeSidebar">&times;</span>
+  </div>
+<ul class="sidebar-menu">
+  <li>
+    <a onclick="Deslogar()" 
+       class="flex items-center gap-2 text-[#225b42] hover:text-[#1b4a36] font-medium transition-colors duration-200 cursor-pointer">
+      <!-- Ícone Sair SVG -->
+      <svg xmlns="http://www.w3.org/2000/svg" 
+           class="w-5 h-5" 
+           fill="none" 
+           viewBox="0 0 24 24" 
+           stroke="currentColor" 
+           stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6a2 2 0 012 2v1" />
+      </svg>
+      <span>Sair</span>
+    </a>
+  </li>
+</ul>
+
+</div>
+
+
+
+  <div id="overlay" class="overlay"></div>
+
+  
+  <!-- ===== HEADER ===== -->
+  <header>
+          <h1>Controle de Entrada</h1>
+
+<div class="search-box">
+  <input type="text" id="searchInput" placeholder="Pesquisar aluno...">
+  <button id="searchBtn">
+    <img src="../imagens/Lupa.svg" alt="Pesquisar">
+  </button>
+</div>
+<div class="icons">
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon perfil size-6" id="perfilBtn">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+</svg>
+</div>
+  </header>
+
+  <div class="bloco1"></div>
+  <h2>Histórico de Alunos</h2>
+
+  <!-- ===== BOTÃO DE CADASTRO ===== -->
+
+
+  <div id="cadastroMenu">
+  <button id="fecharMenuBtn" type="button">X</button>
+  <form>
+    <label for="Rm" id="rmaluno">Rm:</label>
+    <input type="text" id="Rm" name="Rm" placeholder="Ex: 23065" required>
+    <button type="button" id="Enviar">Enviar</button>
+  </form>
+</div>
+
+<!-- ===== MODAL DE CONFIRMAÇÃO ===== -->
+<div id="confirmModal" style="display: none;">
+  
+    <div class="modal"> 
+        <div class="modal-content">
+            <p>Tem certeza de que deseja continuar?</p>
+        </div>
+        <div class="modal-actions">
+            <button id="confirmBtn">Confirmar</button>
+            <button id="cancelBtn">Cancelar</button>
+        </div>
+    </div>
+
+</div>
+
+
+
+  <div id="content"></div><br>
+
+<div class="flex flex-col sm:flex-row gap-6 w-full justify-center mt-6">
+  <button id="cadastroBtn" 
+    class="w-full sm:w-auto bg-[#1b4a36] text-white py-1.5 px-6 rounded-full  shadow-md hover:bg-[#1b4a36] hover:scale-105 transition-all duration-200">
+    Cadastrar Digital
+  </button>
+
+  <button id="Verificar" 
+    class="w-full sm:w-auto bg-white text-[#1b4a36] border-2 border-[#225b42] py-1.5 px-6 rounded-full  hover:bg-[#225b42] hover:text-white hover:scale-105 transition-all duration-200">
+    Verificar Digital
+  </button>
+</div>
+
+
+
+
+
+
+
+  <!-- Script do sidebar e menus -->
+  <script>
+    // ====== SIDEBAR ======
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("overlay");
+    const perfilBtn = document.getElementById("perfilBtn");
+    const closeSidebar = document.getElementById("closeSidebar");
+
+    perfilBtn.addEventListener("click", () => {
+      sidebar.classList.add("open");
+      overlay.classList.add("active");
+    });
+
+    closeSidebar.addEventListener("click", () => {
+      sidebar.classList.remove("open");
+      overlay.classList.remove("active");
+    });
+
+    overlay.addEventListener("click", () => {
+      sidebar.classList.remove("open");
+      overlay.classList.remove("active");
+    });
+
+
+    // ====== MENU DE CADASTRO ======
+    document.getElementById('cadastroBtn').onclick = function(e) {
+      e.stopPropagation();
+      var menu = document.getElementById('cadastroMenu');
+      menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+    };
+    document.getElementById('fecharMenuBtn').onclick = function(e) {
+      e.stopPropagation();
+      document.getElementById('cadastroMenu').style.display = 'none';
+    };
+    document.addEventListener('click', function(e) {
+      var menu = document.getElementById('cadastroMenu');
+      var btn = document.getElementById('cadastroBtn');
+      if (menu.style.display === 'block' && !menu.contains(e.target) && e.target !== btn) {
+        menu.style.display = 'none';
+      }
+    });
+
+    // ===== PESQUISA DE ALUNOS =====
+const searchInput = document.getElementById("searchInput");
+const searchBtn = document.getElementById("searchBtn");
+
+function filtrarAlunos() {
+  let filtro = searchInput.value.toLowerCase();
+  const cards = document.querySelectorAll("#content .card");
+
+  cards.forEach(card => {
+    const nomeEl = card.querySelector("div:nth-child(2)");
+    const rmEl = card.querySelector("div:nth-child(3)");
+
+    const nome = nomeEl ? nomeEl.innerText.toLowerCase() : "";
+    const rm = rmEl ? rmEl.innerText.toLowerCase() : "";
+
+    if (nome.includes(filtro) || rm.includes(filtro)) {
+      card.parentElement.style.display = "flex"; // mostra <tr> wrapper
+    } else {
+      card.parentElement.style.display = "none";
+    }
+  });
+}
+
+// Botão de pesquisa
+if (searchBtn) {
+  searchBtn.addEventListener("click", filtrarAlunos);
+}
+
+// Pesquisa em tempo real
+if (searchInput) {
+  searchInput.addEventListener("keyup", filtrarAlunos);
+}
+
+  </script>
+  
+    <script src="../Script/entrada.js" defer></script>
+  <link rel="stylesheet" href="../css/historicoalunos.css">
+  <script src="../Script/modal.js"></script>
+  <!-- <link rel="stylesheet" href="../css/modal.css"> -->
+</body>
+</html>

@@ -1,0 +1,196 @@
+/* ======== BODY ======== */
+body {
+  background-color: #f5faf6;
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ======== TEXTOS À ESQUERDA ======== */
+.textos {
+  position: fixed;
+  text-align: left;
+  padding: 20px;
+  margin-left: 5%;
+  margin-top: 0%;
+}
+
+.textos h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #225b42;
+  margin: 40px 0;
+}
+
+.textos h2 {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #355f46;
+  margin: 0;
+}
+
+/* ======== CONTEÚDO CENTRAL ======== */
+.container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* sobe, mas controlamos com margin */
+  text-align: center;
+  gap: 20px;
+  margin-top: 220px; /* empurra o conteúdo mais para baixo */
+}
+
+.middle-elements {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  max-width: 350px;
+}
+
+input {
+  all: unset;
+  width: 100%;
+  height: 40px;
+  padding-left: 10px;
+  border-radius: 5px;
+  font-size: 1rem;
+  border: 2px solid #c1bbbb;
+  border-left: 5px solid #225b42;
+  background-color: #ffffffa7;
+  text-align: left;
+  transition: all 0.3s ease;
+}
+
+select {
+  width: 105%;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  font-size: 1rem;
+  border-top: 2px solid #c1bbbb;
+  border-right: 2px solid #c1bbbb;
+  border-bottom: 2px solid #c1bbbb;
+  border-left: 5px solid #225b42;
+  background-color: #ffffffa7;
+  transition: all 0.3s ease;
+  text-align: left;
+  height: 45px;
+  padding-left: 10px;
+}
+
+button {
+  width: 105%;
+  height: 45px;
+  background-color: #355f46;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+#btndeletar {
+  background-color: #942827;
+  width: 80%;
+}
+
+button:hover {
+  background-color: #4d9267;
+  transform: scale(1.05);
+}
+
+.digitalimg {
+  padding: 20px;
+  width: 200px;
+  height: auto;
+}
+
+/* ======== ÍCONES ======== */
+.iconperfil {
+  position: fixed;
+  right: 20px;
+  top: 20px;       /* fica acima do voltar */
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 11;     /* garante que fica por cima */
+}
+
+.iconvoltar {
+  position: fixed;
+  right: 20px;
+  top: 70px;       /* empurra pra baixo do perfil */
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.iconperfil:hover,
+.iconvoltar:hover {
+  transform: scale(1.1);
+}
+
+/* ======== RESPONSIVO ======== */
+@media (max-width: 800px) {
+  .textos {
+    display: none;
+  }
+
+  .digitalimg {
+    width: 120px;
+  }
+
+  .middle-elements {
+    max-width: 280px;
+  }
+}
+
+/* Para telas grandes (Full HD até 4K) */
+@media (min-width: 1920px) {
+  .textos h1 {
+    font-size: 7rem;
+  }
+
+  .textos h2 {
+    font-size: 4rem;
+  }
+
+  .iconvoltar {
+    width: 90px;
+    height: auto;
+    top: 150px; /* mais espaçamento em telas grandes */
+  }
+
+  .iconperfil {
+    width: 90px;
+    height: auto;
+  }
+
+  .digitalimg {
+    width: 500px;
+  }
+
+  .middle-elements {
+    max-width: 500px;
+  }
+
+  input,
+  button {
+    font-size: 4.3rem;
+    width: 900px;
+    height: 155px;
+  }
+
+  .container {
+    margin-top: 200px; /* mais espaço entre textos e centro */
+  }
+}
