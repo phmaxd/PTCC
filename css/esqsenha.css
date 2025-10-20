@@ -1,0 +1,272 @@
+/* ======== BODY E FONTES ======== */
+body {
+  background-image: url("../css/assets/login/fundo.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-color: #f5faf6;
+  background-attachment: fixed;
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.poppins-regular {
+  font-family: "Poppins", sans-serif;
+  font-weight: lighter;
+  font-style: normal;
+}
+
+/* ======== CONTAINER PRINCIPAL ======== */
+.container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
+/* ======== BLOCO ESQUERDO ======== */
+.bloco.esquerdo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 10%;
+    font-size: 1.5rem;
+
+}
+
+
+
+button#btnAlterar:hover {
+  background-color: #4d9267;
+  transform: scale(1.05);
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* ======== BLOCO DIREITO ======== */
+.bloco.direito {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+.iconvoltar{
+  position: fixed;
+  left: 60%;
+  top: 20px;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+      transition: all 0.3s ease; 
+}
+
+.iconvoltar:hover {
+  transform: scale(1.1);
+}
+
+
+
+/* =========================================================================================================================================== */
+
+@media (min-width: 2560px) {
+ /* BLOCO ESQUERDO */
+.bloco.esquerdo {
+  flex: 1; /* Ocupa mais espaço */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.bloco.esquerdo h1 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 400%;
+    color: #225b42;}
+
+.bloco.esquerdo button {
+  font-weight: 700;
+  padding: 10px 20px;
+  width: 70%; /* botão ocupa toda a largura da célula */
+  height: 100px;
+  font-size: 2.5rem;
+  margin-top: 5%;
+
+}
+.bloco.esquerdo input{
+margin-bottom: 1%;
+        width: 60%;
+        height: 80px;
+        font-size: 3rem;
+}
+  
+  .bloco.direito img{
+    flex: 1;
+    display: flex;
+    justify-content: center; /* Centraliza na horizontal */
+    align-items: center;     /* Centraliza na vertical */
+    padding: 0;              /* Remove padding que pode deslocar */
+    height: 50vh;           /* Garante altura cheia da tela */
+  }
+  
+}
+
+@media (max-width: 1440px) {
+
+
+    
+  .bloco.direito img{
+    width: 70%;
+                    padding-right: 10%;
+
+  }
+
+  .bloco.esquerdo h1{
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 200%;
+    color: #225b42;
+    margin-bottom: 5%;
+  }
+
+  .bloco.esquerdo input{
+    all: unset;
+    margin-bottom: 2.5%;
+    width: 50%;
+    height: 35px;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    border-top: 1.5px solid #C1BBBB;
+    border-right: 1.5px solid #C1BBBB;
+    border-bottom: 1.5px solid #C1BBBB;
+    border-left: 3.5px solid #225b42;
+    padding-left: 10px;
+    background-color: #ffffffa7;
+  }
+  .bloco.esquerdo button {
+    margin-top: 2.5%;
+    width: 17%;
+    height: 35px;
+    font-size: 1rem;
+    background-color: #355F46;
+    color: white;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;  }
+}
+
+/* =================================================================================== */
+/* ======== RESPONSIVO ======== */
+@media (max-width: 1024px) {
+  .bloco.esquerdo input {
+    width: 70%;
+    font-size: 1.1rem;
+  }
+
+  .bloco.esquerdo h1{
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 400%;
+    color: #225b42;
+    margin-bottom: 10%;
+  }
+
+  .bloco.esquerdo input{
+    all: unset;
+    margin-bottom: 2.5%;
+    width: 60%;
+    height: 50px;
+    border-radius: 5px;
+    font-size: 1.7rem;
+    border-top: 2px solid #C1BBBB;
+    border-right: 2px solid #C1BBBB;
+    border-bottom: 2px solid #C1BBBB;
+    border-left: 5px solid #225b42;
+    padding-left: 10px;
+    background-color: #ffffffa7;
+  }
+  button#btnAlterar {
+padding: 10px 20px;
+    margin-right: 10px;
+    font-size: 16px;
+    width: 35%;
+    height: 54px;
+    font-size: 1.5rem;
+    background-color: #355F46;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 5%;
+  }
+}
+/* ===================================================================== */
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column; /* Blocos empilhados verticalmente */
+    height: auto; /* Ajusta altura automática */
+  }
+
+  .bloco.esquerdo{
+    margin-top: 20%;
+    flex: none; /* Remove proporções fixas */
+    width: 100%; /* Ocupa toda largura */
+    height: auto;
+    padding: 20px 0;
+    align-items: center;
+  }
+
+  .bloco.direito{
+    order: 1;
+        padding: 20px 0;
+  }
+
+#bonecoimg {
+        width: 50%;
+
+  }
+
+  .bloco.esquerdo input {all: unset;
+    margin-bottom: 2.5%;
+    width: 60%;
+    height: 50px;
+    border-radius: 5px;
+    font-size: 1.7rem;
+    border-top: 2px solid #C1BBBB;
+    border-right: 2px solid #C1BBBB;
+    border-bottom: 2px solid #C1BBBB;
+    border-left: 5px solid #225b42;
+    padding-left: 10px;
+    background-color: #ffffffa7;
+  }
+
+
+  button#btnAlterar {
+    padding: 10px 20px;
+    margin-right: 10px;
+    font-size: 16px;
+    width: 20%;
+    height: 54px;
+    font-size: 1.5rem;
+    background-color: #355F46;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s 
+ease;
+  }
+
+  .bloco.esquerdo h1 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 400%;
+    color: #225b42;
+    margin-top: 0px;
+  }
+}
+
+/* ================================================================================= */

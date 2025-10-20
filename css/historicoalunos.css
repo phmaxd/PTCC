@@ -1,0 +1,533 @@
+/* ======== RESET ======== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #f5faf6;
+  color: #225b42;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* ======== HEADER ======== */
+header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 20px 40px;
+  position: relative; /* necessário para centralizar a search-box */
+}
+
+h1 {
+  color: #225b42;
+  font-size: 1.5rem;
+  font-weight: 600;
+  flex: 1; /* ocupa o espaço à esquerda */
+}
+
+.icons {
+  display: flex;
+  gap: 15px;
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.icon:hover {
+  transform: scale(1.1);
+}
+
+/* Search Box centralizada */
+.search-box {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: #fff;
+  padding: 5px 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  padding: 5px;
+}
+
+.search-box button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.bloco1{
+  margin-top: 4.5%;
+}
+
+
+/* ======== SUBTÍTULO ======== */
+h2 {
+  font-size: 1.5rem;
+  margin: 10px 0 20px 0;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 2.5%;
+  margin-top: 2%;
+}
+
+.arruma {
+  width: 14%; /* botão ocupa toda a largura da célula */
+  height: 35px;
+  background-color: #355F46;
+  color: white;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease; /* suaviza as mudanças */
+  font-size: 18px;
+  font-weight: 400;
+  margin-top: 4%;
+}
+
+
+/* ======== GRID DE CARDS ======== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  width: 90%;
+  max-width: 1200px;
+  padding: 20px;
+}
+
+.card {
+  background: #fff;
+  width: 200px;
+  border: 2px solid #0B5CD5;
+  border-radius: 25px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  text-align: left;
+  padding: 15px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+.card img {
+  width: 60px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.nome {
+  font-weight: 600;
+  margin-bottom: 5px;
+  font-size: 1rem;
+}
+
+.rm {
+  font-size: 0.9rem;
+  color: #355f46;
+}
+
+/* ======== VOLTAR ======== */
+.voltar {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.voltar:hover {
+  transform: scale(1.1);
+}
+
+/* ======== MODAL ======== */
+/* ======== MODAL ======== */
+/* ======== MODAL ======== */
+#confirmModal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 280px;
+  background: #fff;
+  border-radius: 8px;
+  text-align: left;
+  z-index: 1000;
+  overflow: hidden; /* respeita o border-radius */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-family: "Poppins", sans-serif;
+  color: #333; /* garante que o texto seja visível */
+}
+
+/* Texto */
+#confirmModal .modal-content {
+  padding: 20px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #333; /* texto escuro */
+}
+
+/* Container dos botões */
+#confirmModal .modal-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* dois botões, cada um ocupa 50% */
+  border-top: 1px solid #e5e5e5; /* Divisão horizontal entre conteúdo e botões */
+}
+
+#confirmModal .modal-actions button {
+  width: 100%;
+  padding: 12px 0;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin: 0; /* remove espaçamento extra */
+  border-radius: 0; /* remove cantos arredondados */
+}
+
+#confirmModal .modal-actions button:first-child {
+  border-right: 1px solid #e5e5e5; /* divisor exato no meio */
+}
+
+/* Hover para dar feedback nos botões */
+#confirmModal .modal-actions button:hover {
+  background: #f5f5f5;
+  box-shadow: none;
+}
+
+/* Divisor central (vertical) */
+#confirmModal .modal-actions::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: #ccc; /* divisor central */
+  left: 50%; /* coloca o divisor no meio */
+}
+
+/* Estilo para o botão Confirmar */
+#confirmBtn {
+  color: #333;
+}
+
+/* Estilo para o botão Cancelar */
+#cancelBtn {
+  color: #333;
+}
+
+/* Hover para o botão Confirmar */
+#confirmBtn:hover {
+}
+
+/* Hover para o botão Cancelar */
+#cancelBtn:hover {
+}
+
+
+
+
+
+/* ======== SIDEBAR ======== */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -260px;
+  width: 260px;
+  height: 100%;
+  background: #fff;
+  box-shadow: -2px 0 8px rgba(0,0,0,0.2);
+  border-left: 3px solid #225b42;
+  transition: right 0.3s ease;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar.open {
+  right: 0;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+  background: #f5faf6;
+}
+
+.sidebar-header h2 {
+  font-size: 1.2rem;
+  color: #225b42;
+}
+
+.close-btn {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 15px;
+}
+
+.sidebar-menu li {
+  margin: 15px 0;
+}
+
+.sidebar-menu a {
+  text-decoration: none;
+  color: #225b42;
+  font-size: 1rem;
+  padding: 10px;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.sidebar-menu a:hover {
+  background: #e3f3ea;
+}
+
+.sidebar-menu a:active {
+  background: #bae1cb;
+}
+
+/* ======== OVERLAY ======== */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+  z-index: 1500;
+}
+
+.overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ======== SEARCH BOX ======== */
+.search-box {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #225b42;
+  border-radius: 25px;
+  padding: 5px 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-right: 21%;
+  width: 30%;
+  height: 32px;
+
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  background: none;
+  padding: 8px;
+  font-size: 1rem;
+  color: #225b42;
+  width: 100%;
+}
+
+.search-box button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.search-box img {
+  width: 20px;
+  height: 20px;
+}
+
+
+
+
+/* MODAL DE CADASTRAR DIGITAL */
+
+/* Modal centralizado com estilo limpo */
+/* Modal centralizado com estilo limpo */
+#cadastroMenu {
+  display: none;
+  position: fixed;
+  top: 20px; /* Ajuste a distância do topo conforme necessário */
+  left: 20px; /* Ajuste a distância da esquerda conforme necessário */
+  width: 280px;
+  background: #fff;
+  border-radius: 8px;
+  text-align: center;
+  z-index: 1000;
+  overflow: hidden; /* respeita o border-radius */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-family: "Poppins", sans-serif;
+  color: #333; /* garante que o texto seja visível */
+  border: #ccc solid 1px;
+}
+
+
+/* Conteúdo do modal */
+#cadastroMenu form {
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+
+}
+
+#rmaluno{
+       padding: 20px 20px 0 20px; /* top right bottom left */
+       text-align: left;
+}
+
+#Rm::placeholder {
+    color: #ccc; /* Cor mais clara, pode ajustar como preferir */
+    opacity: 1; /* Para garantir que a opacidade do placeholder não fique muito baixa */
+}
+
+
+/* Campo de entrada */
+#cadastroMenu input[type="text"] {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s;
+  margin: 12px 20px 20 20px; /* top right bottom left */
+
+
+}
+
+#cadastroMenu input[type="text"]:focus {
+  border-color: #225b42;
+}
+
+/* Linha horizontal acima do botão */
+.modal-actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+}
+
+/* Linha divisória acima do botão */
+.modal-actions::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: #e5e5e5; /* Cor da linha */
+  margin-top: 12px; /* Espaçamento da linha para o conteúdo acima */
+}
+
+/* Botão único */
+#Enviar {
+  padding: 12px 0;
+  border: none;
+  background: #355F46;
+  font-size: 18px;
+  font-weight: 500;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background 0.2s;
+  width: 100%;  /* Faz o botão ocupar toda a largura */
+  text-align: center;
+  border-radius: 0;
+    border-top: #ccc solid 1px;
+
+}
+
+#Enviar:hover {
+  background: #1b4a36;
+}
+
+/* Botão de fechar (no topo direito) */
+#fecharMenuBtn {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  color: #aaa;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+#fecharMenuBtn:hover {
+  color: #333;
+}
+
+
+
+/* ======== RESPONSIVIDADE ======== */
+
+
+/* @media (min-width: 1024px) and (max-width: 1440px) {
+  #cadastroBtn{
+    width: 14%;
+    font-size: 16px;
+  }
+
+} */
+
+
+
+/* ======== SIDEBAR ======== */
+/* .icon-sidebar {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  margin-right: 8px;
+  stroke: #225b42; 
+  transition: stroke 0.2s ease;
+} */
+
+.sidebar-menu a:hover .icon-sidebar {
+  stroke: #355F46; /* muda cor no hover para combinar com hover do link */
+}

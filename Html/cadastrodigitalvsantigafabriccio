@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digitais Cadastradas</title>
+</head>
+
+<body>
+    <div id="Cleide">
+
+    </div> 
+    <!-- Ícone de voltar -->
+     <a href="entrada.html" class="voltar">
+         <img src="../imagens/iconvoltar.svg" alt="Voltar" class="icon voltar"> 
+    </a>
+    <div id="feedbackCadastro" class="feedback">
+        
+    </div> <!-- Botão para abrir a sidebar -->
+    <div class="menu-toggle" id="perfilBtn"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg> </div> <!-- SIDEBAR -->
+    <div id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <h2>Menu</h2> <span class="close-btn" id="closeSidebar">&times;</span>
+        </div>
+        <ul class="sidebar-menu"> <a onclick="Deslogar()"> <svg xmlns="http://www.w3.org/2000/svg" class="icon-sidebar"
+                    fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6a2 2 0 012 2v1" />
+                </svg> Sair </a> </li>
+        </ul>
+    </div>
+    <div id="overlay"></div>
+    <script src="../Script/CadastroDigital.js"></script>
+    <script> const feedbackDiv = document.getElementById('feedbackCadastro'); // Supondo que msg seja a resposta do ESP32 ou do PHP window.electronAPI.onEsp32Msg((msg) => { if(msg.acao === "digital_cadastrada") { feedbackDiv.textContent = "Digital cadastrada com sucesso!"; feedbackDiv.style.display = "block"; // Esconde a mensagem depois de 3 segundos setTimeout(() => { feedbackDiv.style.display = "none"; }, 3000); } }); </script>
+    <link rel="stylesheet" href="../css/digitaisCadastradas.css">
+</body>
+
+</html>
