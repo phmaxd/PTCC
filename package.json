@@ -8,7 +8,7 @@
   "main": "Script/index.js",
   "build": {
     "appId" : "com.bioid.app",
-    "productName": "BioId",
+    "productName": "BIOID",
     "directories": {
       "output" : "dist"
     },
