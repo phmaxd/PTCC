@@ -1,0 +1,3 @@
+npx electron-builder  ----------- buildar instalador e de forma certa
+
+npm run build ------------------- buildar só o aplicativo de forma errada
