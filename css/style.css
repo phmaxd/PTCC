@@ -1,0 +1,75 @@
+body {
+    background-image: url("../css/assets/esqsenha/fundoesq.svg"); 
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    font-family: "Poppins", sans-serif;
+    margin-left: 10%;
+   
+
+}
+
+.poppins-regular {
+    font-family: "Poppins", sans-serif;
+    font-weight: bolder;
+    font-style: normal;
+
+}
+
+/* .img-fundo {
+    margin-left: 45%;
+    top: 130px;
+    position: fixed;
+    animation: moverParaBaixo 2s linear infinite;
+} */
+
+
+
+#BioID {
+    font-weight: 700;
+    font-size: 140%;
+    color:#4D9267;
+}
+
+p {
+    color: #636363;
+    margin: 0%;
+    
+}
+
+input {
+    all: unset;
+    margin-bottom: 1%;
+    width: 20%;
+    height: 50px;
+    border-radius: 5px;
+    border-top: 2px solid #C1BBBB;
+    border-right: 2px solid #C1BBBB;
+    border-bottom: 2px solid #C1BBBB;
+    border-left: 5px solid #4D9267;
+    /* box-shadow: 0 2px 3px 0 #00000040; */
+    
+    padding-left: 10px;
+
+}
+
+input::placeholder {
+    font-size: 20px;
+    color: #636363;
+}
+
+button {
+    all: unset;
+    text-align: center;
+    width: 129px;
+    height: 54px;
+    flex-shrink: 0;
+    font-size: 20px;
+    background-color: #4D9267;
+    color: #ffffff;
+    font-weight: 500;
+    border-radius: 5px;
+    border-right: 10px;
+    box-shadow: 0 2px 3px 0 #00000040;
+    border-left: 10%;
+}

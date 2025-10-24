@@ -1,0 +1,55 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificação de Aluno</title>
+ </head>
+         <a href="entrada.html" class="icon">
+      <img src="../imagens/iconvoltar.svg" alt="Voltar" class="icon">
+    </a>
+ <body>
+<div class="container">
+     <div id="rmDiv"></div>
+    <div id="nomeDiv"></div>
+</div>
+    <script>
+    const nomeDiv = document.getElementById("nomeDiv");
+
+    window.electronAPI.onEsp32Msg(async (msg) => {
+        if(msg.acao === "verificacao_ok") {
+            const slot = msg.slot;
+
+            // Requisita o PHP para pegar nome do aluno
+            try {
+                const formData = new FormData();
+                formData.append('slot', slot);
+
+                const response = await fetch('http://stella.elementfx.com/validar.php', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+                
+                if(data.status === 'sucesso') {
+                    nomeDiv.textContent = `Aluno: ${data.nome_aluno}`;
+                    rmDiv.textContent = `RM: ${data.rm}`;
+                } else {
+                    nomeDiv.textContent = `Aluno não encontrado`;
+                }
+            } catch (err) {
+                console.error("Erro ao buscar nome do aluno:", err);
+                nomeDiv.textContent = "Erro na busca";
+            }
+        }
+    });
+    </script>
+    <link rel="stylesheet" href="../css/varificacao.css">
+ </body>
+ </html>   
+    
+    
+    
+    
+   
