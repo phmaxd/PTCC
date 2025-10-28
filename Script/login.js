@@ -25,7 +25,7 @@ async function recebe() {
   data.append("n2", n2);
 
   try {
-    const response = await fetch("http://localhost/BANCO/Php/login.php", {
+    const response = await fetch("http://localhost/ETEC/3MIN/TCC/bioid/Php/login.php", {
     method: "POST",
     credentials: "include",
     headers: {

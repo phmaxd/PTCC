@@ -16,7 +16,7 @@ export function setupWebSocket(mainWindow, ipcMain) {
     } else {
       console.error('Erro ao cadastrar digital:', result.error);
     }
-    return result;
+    return result;    
   }
 
   // Função para validar digital

@@ -3,7 +3,7 @@ const ID = window.name;
 window.onload = function () {
     try {
        $.ajax({
-		url: "http://localhost/BANCO/Php/funcionario.php",
+		url: "http://localhost/ETEC/3MIN/TCC/bioid/Php/funcionario.php",
 	    type: "POST",
 	    dataType: "json"
 		}).done(function(resposta) {
@@ -35,7 +35,7 @@ function Excluir(botao){
     }
     try {
         $.ajax({
-            url: "http://localhost/BANCO/Php/Excluir.php",
+            url: "http://localhost/ETEC/3MIN/TCC/bioid/Php/Excluir.php",
             type: "POST",
             data: JSON.stringify({id: id}),
             dataType: "json",
@@ -204,7 +204,7 @@ async function salvarEdicao(id) {
     data.append('nome', novoNome);
 
     try {
-        const response = await fetch('http://localhost/PTCC-BRENDA/Php/editarFuncionario.php', {
+        const response = await fetch('http://localhost/ETEC/3MIN/TCC/bioid/Php/editarFuncionario.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: data.toString()

@@ -14,7 +14,7 @@ async function enviar(event) {
     const data = new URLSearchParams();
     data.append('Rm', Rm);
 
-    const response = await fetch("http://localhost/BANCO/Php/digital.php", {
+    const response = await fetch("http://localhost/ETEC/3MIN/TCC/bioid/Php/digital.php", {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -107,7 +107,7 @@ border: #ccc solid 1px;
 // Carrega cards na tela
 window.onload = async function () {
   try {
-    const response = await fetch("http://localhost/BANCO/Php/acesso.php", {
+    const response = await fetch("http://localhost/ETEC/3MIN/TCC/bioid/Php/acesso.php", {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },

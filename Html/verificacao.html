@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verificação de Aluno</title>
  </head>
-         <a href="entrada.html" class="icon">
+         <a href="entrada.html" class="icon" onclick="pararVerificacao()">
       <img src="../imagens/iconvoltar.svg" alt="Voltar" class="icon">
     </a>
  <body>
@@ -14,6 +14,11 @@
     <div id="nomeDiv"></div>
 </div>
     <script>
+    
+    pararVerificacao = () => {
+        window.electronAPI.sendToMain({ action: "parar_verificacao" });
+    };
+
     const nomeDiv = document.getElementById("nomeDiv");
 
     window.electronAPI.onEsp32Msg(async (msg) => {

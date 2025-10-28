@@ -1,6 +1,6 @@
     window.onload = async function () {
       try {
-        const conecta = await fetch("http://localhost/banco/Php/acesso.php", {
+        const conecta = await fetch("http://localhost/ETEC/3MIN/TCC/bioid/Php/acesso.php", {
           method: "POST",
           credentials: "include",
           headers: {
@@ -93,7 +93,7 @@
       e.preventDefault();
       var Rm = document.getElementById('Rm').value;
         try {
-        const response = await fetch("http://localhost/banco/Php/enviar.php", {
+        const response = await fetch("http://localhost/ETEC/3MIN/TCC/bioid/Php/enviar.php", {
           method: "POST",
           credentials: "include",
           body: Rm
@@ -101,7 +101,7 @@
         if (response.ok) {
           
           if (confirm("")) {
-          const response = await fetch("http://localhost/banco/Php/enviar.php", {
+          const response = await fetch("http://localhost/ETEC/3MIN/TCC/bioid/Php/enviar.php", {
           method: "POST",
           credentials: "include",
           body: Rm

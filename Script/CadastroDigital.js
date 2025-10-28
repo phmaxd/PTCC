@@ -5,7 +5,7 @@ window.onload = async function Dados() {
     const data = new URLSearchParams();
     data.append("rm", rm);
     
-    const digital = await fetch("http://localhost/BANCO/Php/dados.php", {
+    const digital = await fetch("http://localhost/ETEC/3MIN/TCC/bioid/Php/dados.php", {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -31,15 +31,25 @@ modalContent.innerHTML = `
 const btnQualquer = document.getElementById("btn");
 
 if (btnQualquer) {
-  btnQualquer.addEventListener("click", () => {
-    const cadastrar_digital = {
+  btnQualquer.addEventListener("click", async() => {
+    try {
+      // Busca o menor slot disponível
+      const response = await fetch("http://localhost/ETEC/3MIN/TCC/bioid/Php/menor_slot.php");
+      const data = await response.json();
+
+      const cadastrar_digital = {
       action: "cadastrar_digital",
-      rm: aluno.rm
+      rm: aluno.rm,
+      slot: data.menor_slot
     };
 
     // Envia para o main via preload
     window.electronAPI.sendToMain(cadastrar_digital);
     console.log("JSON enviado para o ESP32:", cadastrar_digital);
+    } catch (error) {
+    console.error("Erro ao buscar slot:", error);
+    }
+   
   });
 }
 
