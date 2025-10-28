@@ -25,7 +25,7 @@ async function recebe() {
   data.append("n2", n2);
 
   try {
-    const response = await fetch("http://stella.elementfx.com/login.php", {
+    const response = await fetch("http://bioid.hyperphp.com/login.php", {
     method: "POST",
     credentials: "include",
     headers: {
@@ -34,6 +34,7 @@ async function recebe() {
     body: data.toString(),
 });
 if (response.ok) {
+  console.log(response.text());
     const pata = await response.json();
     if (pata.data != "usuario ou senha incorreto") {
       if (pata.data[0].funcao == "adm") {

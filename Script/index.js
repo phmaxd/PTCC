@@ -39,7 +39,6 @@ function createWindows() {
           contextIsolation: true,
           enableRemoteModule: false,
           preload: path.join(__dirname, "../Script/preload.js"),
-           devTools: false,
         },
         autoHideMenuBar: true,
       });

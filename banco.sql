@@ -1,4 +1,4 @@
-USE `ophttwgf_BioID`;
+USE `icei_40276543_banco`;
 
 DROP TABLE IF EXISTS `alunos`;
 CREATE TABLE IF NOT EXISTS `alunos` (
