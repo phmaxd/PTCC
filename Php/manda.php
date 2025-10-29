@@ -5,7 +5,7 @@ $n1 = $_POST['n1'];
 $n2 = $_POST['n2'];
 $n3 = $_POST['n3'];
 
-$select = $conn ->prepare('SELECT * FROM teste WHERE nome = :nome');
+$select = $conn ->prepare('SELECT * FROM funcionario WHERE nome = :nome');
 $select -> execute(array(
     ':nome' => $n1
 ));
@@ -14,7 +14,7 @@ if (($select) && $select->rowCount() != 0) {
     echo json_encode(["status" => "exists"]);
 } else {
     $hash = password_hash($n2, PASSWORD_DEFAULT); 
-    $INSERT = 'INSERT INTO teste (nome, senha, funcao) VALUES (:nome, :senha, :funcao)';
+    $INSERT = 'INSERT INTO funcionario (nome, senha, funcao) VALUES (:nome, :senha, :funcao)';
 
     $cadastro = $conn->prepare($INSERT);
     $cadastro->execute(array(

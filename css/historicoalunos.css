@@ -415,6 +415,36 @@ h2 {
 
 }
 
+#atualizacaoMenu {
+  display: none;
+  position: fixed;
+  top: 20px; /* Ajuste a distância do topo conforme necessário */
+  left: 20px; /* Ajuste a distância da esquerda conforme necessário */
+  width: 280px;
+  background: #fff;
+  border-radius: 8px;
+  text-align: center;
+  z-index: 1000;
+  overflow: hidden; /* respeita o border-radius */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-family: "Poppins", sans-serif;
+  color: #333; /* garante que o texto seja visível */
+  border: #ccc solid 1px;
+}
+
+
+/* Conteúdo do modal */
+#atualizacaoMenu form {
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+
+}
+
 #rmaluno{
        padding: 20px 20px 0 20px; /* top right bottom left */
        text-align: left;
@@ -443,6 +473,23 @@ h2 {
   border-color: #225b42;
 }
 
+#atualizacaoMenu input[type="text"] {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s;
+  margin: 12px 20px 20 20px; /* top right bottom left */
+
+
+}
+
+#atualizacaoMenu input[type="text"]:focus {
+  border-color: #225b42;
+}
+
+
 /* Linha horizontal acima do botão */
 .modal-actions {
   display: flex;
@@ -465,7 +512,7 @@ h2 {
 }
 
 /* Botão único */
-#Enviar {
+#Enviar, #EnviarAtt {
   padding: 12px 0;
   border: none;
   background: #355F46;
@@ -481,7 +528,7 @@ h2 {
 
 }
 
-#Enviar:hover {
+#Enviar:hover, #EnviarAtt:hover {
   background: #1b4a36;
 }
 

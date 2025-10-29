@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS `banco`;
-USE `banco`;
+CREATE DATABASE IF NOT EXISTS `agqoeafa_banco`;
+USE `agqoeafa_banco`;
 
 DROP TABLE IF EXISTS `alunos`;
 CREATE TABLE IF NOT EXISTS `alunos` (
@@ -14,11 +14,11 @@ INSERT INTO `alunos` (`nome`, `imagem`, `digital`, `rm`, `entrada`) VALUES
 ('Pedro', '1', 1, 23100, 'sim'),
 ('Raul', '1', 1, 23093, 'sim');
 
-DROP TABLE IF EXISTS `teste`;
-CREATE TABLE IF NOT EXISTS `teste` (
+DROP TABLE IF EXISTS `funcionario`;
+CREATE TABLE IF NOT EXISTS `funcionario` (
   `nome` varchar(100) NOT NULL,
   `senha` varchar(255) NOT NULL,
-  `funcao` enum('adm','funcionario') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `funcao` enum('adm','funcionario')NOT NULL,
   `id` int NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
 );

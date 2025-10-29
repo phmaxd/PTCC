@@ -15,7 +15,7 @@ if (!$nome) {
 }
 
 // Atualiza apenas o nome
-$sql = "UPDATE teste SET nome = :nome WHERE id = :id";
+$sql = "UPDATE funcionario SET nome = :nome WHERE id = :id";
 $stmt = $conn->prepare($sql);
 $stmt->bindParam(':nome', $nome);
 $stmt->bindParam(':id', $id);

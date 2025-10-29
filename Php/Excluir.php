@@ -17,7 +17,7 @@ try {
     $conn->beginTransaction();
 
     
-    $sql = $conn->prepare("DELETE FROM teste WHERE id = :id");
+    $sql = $conn->prepare("DELETE FROM funcionario WHERE id = :id");
     $sql->bindParam(':id', $FuncionarioID);
     $sql->execute();
 

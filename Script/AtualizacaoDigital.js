@@ -10,7 +10,6 @@ window.onload = async function Dados() {
       credentials: "include",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: data.toString()
-
     });
     
 const resultado = await digital.json();
@@ -33,20 +32,23 @@ const btnQualquer = document.getElementById("btn");
 if (btnQualquer) {
   btnQualquer.addEventListener("click", async() => {
     try {
-      // Busca o menor slot disponível
-      const response = await fetch("http://localhost/ETEC/3MIN/TCC/bioid/Php/menor_slot.php");
-      const data = await response.json();
-
-      const cadastrar_digital = {
-      action: "cadastrar_digital",
+    // ==->CÓDIGO DE ATUALIZAÇÃO DIGITAL (ws)<-==
+    const response = await fetch("http://localhost/ETEC/3MIN/TCC/bioid/Php/buscar_slot.php", {
+      method: "POST",
+      credentials: "include",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: data.toString()
+    });
+    const  data = await response.json();
+    const slot_att = {
+      action: "atualizar_digital",
       rm: aluno.rm,
-      slot: data.menor_slot
+      slot: data.slot
     };
+    window.electronAPI.sendToMain(slot_att);
+    console.log("JSON enviado para o ESP32:", slot_att);
 
-    // Envia para o main via preload
-    window.electronAPI.sendToMain(cadastrar_digital);
-    console.log("JSON enviado para o ESP32:", cadastrar_digital);
-    } catch (error) {
+    }catch (error) {
     console.error("Erro ao buscar slot:", error);
     }
    

@@ -40,7 +40,7 @@ function createWindows() {
           enableRemoteModule: false,
           preload: path.join(__dirname, "../Script/preload.js"),
         },
-        autoHideMenuBar: true,
+        autoHideMenuBar: false,
       });
 setupWebSocket(mainWindow, ipcMain);
 
@@ -89,6 +89,9 @@ setupWebSocket(mainWindow, ipcMain);
               break;
               case "CadFuncAdmin":
               await mainWindow.loadFile("Html/cadFuncionario.html");
+              break;
+            case "AtualizacaoDigital":
+              await mainWindow.loadFile("Html/AtualizacaoDigital.html");
             default:
               console.log("Página desconhecida", pagina);
               return { success: false, error: "Página desconhecida" };

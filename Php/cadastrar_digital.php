@@ -6,16 +6,14 @@ ini_set('display_errors', 0);
 
 try {
     $rm = $_POST['rm'] ?? null;
-    $digital = $_POST['digital'] ?? null;
     $slot = $_POST['slot'] ?? null;
 
-    if (!$rm || !$digital || !$slot) {
+    if (!$rm || !$slot) {
         echo json_encode(['status' => 'erro', 'mensagem' => 'Parâmetros insuficientes.']);
         exit;
     }
 
-    $stmt = $conn->prepare("UPDATE digitais SET digital = :digital, slot = :slot WHERE rm = :rm");
-    $stmt->bindParam(':digital', $digital);
+    $stmt = $conn->prepare("UPDATE digitais SET slot = :slot WHERE rm = :rm");
     $stmt->bindParam(':rm', $rm);
     $stmt->bindParam(':slot', $slot);
     $stmt->execute();
