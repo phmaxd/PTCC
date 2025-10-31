@@ -1,6 +1,7 @@
 import WebSocket, { WebSocketServer } from 'ws';
 import { cadastrar_digital } from '../WebSocketHandlers/cadastrar_digital.js';
 import { validar_digital } from '../WebSocketHandlers/validar_digital.js';
+import { atualizar_digital } from '../WebSocketHandlers/atualizar_digital.js';
 let esp32Client = null;
 
 export function setupWebSocket(mainWindow, ipcMain) {
@@ -42,6 +43,7 @@ export function setupWebSocket(mainWindow, ipcMain) {
         let resultadoCadastro = await cadastrar(jsonData);
         if (resultadoCadastro.status === 'sucesso' && esp32Client.readyState === WebSocket.OPEN) {
           esp32Client.send(JSON.stringify(resultadoCadastro));
+          mainWindow.webContents.send('esp32-msg', resultadoCadastro);
           console.log('Mensagem enviada para o ESP32:', resultadoCadastro);
         }
       } else if (jsonData.acao === 'verificacao_ok') {
@@ -49,7 +51,15 @@ export function setupWebSocket(mainWindow, ipcMain) {
         if (resultadoValidacao.status === 'sucesso') {
           mainWindow.webContents.send('esp32-msg', jsonData);
         }
+      }else if (jsonData.acao === 'digital_atualizada') {
+        const resultadoAtualizacao = await atualizar_digital(jsonData);
+        mainWindow.webContents.send('esp32-msg', resultadoAtualizacao);
+
+        if (esp32Client.readyState === WebSocket.OPEN) {
+          esp32Client.send(JSON.stringify(resultadoAtualizacao)); // confirmação opcional
+        }
       }
+
 
       // Sempre envia a mensagem pro Renderer
       mainWindow.webContents.send('esp32-msg', jsonData);

@@ -10,7 +10,10 @@ export async function cadastrar_digital(data) {
     });
     const result = await response.json();
     console.log('Resposta do servidor:', result);
-    return result;
+    return {
+      ...result,
+      rm: data.rm,
+    };
  } catch (error) {
     console.log('Erro ao cadastrar digital labubu:', error);
     return { success: false, error: error.message };

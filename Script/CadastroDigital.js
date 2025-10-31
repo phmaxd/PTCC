@@ -1,4 +1,35 @@
 window.onload = async function Dados() {
+  window.electronAPI.onEsp32Msg((msg) => {
+  try {
+    const data = typeof msg === "string" ? JSON.parse(msg) : msg;
+    console.log("Mensagem recebida do ESP32:", data);
+
+    const cleide = document.getElementById("Cleide");
+    if (!cleide) return console.error("Elemento 'Cleide' não encontrado");
+
+    // ✅ Se o ESP32 terminou a atualização da digital
+    if (data.status === "sucesso") {
+      cleide.innerHTML += `
+        <div style="margin-top: 10px; color: green; font-weight: bold;">
+          Digital de RM ${data.rm} cadastrada!<br>
+        </div>
+      `;
+    }
+
+    // ❌ Se o ESP32 mandou erro
+    else if (data.action === "erro_digital") {
+      cleide.innerHTML += `
+        <div style="margin-top: 10px; color: red; font-weight: bold;">
+          ❌ Erro ao cadastrar a digital. Tente novamente.
+        </div>
+      `;
+    }
+
+  } catch (error) {
+    console.error("Erro ao interpretar mensagem do ESP32:", error);
+  }
+});
+
   try {
     const rm = window.name;
     console.log("RM recebido:", rm);

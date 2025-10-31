@@ -40,7 +40,7 @@ function createWindows() {
           enableRemoteModule: false,
           preload: path.join(__dirname, "../Script/preload.js"),
         },
-        autoHideMenuBar: false,
+        autoHideMenuBar: true,
       });
 setupWebSocket(mainWindow, ipcMain);
 
