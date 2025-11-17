@@ -1,6 +1,6 @@
 const pagina = window.pagina;
 async function modalizar() {
-  const modal = document.getElementById('modal');
+  const modal = document.getElementById("modal");
 
   modal.innerHTML = `
     <div class="modal-content">
@@ -12,16 +12,16 @@ async function modalizar() {
     </div>
   `;
 
-  modal.style.display = 'block'; // mostra o modal
+  modal.style.display = "block"; // mostra o modal
 
   // Adiciona eventos aos botões
-  document.getElementById('cancel-btn').addEventListener('click', puxa);
-  document.getElementById('continue-btn').addEventListener('click', aperta);
+  document.getElementById("cancel-btn").addEventListener("click", puxa);
+  document.getElementById("continue-btn").addEventListener("click", aperta);
 }
 
 async function Login() {
-const modal = document.getElementById('modal');
-        modal.innerHTML = `
+  const modal = document.getElementById("modal");
+  modal.innerHTML = `
         <div class="modal-box" style="
         font-size: 18px;
       border: 1px solid #ccc;
@@ -54,12 +54,12 @@ const modal = document.getElementById('modal');
 
         </div>
         `;
-modal.style.display = 'block'; // mostra o modal
+  modal.style.display = "block"; // mostra o modal
 }
 
 async function Sair() {
-const modal = document.getElementById('modal');
-       modal.innerHTML = `
+  const modal = document.getElementById("modal");
+  modal.innerHTML = `
 <div style="
   position: fixed;
   top: 0;
@@ -113,14 +113,12 @@ const modal = document.getElementById('modal');
 </div>
 `;
 
-modal.style.display = 'block'; // mostra o modal
+  modal.style.display = "block"; // mostra o modal
 }
 
-
-
 async function Alteração() {
-const modal = document.getElementById('modal');
-        modal.innerHTML = `
+  const modal = document.getElementById("modal");
+  modal.innerHTML = `
         <div class="modal-box" style="
         font-size: 18px;
       border: 1px solid #ccc;
@@ -153,12 +151,12 @@ const modal = document.getElementById('modal');
 
         </div>
         `;
-modal.style.display = 'block'; // mostra o modal
+  modal.style.display = "block"; // mostra o modal
 }
 
 async function Incorreto() {
-const modal = document.getElementById('modal');
-             modal.innerHTML = `
+  const modal = document.getElementById("modal");
+  modal.innerHTML = `
         <div class="modal-box" style="
         font-size: 18px;
       border: 1px solid #ccc;
@@ -191,14 +189,12 @@ const modal = document.getElementById('modal');
 
         </div>
         `;
-modal.style.display = 'block'; // mostra o modal
+  modal.style.display = "block"; // mostra o modal
 }
 
-
-
 async function Apague() {
-const modal = document.getElementById('modal');
-        modal.innerHTML = `
+  const modal = document.getElementById("modal");
+  modal.innerHTML = `
         <div class="modal-box" style="
         font-size: 18px;
       border: 1px solid #ccc;
@@ -231,34 +227,33 @@ const modal = document.getElementById('modal');
 
         </div>
         `;
-modal.style.display = 'block'; // mostra o modal
+  modal.style.display = "block"; // mostra o modal
 }
 
 // Fecha o modal ao clicar em Cancelar
 function puxa() {
-  const modal = document.getElementById('modal');
-  modal.style.display = 'none';
-  console.log('Cancelar clicado');
+  const modal = document.getElementById("modal");
+  modal.style.display = "none";
+  console.log("Cancelar clicado");
 }
 
 // Fecha o modal e redireciona ao clicar em Continuar
 async function aperta() {
-  const modal = document.getElementById('modal');
-  modal.style.display = 'none';
-  console.log('Continuar clicado');
+  const modal = document.getElementById("modal");
+  modal.style.display = "none";
+  console.log("Continuar clicado");
 
   // Redireciona para entrada.html
-  window.location.href = '../Html/' + window.pagina + '.html';
+  window.location.href = "../Html/" + window.pagina + ".html";
 }
 
-
- function outrapagina() {
- window.location.href = 'cadFuncionario.html';  
+function outrapagina() {
+  window.location.href = "cadFuncionario.html";
 }
 
 async function Preencher() {
-const modal = document.getElementById('modal');
-          modal.innerHTML = `
+  const modal = document.getElementById("modal");
+  modal.innerHTML = `
         <div class="modal-box" style="
         font-size: 18px;
       border: 1px solid #ccc;
@@ -291,21 +286,19 @@ const modal = document.getElementById('modal');
 
         </div>
         `;
-modal.style.display = 'block'; // mostra o modal
+  modal.style.display = "block"; // mostra o modal
 }
 
 async function Erro() {
-const modal = document.getElementById('modal');
-        modal.innerHTML = `
+  const modal = document.getElementById("modal");
+  modal.innerHTML = `
         <div class="modal-box">
           <p>Erro interno da estrutura do codigo</p>
           <button onclick="puxa()" style="margin-right:10px;">Entendi</button>
         </div>
         `;
-modal.style.display = 'block'; // mostra o modal
+  modal.style.display = "block"; // mostra o modal
 }
-
-
 
 // async function letras() {
 // const modal = document.getElementById('modal');
@@ -315,8 +308,8 @@ modal.style.display = 'block'; // mostra o modal
 //           <button onclick="puxa()" style="margin-right:10px;">Entendi</button>
 //         </div>
 //         `;
-        
-// modal.style.display = 'block'; 
+
+// modal.style.display = 'block';
 // }
 
 // async function Cadastro() {
@@ -327,7 +320,7 @@ modal.style.display = 'block'; // mostra o modal
 //           <button onclick="aperta()" style="margin-right:10px;">Entendi</button>
 //         </div>
 //         `;
-// modal.style.display = 'block'; 
+// modal.style.display = 'block';
 // }
 
 // async function numeros() {
@@ -364,8 +357,8 @@ modal.style.display = 'block'; // mostra o modal
 // }
 
 async function mesmo() {
-const modal = document.getElementById('modal');
-        modal.innerHTML = `
+  const modal = document.getElementById("modal");
+  modal.innerHTML = `
         <div class="modal-box"
         style="
         font-size: 18px;
@@ -395,5 +388,5 @@ const modal = document.getElementById('modal');
         Entendi
       </button>        </div>
         `;
-modal.style.display = 'block'; // mostra o modal
+  modal.style.display = "block"; // mostra o modal
 }

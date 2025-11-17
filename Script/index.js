@@ -19,7 +19,7 @@ function createWindows() {
     transparent: true,
     resizable: false,
     center: true,
-    icon: path.join(__dirname, "../icon.ico")
+    icon: path.join(__dirname, "../icon.ico"),
   });
 
   splash.loadFile(path.join(__dirname, "../Html/splash.html"));
@@ -42,9 +42,10 @@ function createWindows() {
         },
         autoHideMenuBar: true,
       });
-setupWebSocket(mainWindow, ipcMain);
+      setupWebSocket(mainWindow, ipcMain);
 
-      mainWindow.loadFile(path.join(__dirname, "../Html/login.html"))
+      mainWindow
+        .loadFile(path.join(__dirname, "../Html/login.html"))
         .then(() => console.log("login.html carregado"))
         .catch((err) => console.error("erro", err));
 
@@ -87,7 +88,7 @@ setupWebSocket(mainWindow, ipcMain);
             case "verificacao":
               await mainWindow.loadFile("Html/verificacao.html");
               break;
-              case "CadFuncAdmin":
+            case "CadFuncAdmin":
               await mainWindow.loadFile("Html/cadFuncionario.html");
               break;
             case "AtualizacaoDigital":
@@ -102,11 +103,9 @@ setupWebSocket(mainWindow, ipcMain);
           return { success: false, error: error.message };
         }
       });
-
     }, 2000); // Delay opcional
   });
 }
-
 
 app.whenReady().then(() => {
   createWindows();
@@ -122,4 +121,3 @@ app.on("window-all-closed", () => {
 process.on("uncaughtException", (err) => {
   console.error("ERRO NÃO TRATADO: ", err);
 });
-

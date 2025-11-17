@@ -1,60 +1,107 @@
- <!DOCTYPE html>
- <html lang="en">
- <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Verificação de Aluno</title>
- </head>
-         <a href="entrada.html" class="icon" onclick="pararVerificacao()">
-      <img src="../imagens/iconvoltar.svg" alt="Voltar" class="icon">
-    </a>
- <body>
-<div class="container">
-     <div id="rmDiv"></div>
-    <div id="nomeDiv"></div>
-</div>
+  </head>
+  <a href="entrada.html" class="icon" onclick="pararVerificacao()">
+    <img src="../imagens/iconvoltar.svg" alt="Voltar" class="icon" />
+  </a>
+  <body>
+    <p>BioID - Bons Estudos</p>
+    <p id="dataHora">BioID - 17/11/2025 08:24:58</p>
+    <div class="container">
+      <div id="statusDiv"></div>
+      <div id="ImgDiv"></div>
+      <div id="nomeDiv"></div>
+      <div id="rmDiv"></div>
+    </div>
     <script>
-    
-    pararVerificacao = () => {
+      let horaAtualLocal = null; // vai guardar a hora vindo da local
+      function atualizarDataHora() {
+        const dateTime = new Date(); // <-- agora pega do PC
+        horaAtualLocal = dateTime;
+
+        const dataBR = dateTime.toLocaleDateString("pt-BR");
+        const horaBR = dateTime.toLocaleTimeString("pt-BR");
+
+        document.getElementById(
+          "dataHora"
+        ).textContent = `BioID - ${dataBR} ${horaBR}`;
+      }
+
+      setInterval(atualizarDataHora, 1000);
+      atualizarDataHora();
+
+      pararVerificacao = () => {
         window.electronAPI.sendToMain({ action: "parar_verificacao" });
-    };
+      };
 
-    const nomeDiv = document.getElementById("nomeDiv");
+      const nomeDiv = document.getElementById("nomeDiv");
 
-    window.electronAPI.onEsp32Msg(async (msg) => {
-        if(msg.acao === "verificacao_ok") {
-            const slot = msg.slot;
+      window.electronAPI.onEsp32Msg(async (msg) => {
+        if (msg.acao === "verificacao_ok") {
+          const slot = msg.slot;
 
-            // Requisita o PHP para pegar nome do aluno
-            try {
-                const formData = new FormData();
-                formData.append('slot', slot);
+          // Requisita o PHP para pegar nome do aluno
+          try {
+            const formData = new FormData();
+            formData.append("slot", slot);
 
-                const response = await fetch('http://localhost/ETEC/3MIN/TCC/bioid/Php/validar.php', {
-                    method: 'POST',
-                    body: formData
-                });
+            const response = await fetch(
+              "http://localhost/ETEC/3MIN/TCC/bioid/Php/validar.php",
+              {
+                method: "POST",
+                body: formData,
+              }
+            );
 
-                const data = await response.json();
-                
-                if(data.status === 'sucesso') {
-                    nomeDiv.textContent = `Aluno: ${data.nome_aluno}`;
-                    rmDiv.textContent = `RM: ${data.rm}`;
-                } else {
-                    nomeDiv.textContent = `Aluno não encontrado`;
-                }
-            } catch (err) {
-                console.error("Erro ao buscar nome do aluno:", err);
-                nomeDiv.textContent = "Erro na busca";
+            const data = await response.json();
+
+            if (data.status === "sucesso") {
+              //Função para atualizar entrada do aluno.
+              const hora = horaAtualLocal.getHours();
+              const minuto = horaAtualLocal.getMinutes();
+              const minutosAgora = hora * 60 + minuto;
+              const limite = 8 * 60 + 10; // 08:10
+
+              try {
+                const formDataAtt = new FormData();
+                formDataAtt.append("rm", data.rm);
+                formDataAtt.append("minutosAgora", minutosAgora);
+                formDataAtt.append("limite", limite);
+                await fetch(
+                  "http://localhost/ETEC/3MIN/TCC/bioid/Php/entradaAtt.php",
+                  {
+                    method: "POST",
+                    body: formDataAtt,
+                  }
+                );
+              } catch (error) {
+                console.error("Erro ao atualizar entrada do aluno:", error);
+              }
+
+              if (minutosAgora > limite) {
+                console.log("Passou de 08:10");
+                try {
+                } catch (error) {}
+              } else {
+                console.log("Ainda é 08:10 ou mais cedo");
+              }
+
+              nomeDiv.textContent = `Aluno: ${data.nome_aluno}`;
+              rmDiv.textContent = `RM: ${data.rm}`;
+            } else {
+              nomeDiv.textContent = `Aluno não encontrado`;
             }
+          } catch (err) {
+            console.error("Erro ao buscar nome do aluno:", err);
+            nomeDiv.textContent = "Erro na busca";
+          }
         }
-    });
+      });
     </script>
-    <link rel="stylesheet" href="../css/varificacao.css">
- </body>
- </html>   
-    
-    
-    
-    
-   
+    <!-- <link rel="stylesheet" href="../css/varificacao.css"> -->
+  </body>
+</html>
