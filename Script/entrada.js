@@ -141,6 +141,9 @@ window.onload = async function () {
 
         texto.innerHTML = '';
         info.data.forEach(function(dados) {
+          const imgPath = `../imagens/img_alunos/${dados.rm}.png`; // ou .png dependendo do formato
+          dados.imagem = `<img src="${imgPath}" alt="Foto do aluno" style="width:150px;border-radius:10px;">`;
+          
           var linha = document.createElement('tr');
           linha.classList.add('linha-tabela');
           linha.innerHTML = `
@@ -150,10 +153,9 @@ window.onload = async function () {
                 margin: 0; display: flex; flex-direction: column;
                 min-width: 180px; max-width: 100%;
               ">
-                <img src="http://localhost/imagens/${dados.imagem}" 
+                <img src="${imgPath}" 
                      alt="Imagem do Card" 
-                     style="width: 80px; height: 80px; object-fit: cover;
-                            border-radius: 4px; margin-bottom: 8px;">
+                     style="width:100px;border-radius:10px;">
                 <div><strong>Nome:</strong> ${dados.nome}</div>
                 <div><strong>RM:</strong> ${dados.rm}</div>
               </div>
