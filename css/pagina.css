@@ -160,14 +160,14 @@ margin-top: 0px;
 
 .btn{
   background-color: transparent;
-    border: solid #225b42 1px;
-    color: #225b42;
+  border: solid #225b42 1px;
+  color: white;
   border-radius: 20px;
   cursor: pointer;
+  width: 140PX;
   transition: all 0.3s ease; /* suaviza as mudanças */
-    width: 130px;
-padding: 0%;
-height: 30px;
+  height: 30px;
+  color: #225b42;
 }
  
 .btn:hover{
@@ -183,7 +183,7 @@ height: 30px;
   color: white;
   border-radius: 20px;
   cursor: pointer;
-  width: 50%;
+  width: 140PX;
   transition: all 0.3s ease; /* suaviza as mudanças */
   height: 30px;
   color: #fa5252;

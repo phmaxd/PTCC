@@ -38,12 +38,13 @@ if (response.ok) {
     if (pata.data != "usuario ou senha incorreto") {
       if (pata.data[0].funcao == "adm") {
        Login();
-       window.pagina = "pagina";
+       window.pagina = "entrada";
         window.name = JSON.parse(pata.data[0].id); //variavel global window, não le JSON
 
       }else{
         Login();
-        window.pagina = "entrada";
+        window.pagina = "verificacao";
+        window.electronAPI.sendToMain({ action: "validar_digital" });
         window.name = pata.data[0].nome;
       }        
     } else {

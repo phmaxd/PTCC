@@ -1,7 +1,6 @@
-document.getElementById("Verificar").addEventListener("click", Verificar);
-function Verificar() {
-  window.electronAPI.trocarPagina("verificacao");
-  window.electronAPI.sendToMain({ action: "validar_digital" });
+document.getElementById("funcionarios").addEventListener("click", listaFuncionarios);
+function listaFuncionarios() {
+  window.electronAPI.trocarPagina("pagina");
 }
 // document.getElementById("sair").addEventListener("click", Deslogar);
 

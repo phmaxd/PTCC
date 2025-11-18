@@ -63,8 +63,10 @@ function adicionarFuncionario(dados) {
     // Decide em qual tabela adicionar
     var tbody;
     if (dados.funcao === "funcionario") {
+        dados.funcao = "Funcionário";
         tbody = document.getElementById("tabela-funcionarios");
     } else if (dados.funcao === "adm") {
+        dados.funcao = "Administrador";
         tbody = document.getElementById("tabela-adms");
     } else {
         return; // ignora se for outra função
