@@ -18,9 +18,10 @@
       <div id="rmDiv"></div>
     </div>
     <script>
+      const statusDiv = document.getElementById("statusDiv");
       let horaAtualLocal = null; // vai guardar a hora vindo da local
       function atualizarDataHora() {
-        const dateTime = new Date(); // <-- agora pega do PC
+        const dateTime = new Date();
         horaAtualLocal = dateTime;
 
         const dataBR = dateTime.toLocaleDateString("pt-BR");
@@ -60,38 +61,54 @@
             const data = await response.json();
 
             if (data.status === "sucesso") {
-              //Função para atualizar entrada do aluno.
+              //Função para atualizar o tipo de entrada do aluno
               const hora = horaAtualLocal.getHours();
               const minuto = horaAtualLocal.getMinutes();
               const minutosAgora = hora * 60 + minuto;
-              const limite = 8 * 60 + 10; // 08:10
+              const diaSemana = horaAtualLocal.getDay(); // 0 (Domingo) a 6 (Sábado)
 
               try {
                 const formDataAtt = new FormData();
                 formDataAtt.append("rm", data.rm);
                 formDataAtt.append("minutosAgora", minutosAgora);
-                formDataAtt.append("limite", limite);
-                await fetch(
+                formDataAtt.append("diaSemana", diaSemana);
+                const respAtt = await fetch(
                   "http://localhost/ETEC/3MIN/TCC/bioid/Php/entradaAtt.php",
                   {
                     method: "POST",
                     body: formDataAtt,
                   }
                 );
+                const resultado = await respAtt.json();
+
+                if (resultado.status === "sucesso") {
+                  console.log("Entrada atualizada com sucesso!");
+                  console.log("Status do aluno:", resultado.statusAluno);
+                  console.log("Mensagem:", resultado.mensagem);
+
+                  // EXEMPLOS DE USO:
+                  statusDiv.textContent = resultado.mensagem;
+                } else {
+                  console.warn("Erro no PHP:", resultado.mensagem);
+                  statusDiv.textContent = "Erro: " + resultado.mensagem;
+                }
               } catch (error) {
                 console.error("Erro ao atualizar entrada do aluno:", error);
               }
 
-              if (minutosAgora > limite) {
-                console.log("Passou de 08:10");
-                try {
-                } catch (error) {}
-              } else {
-                console.log("Ainda é 08:10 ou mais cedo");
-              }
+              const imgPath = `../imagens/img_alunos/${data.rm}.png`; // ou .png dependendo do formato
 
+              ImgDiv.innerHTML = `<img src="${imgPath}" alt="Foto do aluno" style="width:150px;border-radius:10px;">`;
               nomeDiv.textContent = `Aluno: ${data.nome_aluno}`;
               rmDiv.textContent = `RM: ${data.rm}`;
+
+              setTimeout(() => {
+                ImgDiv.innerHTML = "";
+                nomeDiv.textContent = "";
+                rmDiv.textContent = "";
+                statusDiv.textContent = "";
+              }, 3000);
+              console.log();
             } else {
               nomeDiv.textContent = `Aluno não encontrado`;
             }
