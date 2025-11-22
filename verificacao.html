@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Verificação de Aluno</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body class="bg-gray-50 min-h-screen flex flex-col items-center py-10">
+
+    <!-- CARD PRINCIPAL -->
+    <div class="w-[65%] max-w-[1100px] mt-[7%] bg-white rounded-2xl shadow-lg p-10 border border-gray-200 transition-shadow hover:shadow-xl">
+
+      <!-- TÍTULO E DATA -->
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4 md:gap-0">
+        <h2 class="text-3xl md:text-[2.5rem] font-semibold text-gray-900">Informações do Aluno</h2>
+        <p id="dataHora" class="text-lg text-gray-600">BioID - 00/00/0000 00:00:00</p>
+      </div>
+
+      <!-- FOTO + INFORMAÇÕES -->
+      <div id="ImgDiv" class="flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-10">
+        <!-- FOTO -->
+        <img src="../imagens/img_alunos/23032.png" class="w-[220px] h-[260px] object-cover rounded-xl shadow-md transition-all duration-300" />
+
+        <!-- DADOS -->
+        <div class="flex flex-col flex-1 gap-4 md:gap-6 w-full mt-[5.8%]">
+
+          <div class="flex justify-between border-b border-gray-200 pb-2">
+            <span class="text-xl md:text-2xl font-semibold text-gray-900">Nome</span>
+            <span id="nomeDiv" class="text-xl md:text-2xl text-gray-700">Gabriel Silva</span>
+          </div>
+
+          <div class="flex justify-between border-b border-gray-200 pb-2">
+            <span class="text-xl md:text-2xl font-semibold text-gray-900">RM</span>
+            <span id="rmDiv" class="text-xl md:text-2xl text-gray-700">23016</span>
+          </div>
+
+          <!-- LINHA DE STATUS COM FUNDO DINÂMICO -->
+          <div id="statusLinha" class="flex justify-between pb-2 px-3 py-1 rounded-lg transition-colors duration-300 bg-gray-100">
+            <span class="text-xl md:text-2xl font-semibold text-gray-900">Status</span>
+            <span id="statusDiv" class="text-xl md:text-2xl font-medium text-gray-700">---</span>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <script>
+      const statusDiv = document.getElementById("statusDiv");
+      const statusLinha = document.getElementById("statusLinha");
+      const nomeDiv = document.getElementById("nomeDiv");
+      const rmDiv = document.getElementById("rmDiv");
+      const ImgDiv = document.getElementById("ImgDiv");
+
+      let horaAtualLocal = null;
+
+      // Atualiza o relógio da página
+      function atualizarDataHora() {
+        const dateTime = new Date();
+        horaAtualLocal = dateTime;
+        const dataBR = dateTime.toLocaleDateString("pt-BR");
+        const horaBR = dateTime.toLocaleTimeString("pt-BR");
+        document.getElementById("dataHora").textContent = `BioID - ${dataBR} ${horaBR}`;
+      }
+
+      setInterval(atualizarDataHora, 1000);
+      atualizarDataHora();
+
+      // Função para atualizar cor e texto do status
+      function atualizarStatus(msgStatus) {
+        if (!msgStatus) msgStatus = "---";
+        const statusLower = msgStatus.trim().toLowerCase();
+
+        // Remove cores antigas
+        statusLinha.classList.remove('bg-green-100', 'bg-red-100', 'bg-yellow-100', 'bg-gray-100');
+        statusDiv.classList.remove('text-green-700', 'text-red-700', 'text-yellow-700', 'text-gray-700');
+
+        // Atualiza o texto com primeira letra maiúscula
+        statusDiv.textContent = msgStatus.charAt(0).toUpperCase() + msgStatus.slice(1);
+
+        // Adiciona cores de acordo com o status
+        if (statusLower === "entrou") {
+          statusLinha.classList.add('bg-green-100');
+          statusDiv.classList.add('text-green-700');
+        } else if (statusLower === "saiu") {
+          statusLinha.classList.add('bg-green-100');
+          statusDiv.classList.add('text-green-700');
+        } else if (statusLower === "erro") {
+          statusLinha.classList.add('bg-red-100');
+          statusDiv.classList.add('text-red-700');
+        } else {
+          statusLinha.classList.add('bg-gray-100');
+          statusDiv.classList.add('text-gray-700');
+        }
+      }
+
+      // === Exemplo de teste manual para simular ===
+      // Comente quando for receber mensagem real do Electron
+      atualizarStatus("Erro");  // Mude para "Entrou", "Erro" ou "Saiu" para testar
+
+      // Recebe mensagem do Electron
+      window.electronAPI?.onEsp32Msg(async (msg) => {
+        if (msg.acao === "verificacao_ok") {
+          const slot = msg.slot;
+          try {
+            const formData = new FormData();
+            formData.append("slot", slot);
+
+            const response = await fetch("http://localhost/ETEC/3MIN/TCC/bioid/Php/validar.php", { method: "POST", body: formData });
+            const data = await response.json();
+
+            if (data.status === "sucesso") {
+              const hora = horaAtualLocal.getHours();
+              const minuto = horaAtualLocal.getMinutes();
+              const minutosAgora = hora * 60 + minuto;
+              const diaSemana = horaAtualLocal.getDay();
+
+              try {
+                const formDataAtt = new FormData();
+                formDataAtt.append("rm", data.rm);
+                formDataAtt.append("minutosAgora", minutosAgora);
+                formDataAtt.append("diaSemana", diaSemana);
+
+                const respAtt = await fetch("http://localhost/ETEC/3MIN/TCC/bioid/Php/entradaAtt.php", { method: "POST", body: formDataAtt });
+                const resultado = await respAtt.json();
+
+                atualizarStatus(resultado.status === "sucesso" ? resultado.mensagem : "Erro");
+
+              } catch (error) {
+                console.error("Erro ao atualizar entrada:", error);
+                atualizarStatus("Erro");
+              }
+
+              // Atualiza dados do aluno
+              ImgDiv.querySelector("img").src = `../imagens/img_alunos/${data.rm}.png`;
+              nomeDiv.textContent = data.nome_aluno;
+              rmDiv.textContent = data.rm;
+
+              setTimeout(() => {
+                ImgDiv.querySelector("img").src = "";
+                nomeDiv.textContent = "";
+                rmDiv.textContent = "";
+                atualizarStatus(""); // limpa status
+              }, 3000);
+
+            } else {
+              nomeDiv.textContent = "Aluno não encontrado";
+              atualizarStatus("Erro");
+            }
+          } catch (err) {
+            console.error("Erro ao buscar dados:", err);
+            nomeDiv.textContent = "Erro na busca";
+            atualizarStatus("Erro");
+          }
+        }
+      });
+    </script>
+
+    <link rel="stylesheet" href="../css/varificacao.css" />
+  </body>
+</html>
