@@ -23,19 +23,19 @@
       <!-- FOTO + INFORMAÇÕES -->
       <div id="ImgDiv" class="flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-10">
         <!-- FOTO -->
-        <img src="../imagens/img_alunos/23032.png" class="w-[220px] h-[260px] object-cover rounded-xl shadow-md transition-all duration-300" />
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=" class="w-[220px] h-[260px] object-cover rounded-xl shadow-md transition-all duration-300" />
 
         <!-- DADOS -->
         <div class="flex flex-col flex-1 gap-4 md:gap-6 w-full mt-[5.8%]">
 
           <div class="flex justify-between border-b border-gray-200 pb-2">
             <span class="text-xl md:text-2xl font-semibold text-gray-900">Nome</span>
-            <span id="nomeDiv" class="text-xl md:text-2xl text-gray-700">Gabriel Silva</span>
+            <span id="nomeDiv" class="text-xl md:text-2xl text-gray-700"></span>
           </div>
 
           <div class="flex justify-between border-b border-gray-200 pb-2">
             <span class="text-xl md:text-2xl font-semibold text-gray-900">RM</span>
-            <span id="rmDiv" class="text-xl md:text-2xl text-gray-700">23016</span>
+            <span id="rmDiv" class="text-xl md:text-2xl text-gray-700"></span>
           </div>
 
           <!-- LINHA DE STATUS COM FUNDO DINÂMICO -->
@@ -100,7 +100,7 @@
 
       // === Exemplo de teste manual para simular ===
       // Comente quando for receber mensagem real do Electron
-      atualizarStatus("Erro");  // Mude para "Entrou", "Erro" ou "Saiu" para testar
+      atualizarStatus("");  // Mude para "Entrou", "Erro" ou "Saiu" para testar
 
       // Recebe mensagem do Electron
       window.electronAPI?.onEsp32Msg(async (msg) => {
@@ -141,7 +141,7 @@
               rmDiv.textContent = data.rm;
 
               setTimeout(() => {
-                ImgDiv.querySelector("img").src = "";
+                ImgDiv.querySelector("img").src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=";
                 nomeDiv.textContent = "";
                 rmDiv.textContent = "";
                 atualizarStatus(""); // limpa status
