@@ -1,0 +1,132 @@
+body {
+    background-image: url("../css/assets/esqsenha/Group\ 8.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    font-family: "Poppins", sans-serif;
+    margin: 15% 10% 5% 10%;
+    margin-top: 13%;
+    background-attachment: fixed;
+
+}
+p {
+    text-align: center;
+}
+
+
+#BioID {
+    font-weight: 700;
+    font-size: 140%;
+    color:#4D9267;
+     text-align: left;
+    margin-left: 10%;
+    font-weight: 700;
+}
+/* body {
+    background-image: url("../css/assets/esqsenha/Group\ 8.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    margin-left: 0%;
+    margin-top: 0%;
+    font-weight: 300;
+} */
+
+
+
+/* ======== Botão principal ======== */
+button#btnAlterar {
+    width: 12%;
+    height: 54px;
+    font-size: 1.25rem;
+    background-color: #355F46;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+button#btnAlterar:hover {
+    background-color: #4d9267;
+    transform: scale(1.05);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* .Itens_centro{
+    margin-top: 15%;
+} */ 
+
+.poppins-regular {
+    font-family: "Poppins", sans-serif;
+    font-weight: lighter;
+    font-style: normal;
+
+}
+
+/* input::placeholder {
+    font-size: 20px;
+    color: #636363;
+
+} */
+
+/* img{
+    margin-top: -10%;
+    margin-left: 5%;
+} */
+
+.imgsvg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1%;
+    margin-left: 14%;
+    margin-top: -17%;
+  }
+  
+  /* .imgsvg img {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+  } */
+  
+
+h1 {
+    justify-content: center;
+    align-items: center;
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+    font-size: 500%;
+    color: #4d9267;
+    margin-bottom: 1%;
+}
+
+input {
+
+    all: unset;
+    margin-bottom: 1%;
+    width: 30%;
+    height: 50px;
+    border-radius: 5px;
+    border-top: 2px solid #C1BBBB;
+    border-right: 2px solid #C1BBBB;
+    border-bottom: 2px solid #C1BBBB;
+    border-left: 5px solid #4D9267;
+    padding-left: 10px;
+    background-color: #ffffffa7;
+}
+
+input::placeholder {
+    text-align: left;
+   }
+
+h1 {
+
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 400%;
+    color: #4d9267;
+}
+
+

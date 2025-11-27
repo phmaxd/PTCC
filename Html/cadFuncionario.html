@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Cadastro</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../css/cadFuncionario.css">
+</head>
+
+<body class="bg-white-100 min-h-screen flex items-center justify-center">
+  <div id="modal" class="modal"></div>
+
+  <a href="entrada.html" class="absolute top-6 left-6">
+    <img src="../imagens/iconvoltar.svg" alt="Ícone de voltar" class="w-6 h-6">
+  </a>
+
+  <div class="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md">
+        <img src="../css/assets/login/Digital.svg" alt="Your Company" class="mx-auto h-20 w-auto mb-3" />
+
+    <h1 class="text-2xl font-bold text-gray-800 mb-2 text-center">Crie sua conta</h1>
+   <p class="text-gray-500 mb-6 text-center">Preencha os dados para criar uma conta.</p> 
+
+    <!-- Nome -->
+    <input id="nome" 
+      type="text" 
+      placeholder="CPF"
+      minlength="11"
+      maxlength="11"
+      class="w-full px-4 py-2 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#225b42]">
+
+    <!-- Função -->
+    <select id="funcao" 
+      class="w-full px-4 py-2 mb-6 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#225b42]">
+      <option value="" disabled selected hidden>Selecione uma função</option>
+      <option value="funcionario">Funcionário</option>
+      <option value="adm">Administrador</option>
+    </select>
+
+    <!-- Botão -->
+    <button id="btn" 
+      class="w-full bg-[#198754] text-white py-2 rounded-lg font-semibold hover:bg-[#14532d] transition">
+      Cadastrar
+    </button>
+
+    <div id="rep" class="mt-4 text-center text-sm text-gray-500"></div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const btn = document.getElementById("btn");
+      if (btn) btn.addEventListener("click", recebe);
+    });
+
+    function gerarSenha(tamanho = 8) {
+    const caracteres = "0123456789";
+    let senha = "";
+
+    for (let i = 0; i < tamanho; i++) {
+        const indice = Math.floor(Math.random() * caracteres.length);
+        senha += caracteres[indice];
+    }
+
+    return senha.toString();
+}
+    async function recebe() {
+      const n1 = document.getElementById("nome").value;
+      const n3 = document.getElementById("funcao").value;
+      const n2 = gerarSenha();
+
+      const data = new URLSearchParams({ n1, n2, n3 });
+      try {
+        const response = await fetch('http://ptcc.elementfx.com/manda.php', {
+          method: 'POST',
+          credentials: 'include',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: data.toString()
+        });
+
+        if (!response.ok) throw new Error('Erro na requisição: ' + response.statusText);
+
+        const result = await response.text();
+
+        if (result.status === "exists") {
+          falha();
+          return;
+        }
+
+        Cadastro(n2);
+        window.pagina = "login";
+
+      } catch (error) {
+        console.log('Request failed: ' + error.message);
+        Erro();
+      }
+    }
+  </script>
+
+  <script src="../Script/modal.js"></script>
+  <link rel="stylesheet" href="../css/modal.css">
+</body>
+</html>

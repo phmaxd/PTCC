@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Redefinir Senha</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+</head>
+<body class="bg-gray-100">
+<!-- Botão voltar -->
+      <a href="login.html">
+        <img src="../imagens/iconvoltar.svg" alt="Ícone de voltar" class="iconvoltar absolute top-4 left-4 w-6">
+      </a>
+  <div id="modal" class="modal"></div>
+
+  <!-- CENTRALIZA TUDO -->
+  <div class="min-h-screen flex items-center justify-center">
+
+    <div class="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md relative items-center justify-center">
+
+      
+
+      <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center leading-tight">
+        Redefinir senha
+      </h1>
+
+      <!-- CPF -->
+      <input id="CPF"
+        type="text"
+        placeholder="CPF"
+        minlength="11"
+        maxlength="11"
+        class="w-full px-4 py-2 mb-4 border border-gray-300 rounded-lg 
+               focus:outline-none focus:ring-2 focus:ring-[#225b42]">
+
+      <!-- Nova Senha -->
+      <input id="Senha"
+        type="password"
+        placeholder="Nova senha"
+        minlength="8"
+        maxlength="8"
+        class="w-full px-4 py-2 mb-4 border border-gray-300 rounded-lg 
+               focus:outline-none focus:ring-2 focus:ring-[#225b42]">
+
+      <!-- Confirmar Senha -->
+      <input id="CSenha"
+        type="password"
+        placeholder="Confirmar senha"
+        minlength="8"
+        maxlength="8"
+        class="w-full px-4 py-2 mb-6 border border-gray-300 rounded-lg 
+               focus:outline-none focus:ring-2 focus:ring-[#225b42]">
+
+      <!-- Botão Entrar -->
+      <button id="btnAlterar" 
+        class="w-full bg-[#225b42] text-white py-2 rounded-lg font-semibold hover:bg-[#1b4a36] transition">
+          Alterar
+      </button>
+
+      <div id="rep" class="mt-4 text-center text-sm text-gray-500"></div>
+
+    </div>
+
+  </div>
+
+
+  <script>
+    async function Esqueci() {
+  const modal = document.getElementById("modal");
+  modal.innerHTML = `
+        <div class="modal-box" style="
+        font-size: 18px;
+        border: 1px solid #ccc;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        max-width: 400px;
+        text-align: center;
+        overflow: hidden;
+        font-family: sans-serif;
+        padding: 15px 0px 0px 0px;
+        ">
+        
+          <p style="margin-bottom: 20px;">Senha alterada com sucesso!</p>
+          
+          <button onclick="muda()" style="
+              background: #ffffff;
+              border: 1px solid #e5e5e5;
+              font-size: 18px;
+              height: 40px;
+              width: 100%;
+              padding: 0px;
+              color: #333;
+              cursor: pointer;
+          "
+          onmouseenter="this.style.background='#d1e7dd'"
+          onmouseleave="this.style.background='#ffffff'">
+            Entendi
+          </button>
+
+        </div>
+      `;
+  
+  modal.style.display = "block"; 
+}
+function muda() {
+  window.location.href = "login.html";
+}
+
+    document.addEventListener("DOMContentLoaded", () => {
+  const btnAlterar = document.getElementById("btnAlterar");
+  if (btnAlterar) btnAlterar.addEventListener("click", recebe);
+});
+
+async function recebe() {
+  event.preventDefault();
+  const n1 = document.getElementById("Senha").value;
+  const n2 = document.getElementById("CSenha").value;
+  const n3 = document.getElementById("CPF").value;
+
+  if (!n1 || !n2) {
+    Preencher();
+    return;
+  }
+
+  if (n1 !== n2) {
+    igual();
+    return;
+  }
+
+  const data = new URLSearchParams();
+  data.append('n1', n1);
+  data.append('n3', n3);
+
+  try {
+    const response = await fetch('http://ptcc.elementfx.com/esqueci.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: data.toString()
+    });
+    
+    let result = await response.text();
+    console.log(result);
+    result = result.trim();
+
+    if (result === "Senha alterada com sucesso!") {
+      innerHTML = Esqueci();
+
+    } else if (result === "Erro ao alterar a senha.") {
+      Erro("Usuário não encontrado.");
+
+    } else  if (result === "Usuário não encontrado.") {
+      Erro("Erro ao atualizar senha.");
+    }
+    else {
+      Erro("Resposta inesperada do servidor.");
+    }
+
+  } catch (error) {
+    Erro("Erro de conexão.");
+  }
+}
+
+  </script>
+
+  <link rel="stylesheet" href="../css/modal.css">
+  <script src="../Script/modal.js"></script>
+
+</body>
+</html>

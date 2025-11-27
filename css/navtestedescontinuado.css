@@ -1,0 +1,30 @@
+
+  /* Navbar */
+  .navbar {
+    font-size:larger;
+    font-weight: bolder;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #355F46; /* verde bem suave */
+    padding: 30px 40px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .navbar .logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: #ffffff; /* verde escuro */
+  }
+  
+  .navbar ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    color: #ffffff;
+  }
+  
+  .navbar ul li {
+    margin-left: 24px;
+  }

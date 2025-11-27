@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de funcionário</title>
+
+</head>
+<body>
+  <div id="modal" class="modal"></div>
+<header>
+  <div id="overlay" class="overlay"></div>
+    <a href="entrada.html" class="icon" onclick="pararVerificacao()">
+    <img src="../imagens/iconvoltar.svg" alt="Voltar" class="icon" style="width: 25px; height: 25px;">
+  </a>
+</header>
+
+
+    <h2>Funcionários</h2>
+<table class="excel-table">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Função</th>
+      <th>ID</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody id="tabela-funcionarios"></tbody>
+</table>
+
+<h2>Administradores</h2>
+<table class="excel-table">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Função</th>
+      <th>ID</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody id="tabela-adms"></tbody>
+
+
+
+</table>
+
+
+
+        <script src="../Script/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="../css/pagina.css">
+    <link rel="stylesheet" href="../css/modal.css">
+        <script src="../Script/funcionario.js"></script>
+        <script src="../Script/modal.js"></script>
+</body>
+</html>
