@@ -55,7 +55,7 @@ export function setupWebSocket(mainWindow, ipcMain) {
           mainWindow.webContents.send("esp32-msg", jsonData);
           console.log(`jsondata: ${JSON.stringify(jsonData)}, resultadoValidacao: ${JSON.stringify(resultadoValidacao)}`);
         }
-      } else if (jsonData.acao === "digital_atualizada") {
+      } else if (jsonData.action === "digital_atualizada") {
         const resultadoAtualizacao = await atualizar_digital(jsonData);
         mainWindow.webContents.send("esp32-msg", resultadoAtualizacao);
 

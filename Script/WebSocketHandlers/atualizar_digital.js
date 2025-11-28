@@ -10,7 +10,7 @@ export async function atualizar_digital(data) {
     // Retorna o mesmo JSON, confirmando o sucesso
     return {
       status: "sucesso",
-      acao: "digital_atualizada",
+      action: "digital_atualizada",
       rm: data.rm,
       slot: data.slot
     };
