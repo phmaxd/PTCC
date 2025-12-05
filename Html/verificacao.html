@@ -58,6 +58,10 @@
 
       let horaAtualLocal = null;
 
+      pararVerificacao = () => {
+        window.electronAPI.sendToMain({ action: "parar_verificacao" });
+    };
+    
       // Atualiza o relógio da página
       function atualizarDataHora() {
         const dateTime = new Date();
